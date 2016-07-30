@@ -9,20 +9,20 @@
 
 (add-to-list 'load-path (concat user-emacs-directory "config"))
 
+(setq package-load-list '(all))
 (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
 (require 'use-package)
 
 ;; MISC
-(setq inhibit-splash-screen t)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+(setq dotemacs-cache-directory (concat user-emacs-directory ".cache/"))
+(setq custom-file (concat user-emacs-directory "custom.el"))
 
-(defun toggle-fullscreen ()
-  "Toggle full screen"
-  (interactive)
-  (set-frame-parameter
-     nil 'fullscreen
-     (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+(setq inhibit-splash-screen t)
 
 ;; THEME
 (use-package gruvbox-theme
@@ -47,7 +47,6 @@
   :ensure which-key
   :config
   (progn
-    ;; (setq which-key-separator " → " )
     (setq which-key-idle-delay 0.4)
     (which-key-setup-side-window-bottom)
     (which-key-mode)
@@ -72,6 +71,41 @@
     (setq ivy-height 10)
     (setq ivy-count-format "(%d/%d) ")))
 
+(use-package org
+  :ensure org
+  :config
+  (progn
+    (setq org-startup-indented nil)
+
+    (setq org-directory "~/org")
+    (setq org-link-abbrev-alist
+	  '(("jira" . "https://getbase.atlassian.net/browse/")))
+    (setq org-agenda-files (list "~/org/home.org" "~/org/work.org"))
+    (setq org-log-into-drawer "LOGBOOK")
+    (setq org-clock-into-drawer "CLOCKING")
+    (setq org-refile-targets '((nil :maxlevel . 9)
+			       (org-agenda-files :maxlevel . 9)))
+    (setq org-refile-use-outline-path t)
+    (setq org-refile-allow-creating-parent-nodes (quote confirm))
+    (setq org-capture-templates
+	  (quote
+	   (("w" "Work")
+	    ("wt" "Todo" entry
+	     (file+headline "~/org/work.org" "INBOX")
+	     "* TODO %?")
+	    ("h" "Home")
+	    ("ht" "Todo" entry
+	     (file+headline "~/org/home.org" "INBOX")
+	     "* TODO %?")
+	    ("o" "Org")
+	    ("ot" "Todo" entry
+	     (file+headline "~/org/todo.org" "INBOX")
+	     "* TODO %?")
+	    ("l" "TIL" entry
+	     (file+datetree "~/org/til.org")
+	     "* %? %^g")
+	    )))
+    ))
 ;; EVIL
 ;; evil-leader needs to be loaded before evil
 (use-package evil-leader
@@ -190,21 +224,22 @@ Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
+(defun toggle-fullscreen ()
+  "Toggle full screen"
+  (interactive)
+  (set-frame-parameter
+     nil 'fullscreen
+     (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
 
-(provide 'init)
+(defun split-window-right-and-focus ()
+  "Split the window horizontally and focus the new window."
+  (interactive)
+  (split-window-right)
+  (windmove-right))
 
+(defun split-window-below-and-focus ()
+  "Split the window vertically and focus the new window."
+  (interactive)
+  (split-window-below)
+  (windmove-down))
 (setq gc-cons-threshold 800000)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (which-key evil-matchit evil-nerd-commenter evil-visualstar evil-surround evil-leader counsel ivy evil-magit magit smart-mode-line gruvbox-theme use-package))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
