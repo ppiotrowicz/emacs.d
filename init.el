@@ -37,6 +37,14 @@
 (set-default-font "M+ 1mn")
 (set-face-attribute 'default nil :height 130)
 
+(use-package general
+  :ensure general
+  :demand general
+  :config
+  (progn
+    (general-evil-setup)
+    (setq general-default-keymaps 'evil-normal-state-map)))
+
 (use-package smart-mode-line
   :ensure smart-mode-line
   :config
@@ -68,8 +76,17 @@
 
     (ivy-mode 1)
     (setq ivy-use-virtual-buffers t)
-    (setq ivy-height 10)
-    (setq ivy-count-format "(%d/%d) ")))
+    (setq ivy-height 15)
+    (setq ivy-count-format "(%d/%d) ")
+
+    (use-package swiper
+      :ensure swiper
+      :config
+      (progn
+	(general-define-key
+	 "C-s" 'swiper
+	 "C-c C-r" 'ivy-resume)
+	))))
 
 (use-package org
   :ensure org
@@ -198,7 +215,7 @@
     (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
     ))
 
-;; <leader> keybindings for evil-leader
+;; global key bindings
 
 (defmacro bind (&rest commands)
   "Convenience macro which creates a lambda interactive command."
@@ -206,46 +223,52 @@
      (interactive "P")
      ,@commands))
 
-;; windows
-(evil-leader/set-key
-  "ws" 'split-window-vertically
-  "wS" 'split-window-below-and-focus
-  "wv" 'split-window-horizontally
-  "wV" 'split-window-right-and-focus
-  "wc" 'delete-window
-  "w=" 'balance-windows
-  "ww"  'other-window
-  "wf" 'toggle-fullscreen)
-
 ;; buffers
-(evil-leader/set-key
-  "b" (let ((map (make-sparse-keymap)))
-        (define-key map (kbd "b") 'ivy-switch-buffer)
-        (define-key map (kbd "d") 'kill-this-buffer)
-        map))
+(general-define-key :prefix "SPC"
+		    "b"   '(:which-key "buffers" :ignore t)
+		    "bb"  '(:which-key "switch" :command ivy-switch-buffer)
+		    "bd"  '(:which-key "kill" :command kill-this-buffer)
+		    "TAB" '(:which-key "toggle" :command switch-to-previous-buffer))
 
-(evil-leader/set-key
-  "TAB" 'switch-to-previous-buffer)
+(general-define-key :prefix "SPC"
+		    "h"  '(:which-key "help" :ignore t)
+		    "hv" '(:which-key "describe variable" :command counsel-describe-variable)
+		    "hf" '(:which-key "describe function" :command counsel-describe-function))
 
 ;; files
-(evil-leader/set-key
-  "ff" 'counsel-find-file
-  "fr" 'ivy-recentf)
+(general-define-key :prefix "SPC"
+		    "f"  '(:which-key "files" :ignore t)
+		    "ff" '(:which-key "find" :command counsel-find-file)
+		    "fr" '(:which-key "rename" :command rename-file))
 
 ;; magit
-(evil-leader/set-key
-  "gs" 'magit-status)
+(general-define-key :prefix "SPC"
+		    "g"  '(:which-key "git" :ignore t)
+		    "gs" '(:which-key "status" :command magit-status))
 
 ;; projectile
-(evil-leader/set-key
-  "pp" 'counsel-projectile
-  "pf" 'counsel-projectile-find-file
-  "p/" (bind(counsel-ag nil (projectile-project-root)))
-  "pk" 'projectile-kill-buffers)
+(general-define-key :prefix "SPC"
+		    "p"  '(:which-key "project" :ignore t)
+		    "pp" '(:which-key "switch" :command counsel-projectile)
+		    "pf" '(:which-key "find file" :command counsel-projectile-find-file)
+		    "p/" '(:which-key "search" :command (bind(counsel-ag nil (projectile-project-root))))
+		    "pk" '(:which-key "kill buffers" :command projectile-kill-buffers))
+
+;; windows
+(general-define-key :prefix "SPC"
+		    "w"  '(:which-key "windows" :ignore t)
+		    "ws" '(:which-key "hsplit" :command split-window-vertically)
+		    "wS" '(:which-key "hsplit!" :command split-window-below-and-focus)
+		    "wv" '(:which-key "vsplit" :command split-window-horizontally)
+		    "wV" '(:which-key "vsplit!" :command split-window-right-and-focus)
+		    "wc" '(:which-key "kill" :command delete-window)
+		    "w=" '(:which-key "balance" :command balance-windows)
+		    "ww" '(:which-key "toggle" :command other-window)
+		    "wf" '(:which-key "fullscreen" :command toggle-fullscreen))
 
 ;; misc
-(evil-leader/set-key
-  ":" 'execute-extended-command)
+(general-define-key :prefix "SPC" :keymaps 'normal
+		    ":" '(:which-key "M-x" :command counsel-M-x))
 
 (defun switch-to-previous-buffer ()
   "Switch to previously open buffer.
