@@ -106,6 +106,26 @@
 	     "* %? %^g")
 	    )))
     ))
+
+;; RUBY
+(use-package ruby-mode
+  :ensure ruby-mode
+  :config
+  (progn
+    (use-package inf-ruby
+      :ensure inf-ruby)
+    (use-package rbenv
+      :ensure rbenv)
+    (use-package rspec-mode
+      :ensure rspec-mode
+      :config
+      (progn
+	(setq compilation-scroll-output t)
+	(add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
+	))
+    (use-package bundler
+      :ensure bundler)))
+
 ;; Projectile
 (use-package projectile
   :ensure projectile
