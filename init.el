@@ -106,6 +106,16 @@
 	     "* %? %^g")
 	    )))
     ))
+;; Projectile
+(use-package projectile
+  :ensure projectile
+  :config
+  (progn
+    (use-package counsel-projectile
+      :ensure counsel-projectile)
+    (setq projectile-switch-project-action 'counsel-projectile-find-file)
+    ))
+
 ;; EVIL
 ;; evil-leader needs to be loaded before evil
 (use-package evil-leader
@@ -208,9 +218,8 @@
 
 ;; projectile
 (evil-leader/set-key
-  "pp" 'projectile-switch-project
-  "pP" 'projectile-switch-open-project
-  "pf" 'projectile-find-file
+  "pp" 'counsel-projectile
+  "pf" 'counsel-projectile-find-file
   "p/" (bind(counsel-ag nil (projectile-project-root)))
   "pk" 'projectile-kill-buffers)
 
