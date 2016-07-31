@@ -23,6 +23,18 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 
 (setq inhibit-splash-screen t)
+(setq inhibit-startup-echo-area-message t)
+(setq inhibit-startup-message t)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; better scrolling
+(setq scroll-conservatively 9999
+      scroll-preserve-screen-position t
+      scroll-margin 3)
+
+(setq create-lockfiles nil)
+(setq-default indent-tabs-mode nil)
 
 ;; THEME
 (use-package gruvbox-theme
@@ -34,8 +46,16 @@
 
 (setq ring-bell-function 'ignore)
 
+(blink-cursor-mode -1)
 (set-default-font "M+ 1mn")
 (set-face-attribute 'default nil :height 130)
+
+(show-paren-mode)
+(setq show-paren-delay 0)
+
+;; fringe
+(when (display-graphic-p)
+  (fringe-mode 16))
 
 (use-package general
   :ensure general
@@ -135,6 +155,13 @@
       :ensure rbenv)
     (use-package rspec-mode
       :ensure rspec-mode
+      :general
+      (general-define-key
+       ",ta" 'rspec-verify-all
+       ",tb" 'rspec-verify
+       ",tl" 'rspec-run-last-failed
+       ",tr" 'rspec-rerun
+       ",tt" 'rspec-verify-single)
       :config
       (progn
 	(setq compilation-scroll-output t)
@@ -232,6 +259,7 @@
 
 (general-define-key :prefix "SPC"
 		    "h"  '(:which-key "help" :ignore t)
+		    "hc" '(:which-key "edit config" :command edit-emacs-config)
 		    "hv" '(:which-key "describe variable" :command counsel-describe-variable)
 		    "hf" '(:which-key "describe function" :command counsel-describe-function))
 
@@ -251,7 +279,7 @@
 		    "p"  '(:which-key "project" :ignore t)
 		    "pp" '(:which-key "switch" :command counsel-projectile)
 		    "pf" '(:which-key "find file" :command counsel-projectile-find-file)
-		    "p/" '(:which-key "search" :command (bind(counsel-ag nil (projectile-project-root))))
+		    "p/" '(:which-key "search" :command find-in-project)
 		    "pk" '(:which-key "kill buffers" :command projectile-kill-buffers))
 
 ;; windows
@@ -266,9 +294,27 @@
 		    "ww" '(:which-key "toggle" :command other-window)
 		    "wf" '(:which-key "fullscreen" :command toggle-fullscreen))
 
+;; ORG
+(general-define-key :prefix "SPC"
+		    "o"  '(:which-key "org" :ignore t)
+		    "oh" '(:which-key "home tasks" :command (lambda () (interactive) (find-file "~/org/home.org")))
+		    "ot" '(:which-key "todo tasks" :command (lambda () (interactive) (find-file "~/org/todo.org")))
+		    "ow" '(:which-key "work tasks" :command (lambda () (interactive) (find-file "~/org/work.org"))))
+
 ;; misc
 (general-define-key :prefix "SPC" :keymaps 'normal
 		    ":" '(:which-key "M-x" :command counsel-M-x))
+
+(defun edit-emacs-config ()
+  "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open buffers."
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+(defun find-in-project ()
+  "Searches in current project"
+  (interactive)
+  (counsel-ag nil (projectile-project-root)))
 
 (defun switch-to-previous-buffer ()
   "Switch to previously open buffer.
@@ -294,4 +340,6 @@ Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (split-window-below)
   (windmove-down))
+
 (setq gc-cons-threshold 800000)
+
