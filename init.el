@@ -391,6 +391,7 @@
 ;; magit
 (general-define-key :prefix "SPC"
 		    "g"  '(:which-key "git" :ignore t)
+		    "gb" '(:which-key "blame" :command magit-blame)
 		    "gs" '(:which-key "status" :command magit-status))
 
 ;; projectile
@@ -399,6 +400,7 @@
 		    "pp" '(:which-key "switch" :command counsel-projectile)
 		    "pf" '(:which-key "find file" :command counsel-projectile-find-file)
 		    "p/" '(:which-key "search" :command find-in-project)
+		    "/"  '(:which-key "search" :command find-in-project)
 		    "pk" '(:which-key "kill buffers" :command projectile-kill-buffers))
 
 ;; windows
@@ -418,11 +420,15 @@
 		    "o"  '(:which-key "org" :ignore t)
 		    "oh" '(:which-key "home tasks" :command (lambda () (interactive) (find-file "~/org/home.org")))
 		    "ot" '(:which-key "todo tasks" :command (lambda () (interactive) (find-file "~/org/todo.org")))
-		    "ow" '(:which-key "work tasks" :command (lambda () (interactive) (find-file "~/org/work.org"))))
+		    "ow" '(:which-key "work tasks" :command (lambda () (interactive) (find-file "~/org/work.org")))
+		    "ol" '(:which-key "work tasks" :command (lambda () (interactive) (find-file "~/org/til.org"))))
 
 ;; misc
 (general-define-key :prefix "SPC" :keymaps 'normal
 		    ":" '(:which-key "M-x" :command counsel-M-x))
+
+(general-define-key :prefix "C-c" :keymaps 'normal
+                    "/" 'find-symbol-at-point)
 
 (defun edit-emacs-config ()
   "Switch to previously open buffer.
@@ -434,6 +440,11 @@ Repeated invocations toggle between the two most recently open buffers."
   "Searches in current project"
   (interactive)
   (counsel-ag nil (projectile-project-root)))
+
+(defun find-symbol-at-point ()
+  "Searches for symbol under cursor in current project"
+  (interactive)
+  (counsel-ag (thing-at-point 'symbol) (projectile-project-root)))
 
 (defun switch-to-previous-buffer ()
   "Switch to previously open buffer.
