@@ -2,3 +2,6 @@
 recentf
 elpa/
 custom.el
+config.el
+bookmarks
+projectile-bookmarks.eld
