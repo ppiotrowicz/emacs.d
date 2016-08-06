@@ -312,6 +312,15 @@
     (setq projectile-switch-project-action 'counsel-projectile-find-file)
     ))
 
+;; Markdown
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
 ;; EVIL
 ;; evil-leader needs to be loaded before evil
 (use-package evil-leader
