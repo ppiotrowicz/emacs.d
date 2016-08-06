@@ -324,6 +324,13 @@
               ("\\.markdown\\'" . markdown-mode))
        :init (setq markdown-command "multimarkdown"))
   #+END_SRC
+** Restclient
+  HTTP REST client tool for emacs (https://github.com/pashky/restclient.el)
+  #+BEGIN_SRC emacs-lisp
+    (use-package restclient
+      :ensure t
+      :mode (("\\.http\\'" . restclient-mode)))
+  #+END_SRC
 ** Evil
   Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
   #+BEGIN_SRC emacs-lisp
@@ -510,7 +517,6 @@
   #+END_SRC
 * finetuning
 ** TODO check out https://github.com/justbur/emacs-bind-map for binding keys in modes
-** TODO restclient
 ** TODO ace window/char
 ** TODO hydra
 ** TODO git blame [1/2]
