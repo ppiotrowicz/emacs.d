@@ -1,17 +1,18 @@
 * General
 ** interface tweaks
   #+BEGIN_SRC emacs-lisp
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-  (menu-bar-mode -1)
-  (blink-cursor-mode -1)
-  (setq custom-file (concat user-emacs-directory "custom.el"))
-  (setq inhibit-splash-screen t
-        inhibit-startup-echo-area-message t
-        inhibit-startup-message t)
+    (tool-bar-mode -1)
+    (scroll-bar-mode -1)
+    (menu-bar-mode -1)
+    (blink-cursor-mode -1)
+    (setq custom-file (concat user-emacs-directory "custom.el"))
+    (setq inhibit-splash-screen t
+          inhibit-startup-echo-area-message t
+          inhibit-startup-message t)
 
-  (setq ring-bell-function 'ignore)
-  (defalias 'yes-or-no-p 'y-or-n-p)
+    (setq ring-bell-function 'ignore)
+    (defalias 'yes-or-no-p 'y-or-n-p)
+    (setq confirm-kill-emacs 'yes-or-no-p)
   #+END_SRC
 ** better scrolling
 #+BEGIN_SRC emacs-lisp
@@ -225,6 +226,16 @@
               "C-c C-r" 'ivy-resume)
              ))))
    #+END_SRC
+** Avy
+#+BEGIN_SRC emacs-lisp
+  (use-package avy
+    :ensure t
+    :general
+    (general-define-key :prefix "SPC"
+                        "SPC" '(:which-key "avy" :command avy-goto-char))
+    :config
+    (avy-setup-default))
+#+END_SRC
 ** Org
    Org mode - your life in plain text (http://orgmode.org)
    #+BEGIN_SRC emacs-lisp
@@ -236,7 +247,8 @@
 
          (setq org-directory "~/org")
          (setq org-link-abbrev-alist
-               '(("jira" . "https://getbase.atlassian.net/browse/")))
+               '(("jira" . "https://getbase.atlassian.net/browse/")
+                 ("conf" . "https://getbase.atlassian.net/wiki/display/")))
          (setq org-agenda-files (list "~/org/home.org" "~/org/work.org"))
          (setq org-log-into-drawer "LOGBOOK")
          (setq org-clock-into-drawer "CLOCKING")
@@ -331,19 +343,58 @@
       :ensure t
       :mode (("\\.http\\'" . restclient-mode)))
   #+END_SRC
+** Github
+#+BEGIN_SRC emacs-lisp
+  (use-package github-browse-file
+    :ensure t
+    :defer t)
+#+END_SRC
+** Json
+   #+BEGIN_SRC emacs-lisp
+     (use-package json-mode
+       :ensure t)
+   #+END_SRC
+** Folding
+   #+BEGIN_SRC emacs-lisp
+     (use-package yafolding
+       :ensure t
+       :init
+       (progn
+         (define-key yafolding-mode-map (kbd "<C-S-return>") nil)
+         (define-key yafolding-mode-map (kbd "<C-M-return>") nil)
+         (define-key yafolding-mode-map (kbd "<C-return>") nil)
+         (define-key evil-normal-state-map (kbd "zm") 'yafolding-toggle-all)
+         (define-key evil-normal-state-map (kbd "zc") 'yafolding-hide-parent-element)
+         (define-key evil-normal-state-map (kbd "za") 'yafolding-toggle-element)))
+   #+END_SRC
+** Hydra
+#+BEGIN_SRC emacs-lisp
+  (use-package hydra
+    :ensure t)
+#+END_SRC
+** Auto highlight
+#+BEGIN_SRC emacs-lisp
+  (use-package auto-highlight-symbol
+    :ensure t
+    :init
+    (progn
+      (global-auto-highlight-symbol-mode t)
+
+      (general-nmap "*" 'ahs-highlight-now)
+      (general-nmap "C-n" 'ahs-forward)
+      (general-nmap "C-p" 'ahs-backward)
+      (setq ahs-idle-interval 30)
+      (set-face-attribute 'ahs-face nil
+                          :foreground "#fdf4c1"
+                          :background "#504945")
+
+      (set-face-attribute 'ahs-plugin-defalt-face nil
+                          :foreground "#7c6f64"
+                          :background "#fabd2f")))
+#+END_SRC
 ** Evil
   Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
   #+BEGIN_SRC emacs-lisp
-    ;; evil-leader needs to be loaded before evil
-    (use-package evil-leader
-      :commands (evil-leader-mode global-evil-leader-mode)
-      :ensure evil-leader
-      :demand evil-leader
-      :config
-      (progn
-        (evil-leader/set-leader "<SPC>")
-        (global-evil-leader-mode t)))
-
     (use-package evil
       :ensure evil
       :config
@@ -359,12 +410,6 @@
           (progn
             (global-evil-surround-mode 1)))
 
-        (use-package evil-visualstar
-          :ensure evil-visualstar
-          :config
-          (progn
-            (global-evil-visualstar-mode)))
-
         (use-package evil-nerd-commenter
           :commands (evilnc-comment-or-uncomment-lines)
           :ensure evil-nerd-commenter)
@@ -376,7 +421,7 @@
           :commands evilmi-jump-items
           :init
           (progn
-            (setq global-evil-matchit-mode t)
+            (global-evil-matchit-mode 1)
             (define-key evil-normal-state-map "%" 'evilmi-jump-items)))
 
         ;; window movements
@@ -395,6 +440,17 @@
         (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
         ))
   #+END_SRC
+* Hydras
+** highlight
+   #+BEGIN_SRC emacs-lisp
+     (defhydra hydra-highlight
+       (:pre ahs-highlight-now)
+       "Highlight"
+       ("/" find-symbol-at-point "search")
+       ("e" ahs-edit-mode "edit"))
+
+     (general-nmap "*" 'hydra-highlight/body)
+   #+END_SRC
 * Global key bindings
 ** buffers
   #+BEGIN_SRC emacs-lisp
@@ -424,7 +480,8 @@
     (general-define-key :prefix "SPC"
                         "g"  '(:which-key "git" :ignore t)
                         "gb" '(:which-key "blame" :command magit-blame)
-                        "gs" '(:which-key "status" :command magit-status))
+                        "gs" '(:which-key "status" :command magit-status)
+                        "go" '(:which-key "open" :command github-browse-file))
   #+END_SRC
 ** projectile
   #+BEGIN_SRC emacs-lisp
@@ -449,10 +506,10 @@
                         "ww" '(:which-key "toggle" :command other-window)
                         "wf" '(:which-key "fullscreen" :command toggle-fullscreen))
   #+END_SRC
-** file list
+** open files
   #+BEGIN_SRC emacs-lisp
     (general-define-key :prefix "SPC"
-                        "o"  '(:which-key "org" :ignore t)
+                        "o"  '(:which-key "open" :ignore t)
                         "oh" '(:which-key "home tasks" :command (lambda () (interactive) (find-file "~/org/home.org")))
                         "ot" '(:which-key "todo tasks" :command (lambda () (interactive) (find-file "~/org/todo.org")))
                         "ow" '(:which-key "work tasks" :command (lambda () (interactive) (find-file "~/org/work.org")))
@@ -516,22 +573,14 @@
     (setq gc-cons-threshold 800000)
   #+END_SRC
 * finetuning
-** TODO check out https://github.com/justbur/emacs-bind-map for binding keys in modes
-** TODO ace window/char
-** TODO hydra
 ** TODO git blame [1/2]
    - [X] basic binding (SPC g b)
    - [ ] bindings for prev/next changes (hydra?)
-** TODO open file in github
-** TODO folding
 ** TODO coffescript/javascript
 ** TODO swiper enhancements
    - [ ] https://github.com/abo-abo/swiper/wiki/Sort-files-by-mtime
 ** TODO .net
-** TODO json
 ** TODO my SPC keymaps in dired mode
 ** TODO why ESC doesn't work in terminal?
-** TODO search for selected symbol enhancements
-https://github.com/syl20bnr/spacemacs/commit/b335a6aeb32890a2a1493ff9e31c4fd356bd00a0#diff-2dc8c6706748b706747e21bac4624b85L361
 ** TODO tree like file explorer (NERDtree)
-** TODO vim matchit (% to jump between things)
+** TODO check out https://github.com/justbur/emacs-bind-map for binding keys in modes
