@@ -23,6 +23,11 @@
   (setq create-lockfiles nil)
   (setq-default indent-tabs-mode nil)
 #+END_SRC
+** backups
+#+BEGIN_SRC emacs-lisp
+  (setq auto-save-default nil
+        make-backup-files nil)
+#+END_SRC
 * Interface
 ** theme
   #+BEGIN_SRC emacs-lisp
@@ -379,10 +384,6 @@
     :init
     (progn
       (global-auto-highlight-symbol-mode t)
-
-      (general-nmap "*" 'ahs-highlight-now)
-      (general-nmap "C-n" 'ahs-forward)
-      (general-nmap "C-p" 'ahs-backward)
       (setq ahs-idle-interval 30)
       (set-face-attribute 'ahs-face nil
                           :foreground "#fdf4c1"
@@ -392,6 +393,15 @@
                           :foreground "#7c6f64"
                           :background "#fabd2f")))
 #+END_SRC
+** Dumb Jump
+   #+BEGIN_SRC emacs-lisp
+     (use-package dumb-jump
+       :ensure t
+       :init
+       (progn
+         (general-define-key :keymaps 'evil-normal-state-map
+                             "C-]" 'dumb-jump-go)))
+   #+END_SRC
 ** Evil
   Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
   #+BEGIN_SRC emacs-lisp
@@ -446,8 +456,11 @@
      (defhydra hydra-highlight
        (:pre ahs-highlight-now)
        "Highlight"
-       ("/" find-symbol-at-point "search")
-       ("e" ahs-edit-mode "edit"))
+       ("n" ahs-forward "next")
+       ("p" ahs-backward "prev")
+       ("/" find-symbol-at-point "search" :color blue)
+       ("e" ahs-edit-mode "edit" :color blue)
+       ("q" nil "quit"))
 
      (general-nmap "*" 'hydra-highlight/body)
    #+END_SRC
