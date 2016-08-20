@@ -609,16 +609,11 @@
     (setq gc-cons-threshold 800000)
   #+END_SRC
 * todo
-** TODO git blame [1/2]
-   - [X] basic binding (SPC g b)
-   - [ ] bindings for prev/next changes (hydra?)
-** TODO coffescript/javascript
-** TODO swiper enhancements
-   - [ ] https://github.com/abo-abo/swiper/wiki/Sort-files-by-mtime
-** TODO .net
-** TODO my SPC keymaps in dired mode
-** TODO why ESC doesn't work in terminal?
-** TODO tree like file explorer (NERDtree)
-** TODO check out https://github.com/justbur/emacs-bind-map for binding keys in modes
-** TODO comint mode
-** TODO https://github.com/alf/ob-restclient.el
+  - [ ] bindings for prev/next changes (hydra?)
+  - [ ] swiper enhancements https://github.com/abo-abo/swiper/wiki/Sort-files-by-mtime
+  - [ ] .net/omnisharp
+  - [ ] SPC keymaps in dired mode
+  - [ ] ESC doesn't work in terminal
+  - [ ] check out https://github.com/justbur/emacs-bind-map for binding keys
+  - [ ] comint mode for shell and irb
+  - [ ] https://github.com/alf/ob-restclient.el
