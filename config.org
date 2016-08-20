@@ -225,11 +225,10 @@
          (use-package swiper
            :ensure swiper
            :config
-           (progn
-             (general-define-key
+           :general (
               "C-s" 'swiper
               "C-c C-r" 'ivy-resume)
-             ))))
+             )))
    #+END_SRC
 ** Avy
 #+BEGIN_SRC emacs-lisp
@@ -354,9 +353,14 @@
 ** Restclient
   HTTP REST client tool for emacs (https://github.com/pashky/restclient.el)
   #+BEGIN_SRC emacs-lisp
-    (use-package restclient
-      :ensure t
-      :mode (("\\.http\\'" . restclient-mode)))
+        (use-package restclient
+          :ensure t
+          :mode (("\\.http\\'" . restclient-mode))
+          :general (
+             :prefix ","
+             "s"  '(:which-key "http" :ignore t)
+             "ss" '(:which-key "send" :command restclient-http-send-current)
+             "sc" '(:which-key "curl" :command restclient-copy-curl-command)))
   #+END_SRC
 ** Github
 #+BEGIN_SRC emacs-lisp
@@ -404,13 +408,13 @@
                           :background "#fabd2f")))
 #+END_SRC
 ** Dumb Jump
+   An Emacs "jump to definition" package
    #+BEGIN_SRC emacs-lisp
      (use-package dumb-jump
        :ensure t
-       :init
-       (progn
-         (general-define-key :keymaps 'evil-normal-state-map
-                             "C-]" 'dumb-jump-go)))
+       :general (:keymaps 'evil-normal-state-map
+                          "C-]" 'dumb-jump-go
+                          "C-[" 'dump-jump-quick-look))
    #+END_SRC
 ** Evil
   Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
@@ -608,4 +612,4 @@
 ** TODO tree like file explorer (NERDtree)
 ** TODO check out https://github.com/justbur/emacs-bind-map for binding keys in modes
 ** TODO comint mode
-** TODO SD jira links
+** TODO https://github.com/alf/ob-restclient.el
