@@ -546,6 +546,7 @@
   #+BEGIN_SRC emacs-lisp
     (general-define-key :prefix "SPC"
                         "o"  '(:which-key "open" :ignore t)
+                        "oc" '(:which-key "capture" :command org-capture)
                         "oh" '(:which-key "home tasks" :command (lambda () (interactive) (find-file "~/org/home.org")))
                         "ot" '(:which-key "todo tasks" :command (lambda () (interactive) (find-file "~/org/todo.org")))
                         "ow" '(:which-key "work tasks" :command (lambda () (interactive) (find-file "~/org/work.org")))
