@@ -301,23 +301,32 @@
              ))
          (use-package rspec-mode
            :ensure rspec-mode
-           :general
-           (general-define-key
-            :prefix ","
-            :predicate '(string= (file-name-extension (buffer-file-name)) "rb")
-            "t"  '(:which-key "rspec" :ignore t)
-            "ta" 'rspec-verify-all
-            "tb" 'rspec-verify
-            "tl" 'rspec-run-last-failed
-            "tr" 'rspec-rerun
-            "tt" 'rspec-verify-single)
            :config
            (progn
              (setq compilation-scroll-output t)
              (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
+             (general-define-key
+              :prefix ","
+              "t"  '(:which-key "rspec" :ignore t)
+              "ta" '(:which-key "all" :command rspec-verify-all)
+              "tb" '(:which-key "buffer" :command rspec-verify)
+              "tl" '(:which-key "failed" :command rspec-run-last-failed)
+              "tr" '(:which-key "rerun" :command rspec-rerun)
+              "tt" '(:which-key "current" :command rspec-verify-single))
              ))
          (use-package bundler
-           :ensure bundler)))
+           :ensure bundler
+           :config
+           (progn
+             (general-define-key
+              :prefix ","
+              "b"  '(:which-key "bundle" :ignore t)
+              "bi" '(:which-key "install" :command bundle-install)
+              "bo" '(:which-key "open" :command bundle-open)
+              "be" '(:which-key "exec" :command bundle-exec)
+              "bc" '(:which-key "console" :command bundle-console)
+              "bu" '(:which-key "update" :command bundle-update))
+             ))))
   #+END_SRC
 ** Projectile
    Project Interaction Library for Emacs (http://projectile.readthedocs.io)
