@@ -637,12 +637,14 @@
 
     (setq gc-cons-threshold 800000)
   #+END_SRC
-* todo
-  - [ ] bindings for prev/next changes (hydra?)
-  - [ ] swiper enhancements https://github.com/abo-abo/swiper/wiki/Sort-files-by-mtime
-  - [ ] .net/omnisharp
-  - [ ] SPC keymaps in dired mode
-  - [ ] ESC doesn't work in terminal
-  - [ ] check out https://github.com/justbur/emacs-bind-map for binding keys
-  - [ ] comint mode for shell and irb
-  - [ ] https://github.com/alf/ob-restclient.el
+* Todo
+  - bindings for prev/next changes (hydra?)
+  - swiper enhancements https://github.com/abo-abo/swiper/wiki/Sort-files-by-mtime
+  - .net/omnisharp
+  - SPC keymaps in dired mode
+  - dired-x
+  - ESC doesn't work in terminal
+  - check out https://github.com/justbur/emacs-bind-map for binding keys
+  - comint mode for shell and irb
+  - https://github.com/alf/ob-restclient.el
+  - https://github.com/Malabarba/rich-minority instead of diminish
