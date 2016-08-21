@@ -72,6 +72,13 @@
   (show-paren-mode)
   (setq show-paren-delay 0)
 #+END_SRC
+** whitespace
+   #+BEGIN_SRC emacs-lisp
+     (require 'whitespace)
+     (setq whitespace-line-column 80)
+     (setq whitespace-style '(face tabs empty trailing))
+     (global-whitespace-mode 1)
+   #+END_SRC
 * Modeline
 ** format
 #+BEGIN_SRC emacs-lisp
