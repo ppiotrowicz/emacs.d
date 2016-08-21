@@ -31,6 +31,22 @@
   (setq auto-save-default nil
         make-backup-files nil)
 #+END_SRC
+** hippie expand
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key [remap dabbrev-expand] 'hippie-expand)
+
+     (setq hippie-expand-try-functions-list
+           '(try-complete-file-name-partially
+             try-complete-file-name
+             try-expand-all-abbrevs
+             try-expand-list
+             try-expand-line
+             try-expand-dabbrev
+             try-expand-dabbrev-all-buffers
+             try-expand-dabbrev-from-kill
+             try-complete-lisp-symbol-partially
+             try-complete-lisp-symbol))
+   #+END_SRC
 * Interface
 ** theme
   #+BEGIN_SRC emacs-lisp
