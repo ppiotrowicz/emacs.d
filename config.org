@@ -13,6 +13,9 @@
     (setq ring-bell-function 'ignore)
     (defalias 'yes-or-no-p 'y-or-n-p)
     (setq confirm-kill-emacs 'yes-or-no-p)
+
+    (setq mac-command-modifier 'meta)
+    (setq mac-option-modifier nil)
   #+END_SRC
 ** better scrolling
 #+BEGIN_SRC emacs-lisp
@@ -555,10 +558,12 @@
 ** misc
   #+BEGIN_SRC emacs-lisp
     (general-define-key :prefix "SPC" :keymaps 'normal
-                        ":" '(:which-key "M-x" :command counsel-M-x))
+                        ":" '(:which-key "M-x" :command execute-extended-command))
 
     (general-define-key :prefix "C-c" :keymaps 'normal
                         "/" 'find-symbol-at-point)
+
+    (global-set-key (kbd "M-x") 'execute-extended-command)
   #+END_SRC
 * Functions
   #+BEGIN_SRC emacs-lisp
