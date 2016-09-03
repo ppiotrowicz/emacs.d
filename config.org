@@ -487,19 +487,26 @@
         ))
   #+END_SRC
 * Hydras
-** highlight
-   #+BEGIN_SRC emacs-lisp
-     (defhydra hydra-highlight
-       (:pre ahs-highlight-now)
-       "Highlight"
-       ("n" ahs-forward "next")
-       ("p" ahs-backward "prev")
-       ("/" find-symbol-at-point "search" :color blue)
-       ("e" ahs-edit-mode "edit" :color blue)
-       ("q" nil "quit"))
-
-     (general-nmap "*" 'hydra-highlight/body)
-   #+END_SRC
+** zoom
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-zoom ()
+    "zoom"
+    ("+" text-scale-increase "in")
+    ("-" text-scale-decrease "out")
+    ("0" (text-scale-adjust 0) "reset")
+    ("q" nil "quit" :color blue))
+#+END_SRC
+** org
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-org (:color red :columns 3)
+    "Org Mode Movements"
+    ("n" outline-next-visible-heading "next heading")
+    ("p" outline-previous-visible-heading "prev heading")
+    ("N" org-forward-heading-same-level "next heading at same level")
+    ("P" org-backward-heading-same-level "prev heading at same level")
+    ("u" outline-up-heading "up heading")
+    ("g" org-goto "goto" :exit t))
+#+END_SRC
 * Global key bindings
 ** buffers
   #+BEGIN_SRC emacs-lisp
