@@ -60,6 +60,7 @@
   #+BEGIN_SRC emacs-lisp
   (set-default-font "M+ 1mn")
   (set-face-attribute 'default nil :height 130)
+  (set-face-background 'highlight "DarkSlateGray")
   (require 'diminish)
   #+END_SRC
 ** fringe
@@ -426,22 +427,6 @@
   (use-package hydra
     :ensure t)
 #+END_SRC
-** Auto highlight
-#+BEGIN_SRC emacs-lisp
-  (use-package auto-highlight-symbol
-    :ensure t
-    :init
-    (progn
-      (global-auto-highlight-symbol-mode t)
-      (setq ahs-idle-interval 30)
-      (set-face-attribute 'ahs-face nil
-                          :foreground "#fdf4c1"
-                          :background "#504945")
-
-      (set-face-attribute 'ahs-plugin-defalt-face nil
-                          :foreground "#7c6f64"
-                          :background "#fabd2f")))
-#+END_SRC
 ** Dumb Jump
    An Emacs "jump to definition" package
    #+BEGIN_SRC emacs-lisp
@@ -587,6 +572,9 @@
                         "/" 'find-symbol-at-point)
 
     (global-set-key (kbd "M-x") 'execute-extended-command)
+
+    (general-nmap "*" 'pp/swiper-at-point)
+
   #+END_SRC
 * Functions
   #+BEGIN_SRC emacs-lisp
@@ -629,6 +617,10 @@
       (interactive)
       (split-window-below)
       (windmove-down))
+
+    (defun pp/swiper-at-point ()
+      (interactive)
+      (swiper (thing-at-point 'symbol)))
   #+END_SRC
 * Other
   #+BEGIN_SRC emacs-lisp
