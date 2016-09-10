@@ -54,6 +54,7 @@
     :ensure gruvbox-theme
     :config
     (unless noninteractive
+    (setq gruvbox-contrast 'hard)
       (load-theme 'gruvbox t)))
   #+END_SRC
 ** fonts
@@ -644,9 +645,12 @@
   - swiper enhancements https://github.com/abo-abo/swiper/wiki/Sort-files-by-mtime
   - .net/omnisharp
   - SPC keymaps in dired mode
+  - SPC keymaps in magit mode
   - dired-x
   - ESC doesn't work in terminal
   - check out https://github.com/justbur/emacs-bind-map for binding keys
   - comint mode for shell and irb
   - https://github.com/alf/ob-restclient.el
   - https://github.com/Malabarba/rich-minority instead of diminish
+  - swiper faces
+  - org conf shortcut - replace spaces with +
