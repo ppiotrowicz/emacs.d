@@ -84,11 +84,6 @@
 #+BEGIN_SRC emacs-lisp
   (require 'diminish)
 #+END_SRC
-** fringe
-#+BEGIN_SRC emacs-lisp
-  (when (display-graphic-p)
-    (fringe-mode 16))
-#+END_SRC
 ** parenthesis
 #+BEGIN_SRC emacs-lisp
   (show-paren-mode)
@@ -104,122 +99,254 @@
 * Modeline
 ** format
 #+BEGIN_SRC emacs-lisp
-  (setq-default
-   mode-line-format
-   '(
-     (:propertize "%5l:" face mode-line-position-face)
-     (:eval (propertize "%5c" 'face
-                        (if (>= (current-column) 80)
-                            'mode-line-80col-face
-                          'mode-line-position-face)))
-     mode-line-client
-     "  "
-     (:eval
-      (cond (buffer-read-only
-             (propertize " RO " 'face 'mode-line-read-only-face))
-            ((buffer-modified-p)
-             (propertize " ** " 'face 'mode-line-modified-face))
-            (t "    ")))
-     " ("
-     (:propertize (:eval (projectile-project-name))
-                  face mode-line-mode-face)
-     ") "
+  (defvar mode-line-height 30
+    "How tall the mode-line should be. This is only respected in GUI emacs.")
 
-     (:propertize (:eval (shorten-directory default-directory 30))
-                  face mode-line-folder-face)
-     (:propertize "%b"
-                  face mode-line-filename-face)
-     " %n "
-     (vc-mode vc-mode)
-     "  %["
-     (:propertize mode-name
-                  face mode-line-mode-face)
-     "%] "
-     (:eval (propertize (format-mode-line minor-mode-alist)
-                        'face 'mode-line-minor-mode-face))
-     (:propertize mode-line-process
-                  face mode-line-process-face)
-     (global-mode-string global-mode-string)
-     "    "
-     ))
-#+END_SRC
-** helpers
-#+BEGIN_SRC emacs-lisp
-  (eval-when-compile (require 'subr-x))
-  (defun shorten-directory (dir max-length)
-    "Show up to `max-length' characters of a directory name `dir'."
+  ;; Load powerline only when uncompiled, in order to generate the xpm bitmaps for
+  ;; the mode-line. This is the tall blue bar on the left of the mode-line.
+  ;; NOTE Compile this file for a faster startup!
+  (eval-when-compile (require 'powerline))
+  ;; FIXME Don't hardcode colors in
+  (defvar mode-line-bar          (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 3 "#00B3EF" nil)))
+  (defvar mode-line-eldoc-bar    (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 3 "#B3EF00" nil)))
+  (defvar mode-line-inactive-bar (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 3 nil nil)))
 
-    (let* ((root-folder
-            (if (and (boundp 'projectile-project-root) (projectile-project-p))
-                (projectile-project-root) ""))
-           (path (reverse (split-string
-                           (abbreviate-file-name
-                            (string-remove-prefix root-folder dir)) "/")))
-           (output ""))
-      (when (and path (equal "" (car path)))
-        (setq path (cdr path)))
-      (while (and path (< (length output) (- max-length 4)))
-        (setq output (concat (car path) "/" output))
-        (setq path (cdr path)))
-      (when path
-        (setq output (concat ".../" output)))
-      output))
-#+END_SRC
-** modeline style
-#+BEGIN_SRC emacs-lisp
-    ;; Extra mode line faces
-    (make-face 'mode-line-read-only-face)
-    (make-face 'mode-line-modified-face)
-    (make-face 'mode-line-folder-face)
-    (make-face 'mode-line-filename-face)
-    (make-face 'mode-line-position-face)
-    (make-face 'mode-line-mode-face)
-    (make-face 'mode-line-minor-mode-face)
-    (make-face 'mode-line-process-face)
-    (make-face 'mode-line-80col-face)
-    (make-face 'rbenv-active-ruby-face)
+  ;; Custom faces
+  (defface mode-line-is-modified nil
+    "Face for mode-line modified symbol")
 
-    (set-face-attribute 'mode-line nil
-                        :foreground "gray60" :background "gray20"
-                        :inverse-video nil
-                        :box '(:line-width 6 :color "gray20" :style nil))
-    (set-face-attribute 'mode-line-inactive nil
-                        :foreground "gray80" :background "gray22"
-                        :inverse-video nil
-                        :box '(:line-width 6 :color "gray22" :style nil))
+  (defface mode-line-2 nil
+    "The alternate color for mode-line text.")
 
-    (set-face-attribute 'mode-line-read-only-face nil
-                        :inherit 'mode-line-face
-                        :foreground "#4271ae"
-                        :box '(:line-width 2 :color "#4271ae"))
-    (set-face-attribute 'mode-line-modified-face nil
-                        :inherit 'mode-line-face
-                        :foreground "#c82829"
-                        :background "#ffffff"
-                        :box '(:line-width 2 :color "#c82829"))
-    (set-face-attribute 'mode-line-folder-face nil
-                        :inherit 'mode-line-face
-                        :foreground "gray60")
-    (set-face-attribute 'mode-line-filename-face nil
-                        :inherit 'mode-line-face
-                        :foreground "#eab700"
-                        :weight 'bold)
-    (set-face-attribute 'mode-line-position-face nil
-                        :inherit 'mode-line-face
-                        :family "Menlo" :height 100)
-    (set-face-attribute 'mode-line-mode-face nil
-                        :inherit 'mode-line-face
-                        :foreground "gray80")
-    (set-face-attribute 'mode-line-minor-mode-face nil
-                        :inherit 'mode-line-mode-face
-                        :foreground "gray40"
-                        :height 110)
-    (set-face-attribute 'mode-line-process-face nil
-                        :inherit 'mode-line-face
-                        :foreground "#718c00")
-    (set-face-attribute 'mode-line-80col-face nil
-                        :inherit 'mode-line-position-face
-                        :foreground "black" :background "#eab700")
+  (defface mode-line-highlight nil
+    "Face for bright segments of the mode-line.")
+
+  (defface mode-line-count-face nil
+    "Face for anzu/evil-substitute/evil-search number-of-matches display.")
+
+  ;; Git/VCS segment faces
+  (defface mode-line-vcs-info '((t (:inherit warning)))
+    "")
+  (defface mode-line-vcs-warning '((t (:inherit warning)))
+    "")
+
+  ;;
+  ;; Initialization
+  ;;
+
+  ;; So the mode-line can keep track of "the current window"
+  (defvar mode-line-selected-window nil)
+  (defun pp/set-selected-window (&rest _)
+    (let ((window (frame-selected-window)))
+      (when (and (windowp window)
+                 (not (minibuffer-window-active-p window)))
+        (setq mode-line-selected-window window))))
+  (add-hook 'window-configuration-change-hook #'pp/set-selected-window)
+  (add-hook 'focus-in-hook #'pp/set-selected-window)
+  (advice-add 'select-window :after 'pp/set-selected-window)
+  (advice-add 'select-frame  :after 'pp/set-selected-window)
+
+  (defun pp/project-root (&optional strict-p)
+    "Get the path to the root of your project."
+    (let (projectile-require-project-root strict-p)
+      (projectile-project-root)))
+
+  ;;
+  ;; Mode-line segments
+  ;;
+
+  (defun *buffer-path ()
+    "Displays the buffer's full path relative to the project root (includes the
+  project root). Excludes the file basename. See `*buffer-name' for that."
+    (when buffer-file-name
+      (propertize
+       (f-dirname
+        (let ((buffer-path (file-relative-name buffer-file-name (pp/project-root)))
+              (max-length (truncate (/ (window-body-width) 1.75))))
+          (concat (projectile-project-name) "/"
+                  (if (> (length buffer-path) max-length)
+                      (let ((path (reverse (split-string buffer-path "/" t)))
+                            (output ""))
+                        (when (and path (equal "" (car path)))
+                          (setq path (cdr path)))
+                        (while (and path (<= (length output) (- max-length 4)))
+                          (setq output (concat (car path) "/" output))
+                          (setq path (cdr path)))
+                        (when path
+                          (setq output (concat "../" output)))
+                        (when (string-suffix-p "/" output)
+                          (setq output (substring output 0 -1)))
+                        output)
+                    buffer-path))))
+       'face (if active 'mode-line-2))))
+
+
+  (defun *buffer-name ()
+    "The buffer's base name or id."
+    (s-trim-left (format-mode-line "%b")))
+
+  (defun *buffer-pwd ()
+    "Displays `default-directory', for special buffers like the scratch buffer."
+    (propertize
+     (concat "[" (abbreviate-file-name default-directory) "]")
+     'face 'mode-line-2))
+
+  (defun *buffer-state ()
+    "Displays symbols representing the buffer's state
+  (non-existent/modified/read-only)"
+    (when buffer-file-name
+      (propertize
+       (concat (if (not (file-exists-p buffer-file-name))
+                   "∄"
+                 (if (buffer-modified-p) "✱"))
+               (if buffer-read-only ""))
+       'face 'mode-line-is-modified)))
+
+  (defun *buffer-encoding-abbrev ()
+    "The line ending convention used in the buffer."
+    (if (memq buffer-file-coding-system '(utf-8 utf-8-unix))
+        ""
+      (symbol-name buffer-file-coding-system)))
+
+  (defun *major-mode ()
+    "The major mode, including process, environment and text-scale info."
+    (concat (format-mode-line mode-name)
+            (if (stringp mode-line-process) mode-line-process)
+            (and (featurep 'face-remap)
+                 (/= text-scale-mode-amount 0)
+                 (format " (%+d)" text-scale-mode-amount))))
+
+  (defun *vc ()
+    "Displays the current branch, colored based on its state."
+    (when vc-mode
+      (let ((backend (concat " " (substring vc-mode (+ 2 (length (symbol-name (vc-backend buffer-file-name)))))))
+            (face (let ((state (vc-state buffer-file-name)))
+                    (cond ((memq state '(edited added))
+                           'mode-line-vcs-info)
+                          ((memq state '(removed needs-merge needs-update conflict removed unregistered))
+                           'mode-line-vcs-warning)))))
+        (if active
+            (propertize backend 'face face)
+          backend))))
+
+  (defun *selection-info ()
+    "Information about the current selection, such as how many characters and
+  lines are selected, or the NxM dimensions of a block selection."
+    (when (and active (evil-visual-state-p))
+      (propertize
+       (let ((reg-beg (region-beginning))
+             (reg-end (region-end))
+             (evil (eq 'visual evil-state)))
+         (let ((lines (count-lines reg-beg (min (1+ reg-end) (point-max))))
+               (chars (- (1+ reg-end) reg-beg))
+               (cols (1+ (abs (- (evil-column reg-end)
+                                 (evil-column reg-beg))))))
+           (cond
+            ;; rectangle selection
+            ((or (bound-and-true-p rectangle-mark-mode)
+                 (and evil (eq 'block evil-visual-selection)))
+             (format " %dx%dB " lines (if evil cols (1- cols))))
+            ;; line selection
+            ((or (> lines 1) (eq 'line evil-visual-selection))
+             (if (and (eq evil-state 'visual) (eq evil-this-type 'line))
+                 (format " %dL " lines)
+               (format " %dC %dL " chars lines)))
+            (t (format " %dC " (if evil chars (1- chars)))))))
+       'face 'mode-line-highlight)))
+
+  (defun *macro-recording ()
+    "Display current macro being recorded."
+    (when (and active defining-kbd-macro)
+      (propertize
+       (format " %s ▶ " (char-to-string evil-this-macro))
+       'face 'mode-line-highlight)))
+
+  (make-variable-buffer-local 'anzu--state)
+  (defun *anzu ()
+    "Show the current match number and the total number of matches. Requires anzu
+  to be enabled."
+    (when (and (featurep 'evil-anzu) (evil-ex-hl-active-p 'evil-ex-search))
+      (propertize
+       (format " %s/%d%s "
+               anzu--current-position anzu--total-matched
+               (if anzu--overflow-p "+" ""))
+       'face (if active 'mode-line-count-face))))
+
+  (defun *evil-substitute ()
+    "Show number of :s matches in real time."
+    (when (and (evil-ex-p) (evil-ex-hl-active-p 'evil-ex-substitute))
+      (propertize
+       (let ((range (if evil-ex-range
+                        (cons (car evil-ex-range) (cadr evil-ex-range))
+                      (cons (line-beginning-position) (line-end-position))))
+             (pattern (car-safe (evil-delimited-arguments evil-ex-argument 2))))
+         (if pattern
+             (format " %s matches "
+                     (count-matches pattern (car range) (cdr range))
+                     evil-ex-argument)
+           " ... "))
+       'face (if active 'mode-line-count-face))))
+
+  (defun *iedit ()
+    "Show the number of iedit regions matches + what match you're on."
+    (when (and (boundp 'iedit-mode) iedit-mode)
+      (propertize
+       (let ((this-oc (let (message-log-max) (iedit-find-current-occurrence-overlay)))
+             (length (or (ignore-errors (length iedit-occurrences-overlays)) 0)))
+         (format
+          " %s/%s "
+          (save-excursion
+            (unless this-oc
+              (iedit-prev-occurrence)
+              (setq this-oc (iedit-find-current-occurrence-overlay)))
+            (if this-oc
+                ;; NOTE: Not terribly reliable
+                (- length (-elem-index this-oc iedit-occurrences-overlays))
+              "-"))
+          length))
+       'face (if active 'mode-line-count-face))))
+
+  (defun *buffer-position ()
+    "A more vim-like buffer position."
+    (let ((start (window-start))
+          (end (window-end))
+          (pend (point-max)))
+      (if (and (= start 1)
+               (= end pend))
+          ":All"
+        (cond ((= start 1) ":Top")
+              ((= end pend) ":Bot")
+              (t (format ":%d%%%%" (/ end 0.01 pend)))))))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (defun pp/mode-line (&optional id)
+    `(:eval
+      (let* ((active (eq (selected-window) mode-line-selected-window))
+             (lhs (list (propertize " " 'display (if active mode-line-bar mode-line-inactive-bar))
+                        (*macro-recording)
+                        (*selection-info)
+                        (*anzu)
+                        (*evil-substitute)
+                        (*iedit)
+                        " "
+                        (*buffer-path)
+                        (*buffer-name)
+                        " "
+                        (*buffer-state)
+                        ,(if (eq id 'scratch) '(*buffer-pwd))))
+             (rhs (list (*buffer-encoding-abbrev)
+                        (*vc)
+                        "  " (*major-mode) "  "
+                        (propertize
+                         (concat "(%l,%c) " (*buffer-position))
+                         'face (if active 'mode-line-2))))
+             (middle (propertize
+                      " " 'display `((space :align-to (- (+ right right-fringe right-margin)
+                                                         ,(1+ (string-width (format-mode-line rhs)))))))))
+        (list lhs middle rhs))))
+
+  (setq-default mode-line-format (pp/mode-line))
 #+END_SRC
 * Packages
 ** General
@@ -260,6 +387,11 @@ It's Magit! A Git Porcelain inside Emacs. https://magit.vc
     :config
     (use-package evil-magit
       :ensure evil-magit))
+#+END_SRC
+** Powerline
+#+BEGIN_SRC emacs-lisp
+  (use-package powerline
+    :ensure t)
 #+END_SRC
 ** Ivy
 Ivy - a generic completion frontend for Emacs, Swiper - isearch with an overview, and more. Oh, man! http://oremacs.com/swiper/
@@ -516,6 +648,11 @@ Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
       (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
       (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
       ))
+#+END_SRC
+** F
+#+BEGIN_SRC emacs-lisp
+  (use-package f
+    :ensure t)
 #+END_SRC
 * Hydras
 ** zoom
