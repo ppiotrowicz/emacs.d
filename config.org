@@ -349,7 +349,8 @@
   (setq-default mode-line-format (pp/mode-line))
 #+END_SRC
 * Packages
-** General
+** Interface
+*** General
 More convenient key definitions in emacs (https://github.com/noctuid/general.el)
 #+BEGIN_SRC emacs-lisp
   (use-package general
@@ -360,7 +361,7 @@ More convenient key definitions in emacs (https://github.com/noctuid/general.el)
       (general-evil-setup)
       (setq general-default-keymaps 'evil-normal-state-map)))
 #+END_SRC
-** Which key
+*** Which key
 Emacs package that displays available keybindings in popup (https://github.com/justbur/emacs-which-key)
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
@@ -372,28 +373,19 @@ Emacs package that displays available keybindings in popup (https://github.com/j
       (which-key-setup-side-window-bottom)
       (which-key-mode)))
 #+END_SRC
-** Bind-map
+*** Bind-map
 Bind personal keymaps in multiple locations https://github.com/justbur/emacs-bind-map
 #+BEGIN_SRC emacs-lisp
   (use-package bind-map
     :ensure bind-map
     :demand bind-map)
 #+END_SRC
-** Magit
-It's Magit! A Git Porcelain inside Emacs. https://magit.vc
-#+BEGIN_SRC emacs-lisp
-  (use-package magit
-    :ensure magit
-    :config
-    (use-package evil-magit
-      :ensure evil-magit))
-#+END_SRC
-** Powerline
+*** Powerline
 #+BEGIN_SRC emacs-lisp
   (use-package powerline
     :ensure t)
 #+END_SRC
-** Ivy
+*** Ivy
 Ivy - a generic completion frontend for Emacs, Swiper - isearch with an overview, and more. Oh, man! http://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
@@ -417,7 +409,7 @@ Ivy - a generic completion frontend for Emacs, Swiper - isearch with an overview
            "C-c C-r" 'ivy-resume)
           )))
 #+END_SRC
-** Avy
+*** Avy
 #+BEGIN_SRC emacs-lisp
   (use-package avy
     :commands (avy-goto-char)
@@ -425,183 +417,7 @@ Ivy - a generic completion frontend for Emacs, Swiper - isearch with an overview
     :config
     (avy-setup-default))
 #+END_SRC
-** Org
-Org mode - your life in plain text (http://orgmode.org)
-#+BEGIN_SRC emacs-lisp
-  (use-package org
-    :ensure org
-    :config
-    (progn
-      (setq org-startup-indented t)
-      (setq org-hide-leading-stars t)
-      (setq org-directory "~/org")
-      (setq org-link-abbrev-alist
-            '(("SD"   . "https://getbase.atlassian.net/browse/SD-")
-              ("jira" . "https://getbase.atlassian.net/browse/")
-              ("conf" . "https://getbase.atlassian.net/wiki/display/%h")))
-      (setq org-agenda-files (list "~/org/home.org" "~/org/work.org"))
-      (setq org-log-into-drawer "LOGBOOK")
-      (setq org-clock-into-drawer "CLOCKING")
-      (setq org-refile-targets '((nil :maxlevel . 9)
-                                 (org-agenda-files :maxlevel . 9)))
-      (setq org-refile-use-outline-path t)
-      (setq org-refile-allow-creating-parent-nodes (quote confirm))
-      (setq org-tags-column -90)
-      (setq org-capture-templates
-            (quote
-             (("w" "Work")
-              ("wt" "Todo" entry
-               (file+headline "~/org/work.org" "INBOX")
-               "* TODO %?")
-              ("h" "Home")
-              ("ht" "Todo" entry
-               (file+headline "~/org/home.org" "INBOX")
-               "* TODO %?")
-              ("o" "Org")
-              ("ot" "Todo" entry
-               (file+headline "~/org/todo.org" "INBOX")
-               "* TODO %?")
-              ("l" "TIL" entry
-               (file+datetree "~/org/til.org")
-               "* %? %^g")
-              )))
-      ))
-#+END_SRC
-** Ruby
-#+BEGIN_SRC emacs-lisp
-  (use-package ruby-mode
-    :ensure ruby-mode
-    :config
-    (progn
-      (defvar pp/ruby-map
-        (let ((map (make-sparse-keymap)))
-          (define-key map (kbd "b i") 'bundle-install)
-          (define-key map (kbd "b o") 'bundle-open)
-          (define-key map (kbd "b e") 'bundle-exec)
-          (define-key map (kbd "b c") 'bundle-console)
-          (define-key map (kbd "b u") 'bundle-update)
-          (define-key map (kbd "t a") 'rspec-verify-all)
-          (define-key map (kbd "t b") 'rspec-verify)
-          (define-key map (kbd "t l") 'rspec-run-last-failed)
-          (define-key map (kbd "t r") 'rspec-rerun)
-          (define-key map (kbd "t t") 'rspec-verify-single)
-          (define-key map (kbd "t k") '(lambda () (interactive) (kill-buffer "*rspec-compilation*")))
-          map)
-        "Ruby keymap.")
-      (bind-map pp/ruby-map
-        :evil-keys (",")
-        :major-modes (ruby-mode))
-      (use-package inf-ruby
-        :ensure inf-ruby)
-      (use-package rbenv
-        :ensure rbenv
-        :config
-        (progn
-          (global-rbenv-mode)
-          (set-face-attribute 'rbenv-active-ruby-face nil
-                              :inherit 'mode-line-face
-                              :foreground "#eab700")
-          (setq rspec-autosave-buffer t)
-          (setq rspec-spec-command "rspec --format progress --no-profile")
-          (add-hook 'projectile-after-switch-project-hook 'rbenv-use-corresponding)))
-      (use-package rspec-mode
-        :ensure rspec-mode
-        :config
-        (progn
-          (setq compilation-scroll-output t)
-          (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)))
-      (use-package bundler
-        :ensure bundler)))
-#+END_SRC
-** Coffescript
-#+BEGIN_SRC emacs-lisp
-  (use-package coffee-mode
-    :ensure t
-    :config
-    (progn
-      (setq coffee-tab-width 2)
-     ))
-#+END_SRC
-** Projectile
-Project Interaction Library for Emacs (http://projectile.readthedocs.io)
-#+BEGIN_SRC emacs-lisp
-  (use-package projectile
-    :ensure projectile
-    :config
-    (progn
-      (use-package counsel-projectile
-        :ensure counsel-projectile)
-      (setq projectile-switch-project-action 'counsel-projectile-find-file)))
-#+END_SRC
-** Markdown
-Major mode for editing markdown files (http://jblevins.org/projects/markdown-mode/)
-#+BEGIN_SRC emacs-lisp
-  (use-package markdown-mode
-    :ensure t
-    :commands (markdown-mode gfm-mode)
-    :mode (("README\\.md\\'" . gfm-mode)
-           ("\\.md\\'" . markdown-mode)
-           ("\\.markdown\\'" . markdown-mode))
-    :init (setq markdown-command "multimarkdown"))
-#+END_SRC
-** Restclient
-HTTP REST client tool for emacs (https://github.com/pashky/restclient.el)
-#+BEGIN_SRC emacs-lisp
-  (use-package restclient
-    :ensure t
-    :mode (("\\.http\\'" . restclient-mode))
-    :config
-    (progn
-      (defvar pp/restclient-map
-        (let ((map (make-sparse-keymap)))
-          (define-key map (kbd "s") 'restclient-http-send-current)
-          (define-key map (kbd "c") 'restclient-copy-curl-command)
-          map)
-        "Restclient keymap.")
-
-      (bind-map pp/restclient-map
-        :evil-keys (",")
-        :major-modes (restclient-mode))))
-#+END_SRC
-** Github
-#+BEGIN_SRC emacs-lisp
-  (use-package github-browse-file
-    :ensure t
-    :defer t)
-#+END_SRC
-** Json
-#+BEGIN_SRC emacs-lisp
-  (use-package json-mode
-    :ensure t)
-#+END_SRC
-** Folding
-#+BEGIN_SRC emacs-lisp
-  (use-package yafolding
-    :ensure t
-    :init
-    (progn
-      (define-key yafolding-mode-map (kbd "<C-S-return>") nil)
-      (define-key yafolding-mode-map (kbd "<C-M-return>") nil)
-      (define-key yafolding-mode-map (kbd "<C-return>") nil)
-      (define-key evil-normal-state-map (kbd "zm") 'yafolding-toggle-all)
-      (define-key evil-normal-state-map (kbd "zc") 'yafolding-hide-parent-element)
-      (define-key evil-normal-state-map (kbd "za") 'yafolding-toggle-element)))
-#+END_SRC
-** Hydra
-#+BEGIN_SRC emacs-lisp
-  (use-package hydra
-    :ensure t)
-#+END_SRC
-** Dumb Jump
-An Emacs "jump to definition" package
-#+BEGIN_SRC emacs-lisp
-  (use-package dumb-jump
-    :ensure t
-    :general (:keymaps 'evil-normal-state-map
-                       "C-]" 'dumb-jump-go
-                       "C-[" 'dump-jump-quick-look))
-#+END_SRC
-** Evil
+*** Evil
 Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
 #+BEGIN_SRC emacs-lisp
   (use-package evil
@@ -649,9 +465,197 @@ Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
       (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
       ))
 #+END_SRC
-** F
+*** Folding
+#+BEGIN_SRC emacs-lisp
+  (use-package yafolding
+    :ensure t
+    :init
+    (progn
+      (define-key yafolding-mode-map (kbd "<C-S-return>") nil)
+      (define-key yafolding-mode-map (kbd "<C-M-return>") nil)
+      (define-key yafolding-mode-map (kbd "<C-return>") nil)
+      (define-key evil-normal-state-map (kbd "zm") 'yafolding-toggle-all)
+      (define-key evil-normal-state-map (kbd "zc") 'yafolding-hide-parent-element)
+      (define-key evil-normal-state-map (kbd "za") 'yafolding-toggle-element)))
+#+END_SRC
+** Tools
+*** Magit
+It's Magit! A Git Porcelain inside Emacs. https://magit.vc
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :ensure magit
+    :config
+    (use-package evil-magit
+      :ensure evil-magit))
+#+END_SRC
+*** Org
+Org mode - your life in plain text (http://orgmode.org)
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :ensure org
+    :config
+    (progn
+      (setq org-startup-indented t)
+      (setq org-hide-leading-stars t)
+      (setq org-directory "~/org")
+      (setq org-link-abbrev-alist
+            '(("SD"   . "https://getbase.atlassian.net/browse/SD-")
+              ("jira" . "https://getbase.atlassian.net/browse/")
+              ("conf" . "https://getbase.atlassian.net/wiki/display/%h")))
+      (setq org-agenda-files (list "~/org/home.org" "~/org/work.org"))
+      (setq org-log-into-drawer "LOGBOOK")
+      (setq org-clock-into-drawer "CLOCKING")
+      (setq org-refile-targets '((nil :maxlevel . 9)
+                                 (org-agenda-files :maxlevel . 9)))
+      (setq org-refile-use-outline-path t)
+      (setq org-refile-allow-creating-parent-nodes (quote confirm))
+      (setq org-tags-column -90)
+      (setq org-capture-templates
+            (quote
+             (("w" "Work")
+              ("wt" "Todo" entry
+               (file+headline "~/org/work.org" "INBOX")
+               "* TODO %?")
+              ("h" "Home")
+              ("ht" "Todo" entry
+               (file+headline "~/org/home.org" "INBOX")
+               "* TODO %?")
+              ("o" "Org")
+              ("ot" "Todo" entry
+               (file+headline "~/org/todo.org" "INBOX")
+               "* TODO %?")
+              ("l" "TIL" entry
+               (file+datetree "~/org/til.org")
+               "* %? %^g")
+              )))
+      ))
+#+END_SRC
+*** Projectile
+Project Interaction Library for Emacs (http://projectile.readthedocs.io)
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :ensure projectile
+    :config
+    (progn
+      (use-package counsel-projectile
+        :ensure counsel-projectile)
+      (setq projectile-switch-project-action 'counsel-projectile-find-file)))
+#+END_SRC
+*** Restclient
+HTTP REST client tool for emacs (https://github.com/pashky/restclient.el)
+#+BEGIN_SRC emacs-lisp
+  (use-package restclient
+    :ensure t
+    :mode (("\\.http\\'" . restclient-mode))
+    :config
+    (progn
+      (defvar pp/restclient-map
+        (let ((map (make-sparse-keymap)))
+          (define-key map (kbd "s") 'restclient-http-send-current)
+          (define-key map (kbd "c") 'restclient-copy-curl-command)
+          map)
+        "Restclient keymap.")
+
+      (bind-map pp/restclient-map
+        :evil-keys (",")
+        :major-modes (restclient-mode))))
+#+END_SRC
+*** Github
+#+BEGIN_SRC emacs-lisp
+  (use-package github-browse-file
+    :ensure t
+    :defer t)
+#+END_SRC
+*** Hydra
+#+BEGIN_SRC emacs-lisp
+  (use-package hydra
+    :ensure t)
+#+END_SRC
+*** Dumb Jump
+An Emacs "jump to definition" package
+#+BEGIN_SRC emacs-lisp
+  (use-package dumb-jump
+    :ensure t
+    :general (:keymaps 'evil-normal-state-map
+                       "C-]" 'dumb-jump-go
+                       "C-[" 'dump-jump-quick-look))
+#+END_SRC
+** Libraries
+*** F
 #+BEGIN_SRC emacs-lisp
   (use-package f
+    :ensure t)
+#+END_SRC
+** Languages
+*** Ruby
+#+BEGIN_SRC emacs-lisp
+  (use-package ruby-mode
+    :ensure ruby-mode
+    :config
+    (progn
+      (defvar pp/ruby-map
+        (let ((map (make-sparse-keymap)))
+          (define-key map (kbd "b i") 'bundle-install)
+          (define-key map (kbd "b o") 'bundle-open)
+          (define-key map (kbd "b e") 'bundle-exec)
+          (define-key map (kbd "b c") 'bundle-console)
+          (define-key map (kbd "b u") 'bundle-update)
+          (define-key map (kbd "t a") 'rspec-verify-all)
+          (define-key map (kbd "t b") 'rspec-verify)
+          (define-key map (kbd "t l") 'rspec-run-last-failed)
+          (define-key map (kbd "t r") 'rspec-rerun)
+          (define-key map (kbd "t t") 'rspec-verify-single)
+          (define-key map (kbd "t k") '(lambda () (interactive) (kill-buffer "*rspec-compilation*")))
+          map)
+        "Ruby keymap.")
+      (bind-map pp/ruby-map
+        :evil-keys (",")
+        :major-modes (ruby-mode))
+      (use-package inf-ruby
+        :ensure inf-ruby)
+      (use-package rbenv
+        :ensure rbenv
+        :config
+        (progn
+          (global-rbenv-mode)
+          (set-face-attribute 'rbenv-active-ruby-face nil
+                              :inherit 'mode-line-face
+                              :foreground "#eab700")
+          (setq rspec-autosave-buffer t)
+          (setq rspec-spec-command "rspec --format progress --no-profile")
+          (add-hook 'projectile-after-switch-project-hook 'rbenv-use-corresponding)))
+      (use-package rspec-mode
+        :ensure rspec-mode
+        :config
+        (progn
+          (setq compilation-scroll-output t)
+          (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)))
+      (use-package bundler
+        :ensure bundler)))
+#+END_SRC
+*** Coffescript
+#+BEGIN_SRC emacs-lisp
+  (use-package coffee-mode
+    :ensure t
+    :config
+    (progn
+      (setq coffee-tab-width 2)
+     ))
+#+END_SRC
+*** Markdown
+Major mode for editing markdown files (http://jblevins.org/projects/markdown-mode/)
+#+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode
+    :ensure t
+    :commands (markdown-mode gfm-mode)
+    :mode (("README\\.md\\'" . gfm-mode)
+           ("\\.md\\'" . markdown-mode)
+           ("\\.markdown\\'" . markdown-mode))
+    :init (setq markdown-command "multimarkdown"))
+#+END_SRC
+*** Json
+#+BEGIN_SRC emacs-lisp
+  (use-package json-mode
     :ensure t)
 #+END_SRC
 * Hydras
@@ -823,8 +827,7 @@ Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
 - ESC doesn't work in terminal
 - comint mode for shell and irb
 - https://github.com/alf/ob-restclient.el
-- swiper faces
 - org conf shortcut - replace spaces with +
 - https://github.com/pidu/git-timemachine
 - https://m.reddit.com/r/emacs/comments/51jvai/making_modern_emacs_themes/?utm_source=mweb_redirect&utm_medium=twitter&compact=true
-- modeline config
+- https://github.com/hlissner/.emacs.d/blob/master/core/core-os-osx.el#L65
