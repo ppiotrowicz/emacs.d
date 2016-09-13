@@ -76,12 +76,14 @@
   (load-theme 'doom-one t)
 #+END_SRC
 ** fonts
-  #+BEGIN_SRC emacs-lisp
-  (set-default-font "M+ 1mn")
-  (set-face-attribute 'default nil :height 130)
-  (set-face-background 'highlight "DarkSlateGray")
+#+BEGIN_SRC emacs-lisp
+  (set-default-font "Fira Mono for Powerline")
+  (set-face-attribute 'default nil :height 120)
+#+END_SRC
+** diminish
+#+BEGIN_SRC emacs-lisp
   (require 'diminish)
-  #+END_SRC
+#+END_SRC
 ** fringe
 #+BEGIN_SRC emacs-lisp
   (when (display-graphic-p)
