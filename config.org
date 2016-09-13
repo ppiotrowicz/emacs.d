@@ -1,52 +1,73 @@
 * General
 ** interface tweaks
-  #+BEGIN_SRC emacs-lisp
-    (tool-bar-mode -1)
-    (scroll-bar-mode -1)
-    (menu-bar-mode -1)
-    (blink-cursor-mode -1)
-    (setq custom-file (concat user-emacs-directory "custom.el"))
-    (setq inhibit-splash-screen t
-          inhibit-startup-echo-area-message t
-          inhibit-startup-message t)
-
-    (setq ring-bell-function 'ignore)
-    (defalias 'yes-or-no-p 'y-or-n-p)
-    (setq confirm-kill-emacs 'yes-or-no-p)
-
-    (setq mac-command-modifier 'meta)
-    (setq mac-option-modifier nil)
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (menu-bar-mode -1)
+  (blink-cursor-mode -1)
+  (setq custom-file (concat user-emacs-directory "custom.el"))
+  (setq inhibit-splash-screen t)
+  (setq inhibit-startup-echo-area-message t)
+  (setq inhibit-startup-message t)
+  (setq ring-bell-function 'ignore)
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (setq confirm-kill-emacs 'yes-or-no-p)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier nil)
+  (setq create-lockfiles nil)
+#+END_SRC
+** encoding
+#+BEGIN_SRC emacs-lisp
+  (setq coding-system-for-read 'utf-8)
+  (setq coding-system-for-write 'utf-8)
+  (setq sentence-end-double-space nil)
+  (setq default-fill-column 80)
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
+** scratch
+#+BEGIN_SRC emacs-lisp
+  (setq initial-scratch-message
+        (format
+         ";; %s\n\n"
+         (replace-regexp-in-string
+          "\n" "\n;; " ; comment each line
+          (replace-regexp-in-string
+           "\n$" ""    ; remove trailing linebreak
+           (shell-command-to-string "fortune")))))
+#+END_SRC
 ** better scrolling
 #+BEGIN_SRC emacs-lisp
-  (setq scroll-conservatively 9999
-        scroll-preserve-screen-position t
-        scroll-margin 3)
-
-  (setq create-lockfiles nil)
-  (setq-default indent-tabs-mode nil)
+  (setq scroll-conservatively 9999)
+  (setq scroll-preserve-screen-position t)
+  (setq scroll-margin 3)
 #+END_SRC
 ** backups
 #+BEGIN_SRC emacs-lisp
-  (setq auto-save-default nil
-        make-backup-files nil)
+  (setq delete-old-versions -1)
+  (setq version-control t)
+  (setq vc-make-backup-files t)
+  (setq auto-save-default nil)
+  (setq make-backup-files t)
+  (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
+  (setq vc-follow-symlinks t )
+  (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 #+END_SRC
 ** hippie expand
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key [remap dabbrev-expand] 'hippie-expand)
+#+BEGIN_SRC emacs-lisp
+  (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
-     (setq hippie-expand-try-functions-list
-           '(try-complete-file-name-partially
-             try-complete-file-name
-             try-expand-all-abbrevs
-             try-expand-list
-             try-expand-line
-             try-expand-dabbrev
-             try-expand-dabbrev-all-buffers
-             try-expand-dabbrev-from-kill
-             try-complete-lisp-symbol-partially
-             try-complete-lisp-symbol))
-   #+END_SRC
+  (setq hippie-expand-try-functions-list
+        '(try-complete-file-name-partially
+          try-complete-file-name
+          try-expand-all-abbrevs
+          try-expand-list
+          try-expand-line
+          try-expand-dabbrev
+          try-expand-dabbrev-all-buffers
+          try-expand-dabbrev-from-kill
+          try-complete-lisp-symbol-partially
+          try-complete-lisp-symbol))
+#+END_SRC
 * Interface
 ** theme
 #+BEGIN_SRC emacs-lisp
