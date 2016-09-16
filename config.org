@@ -1,3 +1,4 @@
+#+STARTUP: content
 * General
 ** interface tweaks
 #+BEGIN_SRC emacs-lisp
@@ -79,7 +80,7 @@
   ;; brighter minibuffer when active
   (add-hook 'minibuffer-setup-hook 'doom-buffer-mode)
 #+END_SRC
-** fonts
+** font
 #+BEGIN_SRC emacs-lisp
   (set-default-font "Fira Mono for Powerline")
   (set-face-attribute 'default nil :height 120)
@@ -235,6 +236,7 @@ Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
 It's Magit! A Git Porcelain inside Emacs. https://magit.vc
 #+BEGIN_SRC emacs-lisp
   (use-package magit
+    :commands (magit-status)
     :ensure magit
     :config
     (use-package evil-magit
@@ -400,6 +402,8 @@ An Emacs "jump to definition" package
           (define-key map (kbd "t r") 'rspec-rerun)
           (define-key map (kbd "t t") 'rspec-verify-single)
           (define-key map (kbd "t k") '(lambda () (interactive) (kill-buffer "*rspec-compilation*")))
+          (define-key map (kbd "v c") 'rbenv-use-corresponding)
+          (define-key map (kbd "v g") 'rbenv-use-global)
           map)
         "Ruby keymap.")
       (bind-map pp/ruby-map
@@ -760,7 +764,7 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
 ** projectile
 #+BEGIN_SRC emacs-lisp
   (let ((map pp/global-map))
-    (define-key map (kbd "p p") 'counsel-projectile)
+    (define-key map (kbd "p p") 'counsel-projectile-switch-project)
     (define-key map (kbd "p f") 'counsel-projectile-find-file)
     (define-key map (kbd "p /") 'find-in-project)
     (define-key map (kbd "/") 'find-in-project)
@@ -797,7 +801,7 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (define-key pp/global-map (kbd "'") 'iterm-focus)
   ;; (general-define-key :prefix "C-c" :keymaps 'normal
   ;;                     "/" 'find-symbol-at-point)
-  ;; (general-nmap "*" 'pp/swiper-at-point)
+  (general-nmap "*" 'pp/swiper-at-point)
 #+END_SRC
 * Functions
 #+BEGIN_SRC emacs-lisp
