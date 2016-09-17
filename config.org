@@ -72,6 +72,9 @@
 * Interface
 ** theme
 #+BEGIN_SRC emacs-lisp
+  ;; (use-package doom-themes
+  ;;  :ensure t)
+
   (add-to-list 'load-path "~/.emacs.d/themes/emacs-doom-theme")
   (require 'doom-themes)
   (load-theme 'doom-one t)
@@ -230,6 +233,12 @@ Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
       (define-key evil-normal-state-map (kbd "zm") 'yafolding-toggle-all)
       (define-key evil-normal-state-map (kbd "zc") 'yafolding-hide-parent-element)
       (define-key evil-normal-state-map (kbd "za") 'yafolding-toggle-element)))
+#+END_SRC
+*** All the icons
+#+BEGIN_SRC emacs-lisp
+  (use-package all-the-icons
+    :ensure t
+    :demand t)
 #+END_SRC
 ** Tools
 *** Magit
@@ -473,9 +482,9 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   ;; NOTE Compile this file for a faster startup!
   (eval-when-compile (require 'powerline))
   ;; FIXME Don't hardcode colors in
-  (defvar mode-line-bar          (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 6 "#00B3EF" nil)))
-  (defvar mode-line-eldoc-bar    (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 6 "#B3EF00" nil)))
-  (defvar mode-line-inactive-bar (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 6 nil nil)))
+  (defvar mode-line-bar          (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 3 "#00B3EF" nil)))
+  (defvar mode-line-eldoc-bar    (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 3 "#B3EF00" nil)))
+  (defvar mode-line-inactive-bar (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 3 nil nil)))
 
   ;; Custom faces
   (defface mode-line-is-modified nil
@@ -490,13 +499,6 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (defface mode-line-count-face nil
     "Face for anzu/evil-substitute/evil-search number-of-matches display.")
 
-  ;; Git/VCS segment faces
-  (defface mode-line-vcs-info '((t (:inherit warning)))
-    "")
-  (defface mode-line-vcs-warning '((t (:inherit warning)))
-    "")
-
-  ;;
   ;; Initialization
   ;;
 
@@ -511,11 +513,6 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (add-hook 'focus-in-hook #'pp/set-selected-window)
   (advice-add 'select-window :after 'pp/set-selected-window)
   (advice-add 'select-frame  :after 'pp/set-selected-window)
-
-  ;; (defun pp/project-root (&optional strict-p)
-  ;;   "Get the path to the root of your project."
-  ;;   (let (projectile-require-project-root strict-p)
-  ;;     (projectile-project-root)))
 
   ;;
   ;; Mode-line segments
@@ -577,7 +574,7 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (defun *ruby-version ()
     "Currently active ruby version"
     (when (string-equal mode-name "Ruby")
-      (concat "[" (rbenv--active-ruby-version) "] ")))
+      (concat " [" (rbenv--active-ruby-version) "]")))
 
   (defun *major-mode ()
     "The major mode, including process, environment and text-scale info."
@@ -587,18 +584,20 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
                  (/= text-scale-mode-amount 0)
                  (format " (%+d)" text-scale-mode-amount))))
 
-  (defun *vc ()
-    "Displays the current branch, colored based on its state."
-    (when vc-mode
-      (let ((backend (concat " " (substring vc-mode (+ 2 (length (symbol-name (vc-backend buffer-file-name)))))))
-            (face (let ((state (vc-state buffer-file-name)))
-                    (cond ((memq state '(edited added))
-                           'mode-line-vcs-info)
-                          ((memq state '(removed needs-merge needs-update conflict removed unregistered))
-                           'mode-line-vcs-warning)))))
-        (if active
-            (propertize backend 'face face)
-          backend))))
+  (defun *major-mode-icon ()
+      (propertize (format "%s " (all-the-icons-icon-for-buffer)
+                  'help-echo (format "Major-mode: `%s`" major-mode)
+                  'face `(:height 1.2 :family ,(all-the-icons-icon-family-for-buffer)))))
+
+  (defun *git-vc ()
+    (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
+      (concat
+       (propertize (format " %s" (all-the-icons-alltheicon "git")) 'face `(:height 1.2) 'display '(raise -0.1))
+       " · "
+       (propertize (format "%s" (all-the-icons-octicon "git-branch"))
+                   'face `(:height 1.3 :family ,(all-the-icons-octicon-family))
+                   'display '(raise -0.1))
+       (propertize (format " %s" branch) 'face `(:height 0.9)))))
 
   (defun *selection-info ()
     "Information about the current selection, such as how many characters and
@@ -647,48 +646,30 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
            " ... "))
        'face (if active 'mode-line-count-face))))
 
-  (defun *iedit ()
-    "Show the number of iedit regions matches + what match you're on."
-    (when (and (boundp 'iedit-mode) iedit-mode)
-      (propertize
-       (let ((this-oc (let (message-log-max) (iedit-find-current-occurrence-overlay)))
-             (length (or (ignore-errors (length iedit-occurrences-overlays)) 0)))
-         (format
-          " %s/%s "
-          (save-excursion
-            (unless this-oc
-              (iedit-prev-occurrence)
-              (setq this-oc (iedit-find-current-occurrence-overlay)))
-            (if this-oc
-                ;; NOTE: Not terribly reliable
-                (- length (-elem-index this-oc iedit-occurrences-overlays))
-              "-"))
-          length))
-       'face (if active 'mode-line-count-face))))
-
   (defun *buffer-position ()
     "A more vim-like buffer position."
     (let ((start (window-start))
           (end (window-end))
           (pend (point-max)))
-      (if (and (= start 1)
-               (= end pend))
-          ":All"
-        (cond ((= start 1) ":Top")
-              ((= end pend) ":Bot")
-              (t (format ":%d%%%%" (/ end 0.01 pend)))))))
+      (format "%d%%%%" (/ end 0.01 pend))))
 
+  (defun *time ()
+    (let* ((hour (string-to-number (format-time-string "%I")))
+           (icon (all-the-icons-wicon (format "time-%s" hour) :height 1.3 :v-adjust 0.0)))
+      (concat
+       (propertize (format-time-string "%H:%M ") 'face `(:height 0.9))
+       (propertize (format "%s " icon) 'face `(:height 1.0 :family ,(all-the-icons-wicon-family)) 'display '(raise -0.0)))))
+
+  (defun *dot-separator ()
+      (propertize " · " 'face `(:height 0.9)))
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+  (setq powerline-default-separator 'slant)
   (defun pp/mode-line (&optional id)
     `(:eval
       (let* ((active (eq (selected-window) mode-line-selected-window))
              (lhs (list (propertize " " 'display (if active mode-line-bar mode-line-inactive-bar))
                         (*macro-recording)
                         (*selection-info)
-                        (*anzu)
-                        (*evil-substitute)
-                        (*iedit)
                         " "
                         (*buffer-path)
                         (*buffer-name)
@@ -696,12 +677,18 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
                         (*buffer-state)
                         ,(if (eq id 'scratch) '(*buffer-pwd))))
              (rhs (list (*buffer-encoding-abbrev)
-                        (*vc)
-                        "  " (*major-mode) "  "
+                        (*git-vc)
+                        ;; (*vc)
+                        (*dot-separator)
+                        (*major-mode-icon)
+                        (*major-mode)
                         (*ruby-version)
+                        (*dot-separator)
                         (propertize
-                         (concat "(%l,%c) " (*buffer-position))
-                         'face (if active 'mode-line-2))))
+                         (concat "(%l,%c)" (*dot-separator) (*buffer-position))
+                         'face (if active 'mode-line-2))
+                        (*dot-separator)
+                        (*time)))
              (middle (propertize
                       " " 'display `((space :align-to (- (+ right right-fringe right-margin)
                                                          ,(1+ (string-width (format-mode-line rhs)))))))))
