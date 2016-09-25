@@ -558,12 +558,13 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
     "Displays symbols representing the buffer's state
   (non-existent/modified/read-only)"
     (when buffer-file-name
-      (propertize
        (concat (if (not (file-exists-p buffer-file-name))
-                   "∄"
-                 (if (buffer-modified-p) "✱"))
-               (if buffer-read-only ""))
-       'face 'mode-line-is-modified)))
+                   (propertize (all-the-icons-faicon "ban" :height 1.3 :v-adjust 0.0) 'face 'mode-line-is-modified))
+                 (if (buffer-modified-p)
+                     (propertize (all-the-icons-faicon "circle" :height 1.3 :v-adjust 0.0) 'face 'mode-line-is-modified)
+                     (propertize (all-the-icons-faicon "check-circle" :height 1.3 :v-adjust 0.0) 'face 'mode-line-is-saved))
+               (if buffer-read-only
+                   (propertize (all-the-icons-faicon "lock" :height 1.3 :v-adjust 0.0) 'face 'mode-line-is-modified)))))
 
   (defun *buffer-encoding-abbrev ()
     "The line ending convention used in the buffer."
