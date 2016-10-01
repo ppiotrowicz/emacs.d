@@ -585,6 +585,11 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (defface mode-line-count-face nil
     "Face for anzu/evil-substitute/evil-search number-of-matches display.")
 
+  (defun pp/project-root (&optional strict-p)
+    "Get the path to the root of your project."
+    (let (projectile-require-project-root strict-p)
+      (projectile-project-root)))
+
   ;; Initialization
   ;;
 
@@ -610,7 +615,7 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
     (when buffer-file-name
       (propertize
        (f-dirname
-        (let ((buffer-path (file-relative-name buffer-file-name (projectile-project-root)))
+        (let ((buffer-path (file-relative-name buffer-file-name (pp/project-root)))
               (max-length (truncate (/ (window-body-width) 1.75))))
           (concat (projectile-project-name) "/"
                   (if (> (length buffer-path) max-length)
@@ -677,14 +682,16 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
                   'face `(:height 1.2 :family ,(all-the-icons-icon-family-for-buffer)))))
 
   (defun *git-vc ()
-    (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
-      (concat
-       (propertize (format " %s" (all-the-icons-alltheicon "git")) 'face `(:height 1.2) 'display '(raise -0.1))
-       " · "
-       (propertize (format "%s" (all-the-icons-octicon "git-branch"))
-                   'face `(:height 1.3 :family ,(all-the-icons-octicon-family))
-                   'display '(raise -0.1))
-       (propertize (format " %s" branch) 'face `(:height 0.9)))))
+    (when vc-mode
+      (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
+        (concat
+         (propertize (format " %s" (all-the-icons-alltheicon "git")) 'face `(:height 1.2) 'display '(raise -0.1))
+         " · "
+         (propertize (format "%s" (all-the-icons-octicon "git-branch"))
+                     'face `(:height 1.3 :family ,(all-the-icons-octicon-family))
+                     'display '(raise -0.1))
+         (propertize (format " %s" branch) 'face `(:height 0.9))
+         " · "))))
 
   (defun *selection-info ()
     "Information about the current selection, such as how many characters and
@@ -766,7 +773,6 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
              (rhs (list (*buffer-encoding-abbrev)
                         (*git-vc)
                         ;; (*vc)
-                        (*dot-separator)
                         (*major-mode-icon)
                         (*major-mode)
                         (*ruby-version)
