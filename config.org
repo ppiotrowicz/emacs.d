@@ -110,7 +110,7 @@
 More convenient key definitions in emacs (https://github.com/noctuid/general.el)
 #+BEGIN_SRC emacs-lisp
   (use-package general
-    :ensure general
+    :ensure t
     :demand general
     :config
     (progn
@@ -121,7 +121,7 @@ More convenient key definitions in emacs (https://github.com/noctuid/general.el)
 Emacs package that displays available keybindings in popup (https://github.com/justbur/emacs-which-key)
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
-    :ensure which-key
+    :ensure t
     :diminish which-key-mode
     :config
     (progn
@@ -133,7 +133,7 @@ Emacs package that displays available keybindings in popup (https://github.com/j
 Bind personal keymaps in multiple locations https://github.com/justbur/emacs-bind-map
 #+BEGIN_SRC emacs-lisp
   (use-package bind-map
-    :ensure bind-map
+    :ensure t
     :demand bind-map)
 #+END_SRC
 *** Powerline
@@ -145,12 +145,12 @@ Bind personal keymaps in multiple locations https://github.com/justbur/emacs-bin
 Ivy - a generic completion frontend for Emacs, Swiper - isearch with an overview, and more. Oh, man! http://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
-    :ensure ivy
+    :ensure t
     :diminish ivy-mode
     :config
     (progn
       (use-package counsel
-        :ensure counsel)
+        :ensure t)
 
       (ivy-mode 1)
       (setq ivy-use-virtual-buffers t)
@@ -158,7 +158,7 @@ Ivy - a generic completion frontend for Emacs, Swiper - isearch with an overview
       (setq ivy-count-format "(%d/%d) ")
 
       (use-package swiper
-        :ensure swiper
+        :ensure t
         :config
         :general (
            "C-s" 'swiper
@@ -177,7 +177,7 @@ Ivy - a generic completion frontend for Emacs, Swiper - isearch with an overview
 Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
 #+BEGIN_SRC emacs-lisp
   (use-package evil
-    :ensure evil
+    :ensure t
     :config
     (progn
       (evil-mode 1)
@@ -186,19 +186,19 @@ Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
       (setq evil-want-fine-undo 'fine)
 
       (use-package evil-surround
-        :ensure evil-surround
+        :ensure t
         :config
         (progn
           (global-evil-surround-mode 1)))
 
       (use-package evil-nerd-commenter
         :commands (evilnc-comment-or-uncomment-lines)
-        :ensure evil-nerd-commenter)
+        :ensure t)
 
       (define-key evil-normal-state-map (kbd "g c") 'evilnc-comment-or-uncomment-lines)
 
       (use-package evil-matchit
-        :ensure evil-matchit
+        :ensure t
         :commands evilmi-jump-items
         :init
         (progn
@@ -325,16 +325,16 @@ It's Magit! A Git Porcelain inside Emacs. https://magit.vc
 #+BEGIN_SRC emacs-lisp
   (use-package magit
     :commands (magit-status)
-    :ensure magit
+    :ensure t
     :config
     (use-package evil-magit
-      :ensure evil-magit))
+      :ensure t))
 #+END_SRC
 *** Org
 Org mode - your life in plain text (http://orgmode.org)
 #+BEGIN_SRC emacs-lisp
   (use-package org
-    :ensure org
+    :ensure t
     :config
     (progn
       (setq org-export-coding-system 'utf-8)
@@ -413,11 +413,11 @@ Org mode - your life in plain text (http://orgmode.org)
 Project Interaction Library for Emacs (http://projectile.readthedocs.io)
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
-    :ensure projectile
+    :ensure t
     :config
     (progn
       (use-package counsel-projectile
-        :ensure counsel-projectile)
+        :ensure t)
       (setq projectile-switch-project-action 'counsel-projectile-find-file)))
 #+END_SRC
 *** Restclient
@@ -463,6 +463,13 @@ An Emacs "jump to definition" package
 #+BEGIN_SRC emacs-lisp
   (use-package paradox
     :commands (paradox-list-packages)
+    :ensure t
+    :config
+    (setq paradox-github-token t))
+#+END_SRC
+*** WGrep
+#+BEGIN_SRC emacs-lisp
+  (use-package wgrep
     :ensure t)
 #+END_SRC
 ** Libraries
@@ -480,7 +487,7 @@ An Emacs "jump to definition" package
 *** Ruby
 #+BEGIN_SRC emacs-lisp
   (use-package ruby-mode
-    :ensure ruby-mode
+    :ensure t
     :config
     (progn
       (defvar pp/ruby-map
@@ -504,9 +511,9 @@ An Emacs "jump to definition" package
         :evil-keys (",")
         :major-modes (ruby-mode))
       (use-package inf-ruby
-        :ensure inf-ruby)
+        :ensure t)
       (use-package rbenv
-        :ensure rbenv
+        :ensure t
         :config
         (progn
           (global-rbenv-mode)
@@ -517,13 +524,13 @@ An Emacs "jump to definition" package
           (setq rspec-spec-command "rspec --format progress --no-profile")
           (add-hook 'projectile-after-switch-project-hook 'rbenv-use-corresponding)))
       (use-package rspec-mode
-        :ensure rspec-mode
+        :ensure t
         :config
         (progn
           (setq compilation-scroll-output t)
           (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)))
       (use-package bundler
-        :ensure bundler)))
+        :ensure t)))
 #+END_SRC
 *** Coffescript
 #+BEGIN_SRC emacs-lisp
