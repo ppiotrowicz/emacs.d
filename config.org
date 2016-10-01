@@ -472,6 +472,15 @@ An Emacs "jump to definition" package
   (use-package wgrep
     :ensure t)
 #+END_SRC
+*** Highlight symbol
+#+BEGIN_SRC emacs-lisp
+  (use-package highlight-symbol
+    :ensure t
+    :init
+    (progn
+      (setq highlight-symbol-foreground-color "#fdf4c1")
+      (setq highlight-symbol-colors '("#504945"))))
+#+END_SRC
 ** Libraries
 *** F
 #+BEGIN_SRC emacs-lisp
@@ -810,6 +819,16 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
     ("u" outline-up-heading "up heading")
     ("g" org-goto "goto" :exit t))
 #+END_SRC
+** search
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-search (:post highlight-symbol-remove-all)
+    "Search"
+    ("n" highlight-symbol-next "next")
+    ("p" highlight-symbol-prev "prev")
+    ("/" find-symbol-at-point "in project")
+    ("s" pp/swiper-at-point "swiper")
+    ("q" highlight-symbol-remove-all "quit" :exit t))
+#+END_SRC
 * Global key bindings
 ** global
 #+BEGIN_SRC emacs-lisp
@@ -887,12 +906,16 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (define-key pp/global-map (kbd ":") 'execute-extended-command)
   (define-key pp/global-map (kbd "'") 'iterm-focus)
   (define-key pp/global-map (kbd "t") 'neotree-projectile)
-  ;; (general-define-key :prefix "C-c" :keymaps 'normal
-  ;;                     "/" 'find-symbol-at-point)
-  (general-nmap "*" 'pp/swiper-at-point)
+  (general-nmap "*" 'pp/highlight-symbol-hydra)
 #+END_SRC
 * Functions
 #+BEGIN_SRC emacs-lisp
+  (defun pp/highlight-symbol-hydra ()
+    "Highlights symbol and begins a search hydra."
+    (interactive)
+    (highlight-symbol)
+    (hydra-search/body))
+
   (defun edit-emacs-config ()
     "Open emacs config file."
     (interactive)
