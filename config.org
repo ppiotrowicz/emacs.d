@@ -716,6 +716,18 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
                   'help-echo (format "Major-mode: `%s`" major-mode)
                   'face `(:height 1.2 :family ,(all-the-icons-icon-family-for-buffer)))))
 
+  (defun *org-timer ()
+    "Displays org timers"
+    (if (and (boundp 'org-mode-line-string) (stringp org-mode-line-string))
+        (propertize
+         (format " %s " (s-match "\\[.*\\]" org-mode-line-string))
+         'face 'mode-line-2)))
+
+  (add-hook 'org-clock-out-hook
+            '(lambda ()
+               (setq org-mode-line-string nil)
+               (force-mode-line-update)))
+
   (defun *git-vc ()
     (when vc-mode
       (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
@@ -805,7 +817,8 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
                         " "
                         (*buffer-state)
                         ,(if (eq id 'scratch) '(*buffer-pwd))))
-             (rhs (list (*buffer-encoding-abbrev)
+             (rhs (list (*org-timer)
+                        (*buffer-encoding-abbrev)
                         (*git-vc)
                         ;; (*vc)
                         (*major-mode-icon)
