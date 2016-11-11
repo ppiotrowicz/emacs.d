@@ -866,6 +866,7 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (let ((map pp/global-map))
     (define-key map (kbd "b b") 'ivy-switch-buffer)
     (define-key map (kbd "b d") 'kill-this-buffer)
+    (define-key map (kbd "b n") 'evil-buffer-new)
     (define-key map (kbd "TAB") 'switch-to-previous-buffer)
     map)
 #+END_SRC
@@ -921,7 +922,7 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (let ((map pp/global-map))
     (define-key map (kbd "o c") 'org-capture)
     (define-key map (kbd "o h") '(lambda () (interactive) (find-file "~/org/home.org")))
-    (define-key map (kbd "o t") '(lambda () (interactive) (find-file "~/org/todo.org")))
+    (define-key map (kbd "o t") '(lambda () (interactive) (find-file "~/org/today.org")))
     (define-key map (kbd "o w") '(lambda () (interactive) (find-file "~/org/work.org")))
     (define-key map (kbd "o l") '(lambda () (interactive) (find-file "~/org/til.org")))
     map)
