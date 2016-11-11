@@ -321,6 +321,13 @@ Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
                   ))
       ))
 #+END_SRC
+*** Company mode
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :ensure t
+    :init
+    (global-company-mode))
+#+END_SRC
 ** Tools
 *** Magit
 It's Magit! A Git Porcelain inside Emacs. https://magit.vc
