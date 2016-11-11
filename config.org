@@ -328,6 +328,11 @@ Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
     :init
     (global-company-mode))
 #+END_SRC
+*** Ace-window
+#+BEGIN_SRC emacs-lisp
+  (use-package ace-window
+    :ensure t)
+#+END_SRC
 ** Tools
 *** Magit
 It's Magit! A Git Porcelain inside Emacs. https://magit.vc
@@ -926,7 +931,7 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
     (define-key map (kbd "w V") 'split-window-right-and-focus)
     (define-key map (kbd "w c") 'delete-window)
     (define-key map (kbd "w =") 'balance-windows)
-    (define-key map (kbd "w w") 'other-window)
+    (define-key map (kbd "w w") 'ace-window)
     (define-key map (kbd "w f") 'toggle-fullscreen)
     map)
 #+END_SRC
