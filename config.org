@@ -950,7 +950,7 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
 #+BEGIN_SRC emacs-lisp
   (define-key pp/global-map (kbd "SPC") 'avy-goto-char)
   (define-key pp/global-map (kbd ":") 'execute-extended-command)
-  (define-key pp/global-map (kbd "'") 'iterm-focus)
+  (define-key pp/global-map (kbd "'") 'terminal-focus)
   (define-key pp/global-map (kbd "t") 'neotree-projectile-find)
   (define-key pp/global-map (kbd "T") 'neotree-projectile)
   (general-nmap "*" 'pp/highlight-symbol-hydra)
@@ -1007,10 +1007,10 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
     (interactive)
     (swiper (thing-at-point 'symbol)))
 
-  (defun iterm-focus ()
+  (defun terminal-focus ()
     (interactive)
     (do-applescript
-     " do shell script \"open -a iTerm\"\n"
+     " do shell script \"open -a iterm\"\n"
      ))
 #+END_SRC
 * Other
