@@ -954,6 +954,7 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (define-key pp/global-map (kbd "t") 'neotree-projectile-find)
   (define-key pp/global-map (kbd "T") 'neotree-projectile)
   (general-nmap "*" 'pp/highlight-symbol-hydra)
+  (define-key ruby-mode-map (kbd "C-c :") 'ruby_toggle_symbol)
 #+END_SRC
 * Functions
 #+BEGIN_SRC emacs-lisp
@@ -1019,6 +1020,15 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (diminish 'auto-revert-mode)
 
   (setq gc-cons-threshold 800000)
+#+END_SRC
+* Macros
+#+BEGIN_SRC emacs-lisp
+  (fset 'ruby_toggle_symbol
+        (lambda (&optional arg)
+          "Keyboard macro for changing :symbol => '' into symbol: ''."
+          (interactive "p")
+          (kmacro-exec-ring-item (quote ([66 120 69 97 58 kp-delete kp-delete kp-delete escape] 0 "%d")) arg)))
+
 #+END_SRC
 * Todo
 - bindings for prev/next changes (hydra?)
