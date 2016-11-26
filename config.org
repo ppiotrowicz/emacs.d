@@ -250,7 +250,8 @@ Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
     (progn
       (setq neo-show-updir-line nil
             neo-window-width 35
-            neo-persist-show nil)
+            neo-persist-show nil
+            neo-create-file-auto-open t)
       (add-hook 'neotree-mode-hook (lambda () (setq-local line-spacing 5)))
       (add-hook 'neotree-mode-hook (lambda () (setq-local mode-line-format nil)))
       (add-hook 'neotree-mode-hook (lambda () (setq-local tab-width 1)))
@@ -305,9 +306,11 @@ Extensible vi layer for emacs (https://bitbucket.org/lyro/evil/wiki/Home)
 
       (defun neotree-projectile-find ()
         (interactive)
-        (let ((cw (get-buffer-window (current-buffer))))
-          (neotree-find)
-          (select-window cw)))
+        (if (neo-global--window-exists-p)
+            (neotree-hide)
+          (let ((origin-buffer-file-name (buffer-file-name)))
+            (neotree-find (projectile-project-root))
+            (neotree-find origin-buffer-file-name))))
 
       (add-hook 'neotree-mode-hook
                 (lambda ()
@@ -950,7 +953,8 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (define-key pp/global-map (kbd "SPC") 'avy-goto-char)
   (define-key pp/global-map (kbd ":") 'execute-extended-command)
   (define-key pp/global-map (kbd "'") 'iterm-focus)
-  (define-key pp/global-map (kbd "t") 'neotree-projectile)
+  (define-key pp/global-map (kbd "t") 'neotree-projectile-find)
+  (define-key pp/global-map (kbd "T") 'neotree-projectile)
   (general-nmap "*" 'pp/highlight-symbol-hydra)
 #+END_SRC
 * Functions
