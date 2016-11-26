@@ -1031,16 +1031,22 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
 
 #+END_SRC
 * Todo
+- better ruby toggle symbol function
 - bindings for prev/next changes (hydra?)
-- swiper enhancements https://github.com/abo-abo/swiper/wiki/Sort-files-by-mtime
-- .net/omnisharp
 - SPC keymaps in dired mode
 - SPC keymaps in magit mode
-- dired-x
-- ESC doesn't work in terminal
-- comint mode for shell and irb
+- customize org faces
+  - green checkbox for completed task
+  - strikethrough completed tasks
+- checkout evil embrace and/or shackle
+- easy next/prev command with shell and irb
 - https://github.com/alf/ob-restclient.el
-- org conf shortcut - replace spaces with +
 - https://github.com/pidu/git-timemachine
-- https://m.reddit.com/r/emacs/comments/51jvai/making_modern_emacs_themes/?utm_source=mweb_redirect&utm_medium=twitter&compact=true
+- https://m.reddit.com/r/emacs/comments/51jvai/making_modern_emacs_themes
 - https://github.com/hlissner/.emacs.d/blob/master/core/core-os-osx.el#L65
+- evil-motion-state-modes
+- .net/omnisharp
+- https://github.com/Silex/elmacro
+- https://github.com/mickeynp/smart-scan
+- web mode
+- coffeescript mode
