@@ -619,6 +619,9 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
   (defface mode-line-is-modified nil
     "Face for mode-line modified symbol")
 
+  (defface mode-line-is-saved nil
+    "Face for mode-line modified symbol")
+
   (defface mode-line-2 nil
     "The alternate color for mode-line text.")
 
@@ -720,7 +723,7 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
                  (format " (%+d)" text-scale-mode-amount))))
 
   (defun *major-mode-icon ()
-      (propertize (format "%s " (all-the-icons-icon-for-buffer)
+      (propertize (format "%s" (all-the-icons-icon-for-buffer)
                   'help-echo (format "Major-mode: `%s`" major-mode)
                   'face `(:height 1.2 :family ,(all-the-icons-icon-family-for-buffer)))))
 
@@ -740,8 +743,6 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
     (when vc-mode
       (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
         (concat
-         (propertize (format " %s" (all-the-icons-alltheicon "git")) 'face `(:height 1.2) 'display '(raise -0.1))
-         " · "
          (propertize (format "%s" (all-the-icons-octicon "git-branch"))
                      'face `(:height 1.3 :family ,(all-the-icons-octicon-family))
                      'display '(raise -0.1))
@@ -825,16 +826,13 @@ Major mode for editing markdown files (http://jblevins.org/projects/markdown-mod
                         " "
                         (*buffer-state)
                         ,(if (eq id 'scratch) '(*buffer-pwd))))
-             (rhs (list (*org-timer)
-                        (*buffer-encoding-abbrev)
+             (rhs (list
+                        ;; (*org-timer)
                         (*git-vc)
-                        ;; (*vc)
                         (*major-mode-icon)
-                        (*major-mode)
-                        (*ruby-version)
                         (*dot-separator)
                         (propertize
-                         (concat "(%l,%c)" (*dot-separator) (*buffer-position))
+                         "(%l,%c)"
                          'face (if active 'mode-line-2))
                         (*dot-separator)
                         (*time)))
