@@ -5,3 +5,6 @@ custom.el
 config.el
 bookmarks
 projectile-bookmarks.eld
+/speed-type/
+/.org-id-locations
+/eshell/

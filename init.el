@@ -432,7 +432,23 @@
   :commands (paradox-list-packages)
   :ensure t
   :config
-  (setq paradox-github-token t))
+  (progn
+    (setq paradox-github-token t)
+    (defvar pp/paradox-map
+      (let ((map (make-sparse-keymap)))
+        (define-key map (kbd "x") 'paradox-menu-execute)
+        (define-key map (kbd "h") 'paradox-menu-visit-homepage)
+        (define-key map (kbd "u") 'paradox-upgrade-packages)
+        (define-key map (kbd "f") 'hydra-paradox-filter/body)
+        (define-key map (kbd "q") 'paradox-quit-and-close)
+        map)
+      "Paradox keymap.")
+
+    (bind-map pp/paradox-map
+      :evil-keys (",")
+      :major-modes (paradox-menu-mode))
+    )
+  )
 
 (use-package wgrep
   :ensure t)
@@ -835,6 +851,7 @@ lines are selected, or the NxM dimensions of a block selection."
  ;; Open
  "o"   '(:ignore t                           :which-key "open")
  "oc"  '(org-capture                         :which-key "org capture")
+ "oe"  '((lambda () (interactive) (find-file "~/org/emacs.org")) :which-key "emacs tasks")
  "oh"  '((lambda () (interactive) (find-file "~/org/home.org"))  :which-key "home tasks")
  "ot"  '((lambda () (interactive) (find-file "~/org/today.org")) :which-key "today tasks")
  "ol"  '((lambda () (interactive) (find-file "~/org/til.org"))   :which-key "today I learned")
@@ -947,7 +964,7 @@ Repeated invocations toggle between the two most recently open buffers."
           (message "Deleted file %s" filename)
           (kill-buffer))))))
 
-(defun rename-file-and-buffer ()
+(defun pp/rename-file-and-buffer ()
   "Rename the current buffer and file it is visiting."
   (interactive)
   (let ((filename (buffer-file-name)))
@@ -959,6 +976,16 @@ Repeated invocations toggle between the two most recently open buffers."
          (t
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
+
+(defun pp/copy-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename))))
 
 (diminish 'undo-tree-mode)
 (diminish 'auto-revert-mode)
