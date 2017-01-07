@@ -563,6 +563,7 @@
      :keymaps 'pp/ledger-map
      "a"  '(ledger-add-transaction     :which-key "add transaction")
      "="  '(ledger-mode-clean-buffer   :which-key "clean")
+     "r"  '(ledger-report              :which-key "reports")
      )
     (bind-map pp/ledger-map
       :evil-keys (",")
@@ -877,11 +878,13 @@ lines are selected, or the NxM dimensions of a block selection."
  ;; Open
  "o"   '(:ignore t                           :which-key "open")
  "oc"  '(org-capture                         :which-key "org capture")
- "oe"  '((lambda () (interactive) (find-file "~/org/emacs.org")) :which-key "emacs tasks")
- "oh"  '((lambda () (interactive) (find-file "~/org/home.org"))  :which-key "home tasks")
- "ot"  '((lambda () (interactive) (find-file "~/org/today.org")) :which-key "today tasks")
- "ol"  '((lambda () (interactive) (find-file "~/org/til.org"))   :which-key "today I learned")
- "ow"  '((lambda () (interactive) (find-file "~/org/work.org"))  :which-key "work tasks")
+ "ob"  '((lambda () (interactive) (find-file "~/org/bookmarks.org"))  :which-key "bookmarks")
+ "oe"  '((lambda () (interactive) (find-file "~/org/emacs.org"))      :which-key "emacs tasks")
+ "oh"  '((lambda () (interactive) (find-file "~/org/home.org"))       :which-key "home tasks")
+ "ot"  '((lambda () (interactive) (find-file "~/org/today.org"))      :which-key "today tasks")
+ "ol"  '((lambda () (interactive) (find-file "~/org/til.org"))        :which-key "today I learned")
+ "ow"  '((lambda () (interactive) (find-file "~/org/work.org"))       :which-key "work tasks")
+ "of"  '((lambda () (interactive) (find-file "~/finance/ledger.dat")) :which-key "ledger")
  ;; Project
  "p"   '(:ignore t                           :which-key "project")
  "pp"  '(counsel-projectile-switch-project   :which-key "switch project")
