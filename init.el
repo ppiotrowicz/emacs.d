@@ -68,7 +68,7 @@
 (setq auto-save-default nil)
 (setq make-backup-files t)
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
-(setq vc-follow-symlinks t )
+(setq vc-follow-symlinks t)
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
 ;; hippie expand
@@ -196,6 +196,10 @@
       (progn
         (global-evil-matchit-mode 1)))
 
+    ;; On OSX, stop copying each visual state move to the clipboard:
+    (when (or (featurep 'mac) (featurep 'ns)
+              (advice-add 'evil-visual-update-x-selection :override 'ignore)))
+
     ;; ESC quits stuff
     (define-key evil-normal-state-map [escape] 'keyboard-quit)
     (define-key evil-visual-state-map [escape] 'keyboard-quit)
@@ -226,7 +230,7 @@
           neo-window-width 35
           neo-persist-show nil
           neo-create-file-auto-open t)
-    (add-hook 'neotree-mode-hook (lambda () (setq-local line-spacing 5)))
+    (add-hook 'neotree-mode-hook (lambda () (setq-local line-spacing 3)))
     (add-hook 'neotree-mode-hook (lambda () (setq-local mode-line-format nil)))
     (add-hook 'neotree-mode-hook (lambda () (setq-local tab-width 1)))
     (defun neo-buffer--insert-fold-symbol (name &optional file-name)
@@ -356,6 +360,8 @@
     (setq org-refile-use-outline-path t)
     (setq org-refile-allow-creating-parent-nodes (quote confirm))
     (setq org-tags-column -90)
+    (setq org-export-html-postamble nil)
+
 
     ;; Fontify checkboxes and dividers
     (defface org-list-bullet '((t ())) "Face for list bullets")
@@ -426,7 +432,12 @@
   :ensure t
   :general (:keymaps 'evil-normal-state-map
                      "C-]" 'dumb-jump-go
-                     "C-[" 'dump-jump-quick-look))
+                     "C-[" 'dump-jump-quick-look)
+
+  :config
+  (progn
+    (setq dumb-jump-selector 'ivy)
+    ))
 
 (use-package paradox
   :commands (paradox-list-packages)
