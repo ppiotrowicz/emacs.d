@@ -1,4 +1,5 @@
 ;; interface
+(require 'diminish)
 
 (use-package general
   :ensure t
@@ -147,5 +148,49 @@
     (define-key yafolding-mode-map (kbd "<C-S-return>") nil)
     (define-key yafolding-mode-map (kbd "<C-M-return>") nil)
     (define-key yafolding-mode-map (kbd "<C-return>") nil)))
+
+(use-package wgrep
+  :ensure t)
+
+(use-package highlight-symbol
+  :ensure t
+  :init
+  (progn
+    (setq highlight-symbol-foreground-color "#fdf4c1")
+    (setq highlight-symbol-colors '("#504945"))))
+
+(use-package paradox
+  :commands (paradox-list-packages)
+  :ensure t
+  :config
+  (progn
+    (setq paradox-github-token t)
+    (defvar pp/paradox-map
+      (let ((map (make-sparse-keymap)))
+        (define-key map (kbd "x") 'paradox-menu-execute)
+        (define-key map (kbd "h") 'paradox-menu-visit-homepage)
+        (define-key map (kbd "u") 'paradox-upgrade-packages)
+        (define-key map (kbd "f") 'hydra-paradox-filter/body)
+        (define-key map (kbd "q") 'paradox-quit-and-close)
+        map)
+      "Paradox keymap.")
+
+    (bind-map pp/paradox-map
+      :evil-keys (",")
+      :major-modes (paradox-menu-mode))
+    )
+  )
+
+(use-package f
+  :ensure t)
+
+(use-package dash
+  :ensure t)
+
+(use-package crux
+  :ensure t
+  :bind (("C-c o" . crux-open-with)))
+
+
 
 (provide 'pp-interface)

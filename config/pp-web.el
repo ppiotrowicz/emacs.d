@@ -1,4 +1,4 @@
-;; pacakges for web development
+;; packages for web development
 
 (use-package restclient
   :ensure t
