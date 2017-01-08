@@ -14,7 +14,19 @@
      )
     (bind-map pp/ledger-map
       :evil-keys (",")
-      :major-modes (ledger-mode)))
+      :major-modes (ledger-mode))
+
+    (setq ledger-reports
+      (quote
+       (("expenses monthly" "ledger -f %(ledger-file) reg expenses -M")
+        ("incomes monthly"  "ledger -f %(ledger-file) reg incomes -M")
+        ("current balance"  "ledger -f %(ledger-file) bal assets")
+        ("bal"              "ledger -f %(ledger-file) bal")
+        ("reg"              "ledger -f %(ledger-file) reg")
+        ("payee"            "ledger -f %(ledger-file) payee")
+        ("account"          "ledger -f %(ledger-file) account")
+        )))
+    )
   :mode (("\\.dat" . ledger-mode)))
 
 (provide 'pp-ledger)
