@@ -5,41 +5,41 @@
   (highlight-symbol)
   (hydra-search/body))
 
-(defun edit-emacs-config ()
+(defun pp/edit-emacs-config ()
   "Open emacs config file."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
-(defun find-in-project ()
+(defun pp/find-in-project ()
   "Searches in current project."
   (interactive)
   (counsel-ag nil (projectile-project-root)))
 
-(defun find-symbol-at-point ()
+(defun pp/find-symbol-at-point ()
   "Searches for symbol under cursor in current project."
   (interactive)
   (counsel-ag (thing-at-point 'symbol) (projectile-project-root)))
 
-(defun switch-to-previous-buffer ()
+(defun pp/switch-to-previous-buffer ()
   "Switch to previously open buffer.
 Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
-(defun toggle-fullscreen ()
+(defun pp/toggle-fullscreen ()
   "Toggle full screen."
   (interactive)
   (set-frame-parameter
      nil 'fullscreen
      (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
 
-(defun split-window-right-and-focus ()
+(defun pp/split-window-right-and-focus ()
   "Split the window horizontally and focus the new window."
   (interactive)
   (split-window-right)
   (windmove-right))
 
-(defun split-window-below-and-focus ()
+(defun pp/split-window-below-and-focus ()
   "Split the window vertically and focus the new window."
   (interactive)
   (split-window-below)
@@ -49,7 +49,7 @@ Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (swiper (thing-at-point 'symbol)))
 
-(defun terminal-focus ()
+(defun pp/terminal-focus ()
   (interactive)
   (do-applescript
    " do shell script \"open -a iterm\"\n"

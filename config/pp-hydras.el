@@ -23,7 +23,7 @@
   "Search"
   ("n" highlight-symbol-next "next")
   ("p" highlight-symbol-prev "prev")
-  ("/" find-symbol-at-point "in project")
+  ("/" pp/find-symbol-at-point "in project")
   ("s" pp/swiper-at-point "swiper")
   ("q" highlight-symbol-remove-all "quit" :exit t))
 
