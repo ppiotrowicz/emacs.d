@@ -1,5 +1,4 @@
 ;; interface
-(require 'diminish)
 
 (use-package general
   :ensure t
@@ -10,7 +9,6 @@
 
 (use-package which-key
   :ensure t
-  :diminish which-key-mode
   :config
   (progn
     (setq which-key-idle-delay 0.4)
@@ -26,7 +24,6 @@
 
 (use-package ivy
   :ensure t
-  :diminish ivy-mode
   :config
   (progn
     (use-package counsel

@@ -90,11 +90,6 @@ Repeated invocations toggle between the two most recently open buffers."
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
-(diminish 'undo-tree-mode)
-(diminish 'auto-revert-mode)
-
-(setq gc-cons-threshold 800000)
-
 (fset 'ruby_toggle_symbol
       (lambda (&optional arg)
         "Keyboard macro for changing :symbol => '' into symbol: ''."
