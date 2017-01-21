@@ -31,7 +31,9 @@
   :init (setq markdown-command "multimarkdown"))
 
 (use-package json-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq js-indent-level 2))
 
 (use-package csv-mode
   :ensure t)
