@@ -42,6 +42,11 @@
     (setq org-export-html-postamble nil)
 
 
+    (setq org-enforce-todo-dependencies t)
+    (setq org-log-done (quote time))
+    (setq org-log-redeadline (quote time))
+    (setq org-log-reschedule (quote time))
+
     ;; Fontify checkboxes and dividers
     (defface org-list-bullet '((t ())) "Face for list bullets")
     (font-lock-add-keywords
@@ -85,13 +90,46 @@
     "h" 'org-agenda-earlier
     "j" 'org-agenda-next-line
     "k" 'org-agenda-previous-line
+    "\C-n" 'org-agenda-next-line
+    "\C-p" 'org-agenda-previous-line
     (kbd "RET") 'org-agenda-switch-to
     [escape] 'org-agenda-quit
     "q" 'org-agenda-quit
-    "s" 'org-agenda-save-all-org-buffers
+    "s" 'org-save-all-org-buffers
     "t" 'org-agenda-todo
     (kbd "SPC") 'org-agenda-show-and-scroll-up
+    "+" 'org-agenda-priority-up
+    "-" 'org-agenda-priority-down
+    "e" 'org-agenda-set-effort
+    "r" 'org-agenda-redo
+    "<" 'org-agenda-do-date-earlier
+    ">" 'org-agenda-do-date-later
     )
+
+
+  (defun pp/org-skip-subtree-if-priority (priority)
+    "Skip an agenda subtree if it has a priority of PRIORITY.
+
+PRIORITY may be one of the characters ?A, ?B, or ?C."
+    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+          (pri-value (* 1000 (- org-lowest-priority priority)))
+          (pri-current (org-get-priority (thing-at-point 'line t))))
+      (if (= pri-value pri-current)
+          subtree-end
+        nil)))
+
+  ;; Agenda views
+  (setq org-agenda-custom-commands
+        '(("c" "Custom agenda view"
+           ((tags "PRIORITY=\"A\""
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                   (org-agenda-overriding-header "High-priority unfinished tasks:")))
+            (agenda "" ((org-agenda-span 1)))
+            (alltodo ""
+                     ((org-agenda-skip-function
+                       '(or (pp/org-skip-subtree-if-priority ?A)
+                            (org-agenda-skip-if nil '(scheduled deadline))))))))))
+
 
   ;; other
   (require 'org-protocol)
