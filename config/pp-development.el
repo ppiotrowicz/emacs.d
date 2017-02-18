@@ -11,7 +11,8 @@
 (use-package magithub
   :ensure t
   :defer t
-  :after magit)
+  :after magit
+  :config (magithub-feature-autoinject t))
 
 (use-package projectile
   :ensure t
