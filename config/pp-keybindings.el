@@ -43,6 +43,9 @@
  "ol"  '((lambda () (interactive) (find-file "~/org/til.org"))        :which-key "today I learned")
  "ow"  '((lambda () (interactive) (find-file "~/org/work.org"))       :which-key "work tasks")
  "of"  '((lambda () (interactive) (find-file "~/finance/ledger.dat")) :which-key "ledger")
+ ;;; Capture
+ "c"   '(:ignore t                           :which-key "capture")
+ "cc"  '(org-capture                         :which-key "org capture")
  ;; Project
  "p"   '(:ignore t                           :which-key "project")
  "pp"  '(counsel-projectile-switch-project   :which-key "switch project")

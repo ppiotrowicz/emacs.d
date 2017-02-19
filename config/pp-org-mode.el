@@ -47,6 +47,10 @@
     (setq org-log-redeadline (quote time))
     (setq org-log-reschedule (quote time))
 
+    ;; mobile
+    (setq org-mobile-inbox-for-pull "~/org/mobile-notes.org")
+    (setq org-mobile-directory "~/Dropbox/Aplikacje/MobileOrg")
+
     ;; Fontify checkboxes and dividers
     (defface org-list-bullet '((t ())) "Face for list bullets")
     (font-lock-add-keywords
@@ -56,15 +60,10 @@
                   (1 'org-meta-line))))
     (setq org-capture-templates
           (quote
-           (("w" "Work")
-            ("wt" "Todo" entry
+           (("w" "Work TODO" entry
              (file+headline "~/org/work.org" "INBOX")
              "* TODO %?")
-            ("wf" "Todo with link" entry
-             (file+headline "~/org/work.org" "INBOX")
-             "* TODO %?\n  %i\n  %a")
-            ("h" "Home")
-            ("ht" "Todo" entry
+            ("h" "Home TODO" entry
              (file+headline "~/org/home.org" "INBOX")
              "* TODO %?")
             ("l" "TIL" entry
