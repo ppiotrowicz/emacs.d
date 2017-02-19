@@ -1,12 +1,11 @@
 ;; modeline config
 
+(require 'powerline)
+(require 'all-the-icons)
+
 (defvar mode-line-height 30
   "How tall the mode-line should be. This is only respected in GUI emacs.")
 
-;; Load powerline only when uncompiled, in order to generate the xpm bitmaps for
-;; the mode-line. This is the tall blue bar on the left of the mode-line.
-;; NOTE Compile this file for a faster startup!
-(eval-when-compile (require 'powerline))
 ;; FIXME Don't hardcode colors in
 (defvar mode-line-bar          (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 3 "#00B3EF" nil)))
 (defvar mode-line-eldoc-bar    (eval-when-compile (pl/percent-xpm mode-line-height 100 0 100 0 3 "#B3EF00" nil)))
