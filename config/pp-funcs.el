@@ -1,4 +1,8 @@
 ;; custom functions
+(defun pp/project-root (&optional strict-p)
+  "Get the path to the root of your project."
+  (let (projectile-require-project-root strict-p)
+    (projectile-project-root)))
 
 (defun pp/highlight-symbol-hydra () "Highlights symbol and begins a search hydra."
   (interactive)

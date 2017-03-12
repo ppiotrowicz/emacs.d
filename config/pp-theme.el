@@ -4,7 +4,7 @@
 (require 'doom-themes)
 (load-theme 'doom-one t)
 ;; brighter source buffers
-(add-hook 'find-file-hook 'doom-buffer-mode)
+(add-hook 'find-file-hook 'doom-buffer-mode-maybe)
 ;; brighter minibuffer when active
 (add-hook 'minibuffer-setup-hook 'doom-buffer-mode)
 
