@@ -34,6 +34,11 @@
  "gs"  '(magit-status                        :which-key "status")
  "gb"  '(magit-blame                         :which-key "blame")
  "go"  '(github-browse-file                  :which-key "github browse")
+ "m"   '(:ignore t                           :which-key "modes")
+ "mf"  '(auto-fill-mode                      :which-key "fill")
+ "mj"  '(json-mode                           :which-key "json")
+ "mt"  '(toggle-truncate-lines               :which-key "truncate")
+ "mw"  '(whitespace-mode                     :which-key "whitespace")
  ;; Open
  "o"   '(:ignore t                           :which-key "open")
  "oc"  '(org-capture                         :which-key "org capture")
