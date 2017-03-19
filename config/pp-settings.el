@@ -1,3 +1,5 @@
+;;; pp-settings.el
+
 ;; interface tweaks
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -8,9 +10,7 @@
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-echo-area-message t)
 (setq inhibit-startup-message t)
-(setq ring-bell-function 'ignore)
 (defalias 'yes-or-no-p 'y-or-n-p)
-(setq confirm-kill-emacs 'yes-or-no-p)
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier nil)
 (setq create-lockfiles nil)
@@ -22,18 +22,6 @@
 (setq coding-system-for-read 'utf-8)
 (setq coding-system-for-write 'utf-8)
 (setq sentence-end-double-space nil)
-(setq default-fill-column 80)
-(setq-default indent-tabs-mode nil)
-
-;; scratch
-(setq initial-scratch-message
-      (format
-       ";; %s\n\n"
-       (replace-regexp-in-string
-        "\n" "\n;; " ; comment each line
-        (replace-regexp-in-string
-         "\n$" ""    ; remove trailing linebreak
-         (shell-command-to-string "fortune")))))
 
 ;; better scrolling
 (setq scroll-conservatively 9999)
@@ -71,11 +59,5 @@
 ;; parens
 (show-paren-mode)
 (setq show-paren-delay 0)
-
-;; whitespace
-(require 'whitespace)
-(setq whitespace-line-column 80)
-(setq whitespace-style '(face tabs trailing))
-(global-whitespace-mode 1)
 
 (provide 'pp-settings)

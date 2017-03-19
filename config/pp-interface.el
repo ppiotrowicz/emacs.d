@@ -1,4 +1,4 @@
-;; interface
+;; pp-interface.el
 
 (use-package general
   :ensure t

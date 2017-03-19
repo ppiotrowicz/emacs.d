@@ -4,7 +4,7 @@
   (add-hook 'emacs-startup-hook
             (lambda ()
               (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
-                (message "[Emacs initialized in %.3fs]" elapsed)))))
+                (message "[Initialized in %.3fs]" elapsed)))))
 
 
 (let ((gc-cons-threshold (* 256 1024 1024)))
@@ -24,10 +24,14 @@
 
   (require 'use-package)
 
+  (require 'pp-core-defuns)
+  (require 'pp-core-ui)
   (require 'pp-settings)
+  (require 'pp-editor)
   (require 'pp-theme)
   (require 'pp-interface)
   (require 'pp-evil)
+  (require 'pp-scratch)
   (require 'pp-development)
   (require 'pp-org-mode)
   (require 'pp-ruby)
