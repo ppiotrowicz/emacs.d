@@ -1,5 +1,4 @@
 (use-package ruby-mode
-  :ensure t
   :defer t
   :config
    (progn
@@ -29,26 +28,22 @@
     (bind-map pp/ruby-map
       :evil-keys (",")
       :major-modes (ruby-mode))
-    (use-package inf-ruby
-      :ensure t)
+    (use-package inf-ruby)
     (use-package rbenv
-      :ensure t
       :config
       (progn
         (global-rbenv-mode)
         (set-face-attribute 'rbenv-active-ruby-face nil
                             :inherit 'mode-line-face
                             :foreground "#eab700")
-        (setq rspec-autosave-buffer t)
-        (setq rspec-spec-command "rspec --format progress --no-profile")
         (add-hook 'projectile-after-switch-project-hook 'rbenv-use-corresponding)))
     (use-package rspec-mode
-      :ensure t
       :config
       (progn
         (setq compilation-scroll-output t)
+        (setq rspec-autosave-buffer t)
+        (setq rspec-spec-command "rspec --format progress --no-profile")
         (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)))
-    (use-package bundler
-      :ensure t)))
+    (use-package bundler)))
 
 (provide 'pp-ruby)

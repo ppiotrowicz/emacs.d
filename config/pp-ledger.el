@@ -1,7 +1,6 @@
 ;; ledger mode configuration
 
 (use-package ledger-mode
-  :ensure t
   :defer t
   :config
   (progn

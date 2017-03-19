@@ -8,3 +8,5 @@ projectile-bookmarks.eld
 /speed-type/
 /.org-id-locations
 /eshell/
+.cask
+custom.el

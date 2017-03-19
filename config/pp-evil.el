@@ -1,5 +1,4 @@
 (use-package evil
-  :ensure t
   :config
   (progn
     (evil-mode 1)
@@ -8,17 +7,14 @@
     (setq evil-want-fine-undo 'fine)
 
     (use-package evil-surround
-      :ensure t
       :config
       (progn
         (global-evil-surround-mode 1)))
 
     (use-package evil-nerd-commenter
-      :commands (evilnc-comment-or-uncomment-lines)
-      :ensure t)
+      :commands (evilnc-comment-or-uncomment-lines))
 
     (use-package evil-matchit
-      :ensure t
       :commands evilmi-jump-items
       :init
       (progn
@@ -37,5 +33,11 @@
     (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
     (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
     ))
+
+(use-package evil-anzu
+  :config
+  (setq anzu-cons-mode-line-p nil
+        anzu-minimum-input-length 1
+        anzu-search-threshold 250))
 
 (provide 'pp-evil)

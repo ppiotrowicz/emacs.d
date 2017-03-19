@@ -1,7 +1,6 @@
 ;; random hydras
 
-(use-package hydra
-  :ensure t)
+(use-package hydra)
 
 (defhydra hydra-zoom ()
   "zoom"

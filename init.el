@@ -8,22 +8,13 @@
 
 
 (let ((gc-cons-threshold (* 256 1024 1024)))
-  (require 'package)
-  (setq package-archives '(("melpa" . "http://melpa.org/packages/")
-                           ("org"   . "http://orgmode.org/elpa/")
-                           ("gnu"   . "http://elpa.gnu.org/packages/")))
-  (package-initialize)
-  (setq package-enable-at-startup nil)
-
   (add-to-list 'load-path (concat user-emacs-directory "config"))
 
-  (setq package-load-list '(all))
-  (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
+  ;; Cask
+  (require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
+  (cask-initialize)
 
-  (require 'use-package)
-
+  (require 'pp-packages)
   (require 'pp-core-defuns)
   (require 'pp-core-ui)
   (require 'pp-core-vcs)

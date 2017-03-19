@@ -1,7 +1,6 @@
 ;; packages for web development
 
 (use-package restclient
-  :ensure t
   :mode (("\\.http\\'" . restclient-mode))
   :config
   (progn
@@ -17,13 +16,11 @@
       :major-modes (restclient-mode))))
 
 (use-package coffee-mode
-  :ensure t
   :config
   (progn
     (setq coffee-tab-width 2)))
 
 (use-package markdown-mode
-  :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
@@ -31,11 +28,9 @@
   :init (setq markdown-command "multimarkdown"))
 
 (use-package json-mode
-  :ensure t
   :config
   (setq js-indent-level 2))
 
-(use-package csv-mode
-  :ensure t)
+(use-package csv-mode)
 
 (provide 'pp-web)

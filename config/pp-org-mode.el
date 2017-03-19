@@ -1,5 +1,4 @@
 (use-package org
-  :ensure t
   :config
   (progn
     (setq org-export-coding-system 'utf-8)

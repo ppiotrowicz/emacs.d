@@ -1,23 +1,19 @@
 ;; pp-core-vcs.el
 
 (use-package gitconfig-mode
-  :ensure t
   :mode ("/\\.?git/?config$" "/\\.gitmodules$"))
 
 (use-package gitignore-mode
-  :ensure t
   :mode ("/\\.gitignore$"
          "/\\.git/info/exclude$"
          "/git/ignore$"))
 
 (use-package git-gutter
-  :ensure t
   :commands (git-gutter-mode)
   :init
   (add-hook! (text-mode prog-mode conf-mode) 'git-gutter-mode)
   :config
-  (use-package git-gutter-fringe
-    :ensure t)
+  (require 'git-gutter-fringe)
 
   ;; colored fringe "bars"
   (define-fringe-bitmap 'git-gutter-fr:added
@@ -37,8 +33,14 @@
 (use-package magit
   :commands (magit-status)
   :config
-  (use-package evil-magit
-    :ensure t)
-  )
+  (require 'evil-magit))
+
+(use-package magithub
+  :defer t
+  :after magit
+  :config (magithub-feature-autoinject t))
+
+(use-package github-browse-file
+  :defer t)
 
 (provide 'pp-core-vcs)
