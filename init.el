@@ -26,6 +26,7 @@
 
   (require 'pp-core-defuns)
   (require 'pp-core-ui)
+  (require 'pp-core-vcs)
   (require 'pp-settings)
   (require 'pp-editor)
   (require 'pp-theme)
