@@ -103,22 +103,5 @@
  :init
  (add-hook! (markdown-mode prog-mode) 'nlinum-mode))
 
- ;; (defvar doom--hl-nlinum-overlay nil)
- ;; (defvar doom--hl-nlinum-line nil)
-;;  :init
-;;  (add-hook!
-;;    (markdown-mode prog-mode scss-mode web-mode conf-mode groovy-mode
-;;     nxml-mode snippet-mode php-mode)
-;;    'nlinum-mode)
-  ;; FIXME This only works if hl-line is active! Why?
-;;  (add-hook! nlinum-mode
-;;    (if nlinum-mode-hook
-;;        (add-hook 'post-command-hook 'doom|nlinum-hl-line nil t)
-;;      (remove-hook 'post-command-hook 'doom|nlinum-hl-line t)))
-;;  :config
-;;  ;; Calculate line number column width beforehand
-;; (add-hook! nlinum-mode
-;;    (setq nlinum--width (length (save-excursion (goto-char (point-max))
-;;                                                (format-mode-line "%l")))))
 
 (provide 'pp-core-ui)

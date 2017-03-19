@@ -1,13 +1,5 @@
 ;; general development config
 
-(use-package magit
-  :commands (magit-status)
-  :defer t
-  :ensure t
-  :config
-  (use-package evil-magit
-    :ensure t))
-
 (use-package magithub
   :ensure t
   :defer t
