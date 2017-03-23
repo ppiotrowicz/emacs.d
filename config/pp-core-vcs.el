@@ -33,12 +33,11 @@
 (use-package magit
   :commands (magit-status)
   :config
-  (require 'evil-magit))
+  (progn
+    (require 'evil-magit)
 
-(use-package magithub
-  :defer t
-  :after magit
-  :config (magithub-feature-autoinject t))
+    (use-package magithub
+      :config (magithub-feature-autoinject t))))
 
 (use-package github-browse-file
   :defer t)
