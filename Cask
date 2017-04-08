@@ -67,6 +67,7 @@
 (depends-on "rbenv")
 (depends-on "rspec-mode")
 (depends-on "bundler")
+(depends-on "rubocop")
 
 ;; web
 (depends-on "restclient")
