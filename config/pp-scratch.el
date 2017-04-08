@@ -1,5 +1,8 @@
 ;; pp-scratch.el
 
+(setenv "LC_ALL" "C")
+(setenv "LANG" "C")
+
 (setq initial-scratch-message
       (format
        ";; %s\n\n"
@@ -7,7 +10,7 @@
         "\n" "\n;; " ; comment each line
         (replace-regexp-in-string
          "\n$" ""    ; remove trailing linebreak
-         (shell-command-to-string "fortune")))))
+         (shell-command-to-string "fortune | cowsay")))))
 
 
 ;; (setq initial-major-mode 'fundamental-mode
