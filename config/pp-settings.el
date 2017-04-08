@@ -15,6 +15,7 @@
 (setq mac-option-modifier nil)
 (setq create-lockfiles nil)
 (setq exec-path (append exec-path '("/usr/local/bin")))
+(setq save-interprogram-paste-before-kill t)
 
 (put 'narrow-to-page 'disabled nil)
 
@@ -40,6 +41,9 @@
 
 ;; server
 (server-start)
+
+;; get rid of fucking "Keep current list of tags tables also?"
+(setq tags-add-tables nil)
 
 ;; hippie expand
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
