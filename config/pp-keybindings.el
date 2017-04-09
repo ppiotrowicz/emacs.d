@@ -21,6 +21,7 @@
  "h"   '(:ignore t                           :which-key "help")
  "hc"  '(pp/edit-emacs-config                :which-key "edit config")
  "hf"  '(describe-function                   :which-key "describe function")
+ "hk"  '(describe-key                        :which-key "describe key")
  "hm"  '(describe-mode                       :which-key "describe mode")
  "hp"  '(paradox-list-packages               :which-key "paradox")
  "hv"  '(describe-variable                   :which-key "describe variable")
