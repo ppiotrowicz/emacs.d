@@ -5,6 +5,8 @@
      (defvar pp/ruby-map (make-sparse-keymap) "Ruby keymap.")
      (general-define-key
       :keymaps 'pp/ruby-map
+      ":"  '(pp/ruby-19-hash             :which-key "ruby 1.9 hash")
+      "'"  '(pp/ruby-string-to-symbol    :which-key "string to sym")
       ;; bundle
       "b"  '(:ignore t                   :which-key "bundle")
       "bi" '(bundle-install              :which-key "bundle install")
