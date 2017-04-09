@@ -88,4 +88,9 @@
 (general-nmap "zc"  'yafolding-hide-parent-element)
 (general-nmap "za"  'yafolding-toggle-element)
 
+;; Help mode
+(evil-set-initial-state 'help-mode 'normal)
+(general-evil-define-key 'normal help-mode-map
+   "q" 'quit-window)
+
 (provide 'pp-keybindings)
