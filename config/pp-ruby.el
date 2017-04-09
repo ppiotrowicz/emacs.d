@@ -52,4 +52,7 @@
     (use-package bundler)
     (use-package rubocop)))
 
+(add-hook! rspec-compilation-mode
+  (toggle-truncate-lines -1))
+
 (provide 'pp-ruby)
