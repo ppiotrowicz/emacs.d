@@ -59,7 +59,7 @@
 
 
 ;; ORG
-(depends-on "org")
+(depends-on "org-plus-contrib")
 
 ;; ruby
 (depends-on "ruby-mode")
