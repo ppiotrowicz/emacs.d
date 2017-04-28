@@ -22,6 +22,7 @@
   "Search"
   ("n" highlight-symbol-next "next")
   ("p" highlight-symbol-prev "prev")
+  ("e" evil-multiedit-match-all "edit")
   ("/" pp/find-symbol-at-point "in project")
   ("s" pp/swiper-at-point "swiper")
   ("q" highlight-symbol-remove-all "quit" :exit t))

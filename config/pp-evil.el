@@ -34,6 +34,10 @@
     (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
     ))
 
+(use-package evil-multiedit
+  :config
+  (evil-multiedit-default-keybinds))
+
 (use-package evil-anzu
   :config
   (setq anzu-cons-mode-line-p nil
