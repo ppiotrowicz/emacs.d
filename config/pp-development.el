@@ -7,10 +7,10 @@
     (setq projectile-switch-project-action 'counsel-projectile-find-file)))
 
 (use-package dumb-jump
-  :general (:keymaps 'evil-normal-state-map
-                     "C-]" 'dumb-jump-go
-                     "C-[" 'dump-jump-quick-look)
+  :general (:keymaps 'evil-normal-state-map "C-]" 'dumb-jump-go)
   :config
-  (setq dumb-jump-selector 'ivy))
+  (progn
+    (setq dumb-jump-selector 'ivy)
+    (setq dumb-jump-aggressive nil)))
 
 (provide 'pp-development)
