@@ -131,6 +131,12 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
   ;; other
   (require 'org-protocol)
+
+  (use-package ob-restclient)
+  (use-package ox-gfm)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((restclient . t)))
   ))
 
 (provide 'pp-org-mode)

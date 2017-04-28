@@ -60,6 +60,8 @@
 
 ;; ORG
 (depends-on "org-plus-contrib")
+(depends-on "ob-restclient")
+(depends-on "ox-gfm")
 
 ;; ruby
 (depends-on "ruby-mode")
