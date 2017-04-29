@@ -7,6 +7,10 @@
 (defconst pp-dashboard-width 80
   "Dashboard's width.")
 
+(defun pp/show-dashboard ()
+  (interactive)
+  (pp/dashboard-redraw)
+  (switch-to-buffer pp-dashboard-buffer-name))
 (defun pp/dashboard-create ()
   "Create dashboard if it doesn't exist yet"
   (interactive)
