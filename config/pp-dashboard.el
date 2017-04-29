@@ -1,4 +1,6 @@
 (require 'recentf)
+(require 'calendar)
+(require 'org-agenda)
 
 (defconst pp-dashboard-buffer-name "*dashboard*"
   "Dashboard's buffer name.") 
@@ -26,8 +28,8 @@
       (pp/dashboard-insert-recents 5 margin)
       (pp/dashboard-insert-title "Projects" margin)
       (pp/dashboard-insert-projects 5 margin)
-      (pp/dashboard-insert-break margin)
-      ;; agenda
+      (pp/dashboard-insert-title "Today" margin)
+      (pp/dashboard-insert-agenda 5 margin)
       (pp/dashboard-insert-break margin))
     (goto-char (point-min))
   ))
@@ -103,7 +105,7 @@ Return entire list if `END' is omitted."
   "Render LIST-DISPLAY-NAME title and items of LIST."
   (when (car list)
     (mapc (lambda (el)
-            (insert (concat margin "   > "))
+            (insert (concat margin "       "))
             (widget-create 'push-button
                            :action `(lambda (&rest ignore) (find-file-existing ,el))
                            :mouse-face 'highlight
@@ -129,7 +131,7 @@ Return entire list if `END' is omitted."
   "Render LIST-DISPLAY-NAME title and project items of LIST."
   (when (car list)
     (mapc (lambda (el)
-            (insert (concat margin "  > " ))
+            (insert (concat margin "      " ))
             (widget-create 'push-button
                            :action `(lambda (&rest ignore)
 				      (projectile-switch-project-by-name ,el))
@@ -152,6 +154,91 @@ Return entire list if `END' is omitted."
          (pp/dashboard-subseq (projectile-relevant-known-projects) 0 list-size)
          margin))
     ))
+
+;;
+;; Org Agenda
+;;
+(defun pp/dashboard-insert-agenda-list (list margin)
+  "Render LIST-DISPLAY-NAME title and agenda items from LIST."
+  (if (car list)
+      (mapc (lambda (el)
+              (insert (concat margin "    "))
+              (let ((filename (nth 4 el))
+                    (lineno (nth 3 el))
+                    (title (nth 0 el)))
+                (widget-create 'push-button
+                               :action `(lambda (&rest ignore)
+                                          (let ((buffer (find-file-other-window ,filename)))
+                                            (with-current-buffer buffer
+                                              (goto-char ,lineno)
+                                              )
+                                            (switch-to-buffer buffer)))
+                               :mouse-face 'highlight
+                               :follow-link "\C-m"
+                               :button-prefix ""
+                               :button-suffix ""
+                               :format "%[%t%]"
+                               (format "%s" title))
+                (insert "\n")))
+            list)
+    (insert (propertize "\n    --- No items ---" 'face 'widget-button))))
+
+(defun pp/dashboard-timestamp-to-gregorian-date (timestamp)
+  "Convert TIMESTAMP to a gregorian date.
+
+The result can be used with functions like
+`calendar-date-compare'."
+  (let ((decoded-timestamp (decode-time timestamp)))
+    (list (nth 4 decoded-timestamp)
+          (nth 3 decoded-timestamp)
+          (nth 5 decoded-timestamp))))
+
+(defun pp/dashboard-date-due-p (timestamp &optional due-date)
+  "Check if TIMESTAMP is today or in the past.
+
+If DUE-DATE is nil, compare TIMESTAMP to today; otherwise,
+compare to the date in DUE-DATE.
+
+The time part of both TIMESTAMP and DUE-DATE is ignored, only the
+date part is considered."
+  (unless due-date
+    (setq due-date (current-time)))
+  (setq due-date (time-add due-date 86400))
+  (let* ((gregorian-date (pp/dashboard-timestamp-to-gregorian-date timestamp))
+         (gregorian-due-date (pp/dashboard-timestamp-to-gregorian-date due-date)))
+    (calendar-date-compare (list gregorian-date)
+                           (list gregorian-due-date))))
+
+(defun pp/dashboard-get-agenda ()
+  "Get agenda items for today."
+  (org-compile-prefix-format 'agenda)
+  (let* ((filtered-entries nil))
+    (org-map-entries
+     (lambda ()
+       (let ((schedule-time (org-get-scheduled-time (point)))
+             (deadline-time (org-get-deadline-time (point)))
+             (item (org-agenda-format-item
+                    ""
+                    (org-get-heading t t)
+                    (org-outline-level)
+                    (org-get-category)
+                    (org-get-tags)
+                    t))
+             (loc (point))
+             (file (buffer-file-name)))
+         (when (and (not (org-entry-is-done-p))
+                    (or (and schedule-time (pp/dashboard-date-due-p schedule-time))
+                        (and deadline-time (pp/dashboard-date-due-p deadline-time))))
+           (setq filtered-entries
+                 (append filtered-entries
+                         (list (list item schedule-time deadline-time loc file)))))))
+     nil
+     'agenda)
+    filtered-entries))
+
+(defun pp/dashboard-insert-agenda (list-size margin)
+  "Add the list of LIST-SIZE items of agenda."
+  (pp/dashboard-insert-agenda-list (pp/dashboard-get-agenda) margin))
 
 ;; resize
 
