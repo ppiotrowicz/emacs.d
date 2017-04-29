@@ -2,6 +2,8 @@
 
 (add-to-list 'load-path "~/.emacs.d/themes/emacs-doom-theme")
 (require 'doom-themes)
+(require 'doom-neotree)
+
 (load-theme 'doom-one t)
 ;; brighter source buffers
 (add-hook 'find-file-hook 'doom-buffer-mode-maybe)
