@@ -10,6 +10,7 @@
           pp-editor
           pp-theme
           pp-interface
+          pp-dashboard
           pp-evil
           pp-scratch
           pp-development
