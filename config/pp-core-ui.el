@@ -86,14 +86,6 @@
         window-divider-default-right-width 1)
   (window-divider-mode +1))
 
-
-(use-package beacon
-  :config
-  (beacon-mode +1)
-  (setq beacon-color (face-attribute 'highlight :background nil t)
-        beacon-blink-when-buffer-changes t
-        beacon-blink-when-point-moves-vertically 10))
-
 (use-package nlinum
  :commands nlinum-mode
  :preface

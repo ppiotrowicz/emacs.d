@@ -11,7 +11,6 @@
 (depends-on "f")
 
 ;; pp-core-ui 
-(depends-on "beacon")
 (depends-on "nlinum")
 
 ;; pp-core-vcs
