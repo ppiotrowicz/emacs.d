@@ -14,7 +14,6 @@
     (setq org-fontify-whole-heading-line t)
     (setq org-footnote-auto-label 'plain)
     (setq org-hide-emphasis-markers t)
-    (setq org-hide-leading-stars t)
     (setq org-image-actual-width nil)
     (setq org-pretty-entities t)
     (setq org-pretty-entities-include-sub-superscripts t)
@@ -50,13 +49,30 @@
     (setq org-mobile-inbox-for-pull "~/org/mobile-notes.org")
     (setq org-mobile-directory "~/Dropbox/Aplikacje/MobileOrg")
 
+  ;;; Custom fontification
+  ;; I like how org-mode fontifies checked TODOs and want this to extend to
+  ;; checked checkbox items, so we remove the old checkbox highlight rule...
+  (font-lock-remove-keywords
+   'org-mode '(("^[ \t]*\\(?:[-+*]\\|[0-9]+[.)]\\)[ \t]+\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\(\\[[- X]\\]\\)"
+                1 'org-checkbox prepend)))
+  (font-lock-add-keywords
+   'org-mode '(;; ...and replace it with my own
+               ("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)"
+                1 'org-headline-done t)
+               ("^[ \t]*\\(?:[-+*]\\|[0-9]+[.)]\\)[ \t]+\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\(\\[[- ]\\]\\)"
+                1 'org-checkbox append)
+               ;; Also highlight list bullets
+               ("^ *\\([-+]\\|[0-9]+[).]\\) " 1 'org-list-dt append)
+               ;; and separators
+               ("^ *\\(-----+\\)$" 1 'org-meta-line)))
+
     ;; Fontify checkboxes and dividers
-    (defface org-list-bullet '((t ())) "Face for list bullets")
-    (font-lock-add-keywords
-     'org-mode '(("^ *\\([-+]\\|[0-9]+[).]\\) "
-                  (1 'org-list-bullet))
-                 ("^ *\\(-----+\\)$"
-                  (1 'org-meta-line))))
+    ;; (defface org-list-bullet '((t ())) "Face for list bullets")
+    ;; (font-lock-add-keywords
+    ;;  'org-mode '(("^ *\\([-+]\\|[0-9]+[).]\\) "
+    ;;               (1 'org-list-bullet))
+    ;;              ("^ *\\(-----+\\)$"
+    ;;               (1 'org-meta-line))))
     (setq org-capture-templates
           (quote
            (("w" "Work TODO" entry
