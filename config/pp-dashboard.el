@@ -29,11 +29,13 @@
            (margin (s-repeat margin-left " ")))
       (pp/dashboard-insert-banner (concat user-emacs-directory "banner.png"))
       (pp/dashboard-insert-title "Recent files" margin)
-      (pp/dashboard-insert-recents 5 margin)
+      (pp/dashboard-insert-recents 7 margin)
       (pp/dashboard-insert-title "Projects" margin)
-      (pp/dashboard-insert-projects 5 margin)
+      (pp/dashboard-insert-projects 7 margin)
       (pp/dashboard-insert-title "Today" margin)
-      (pp/dashboard-insert-agenda 5 margin)
+      (pp/dashboard-insert-agenda 7 margin)
+      (pp/dashboard-insert-title "Links" margin)
+      (pp/dashboard-insert-links margin)
       (pp/dashboard-insert-break margin))
     (goto-char (point-min))
   ))
@@ -109,7 +111,7 @@ Return entire list if `END' is omitted."
   "Render LIST-DISPLAY-NAME title and items of LIST."
   (when (car list)
     (mapc (lambda (el)
-            (insert (concat margin "       "))
+            (insert (concat margin "   " (all-the-icons-icon-for-file el) " "))
             (widget-create 'push-button
                            :action `(lambda (&rest ignore) (find-file-existing ,el))
                            :mouse-face 'highlight
@@ -135,7 +137,7 @@ Return entire list if `END' is omitted."
   "Render LIST-DISPLAY-NAME title and project items of LIST."
   (when (car list)
     (mapc (lambda (el)
-            (insert (concat margin "      " ))
+            (insert (concat margin "   " (all-the-icons-octicon "repo") " " ))
             (widget-create 'push-button
                            :action `(lambda (&rest ignore)
 				      (projectile-switch-project-by-name ,el))
@@ -243,6 +245,34 @@ date part is considered."
 (defun pp/dashboard-insert-agenda (list-size margin)
   "Add the list of LIST-SIZE items of agenda."
   (pp/dashboard-insert-agenda-list (pp/dashboard-get-agenda) margin))
+
+;;
+;; Links
+;;
+(defun pp/dashboard-insert-link-list (list margin)
+  "Render list of links"
+  (when (car list)
+    (mapc (lambda (el)
+            (insert (concat margin "   " (all-the-icons-octicon "link") " " ))
+            (widget-create 'push-button
+                           :action `(lambda (&rest ignore)
+                                      (browse-url ,(cdr el)))
+                           :mouse-face 'highlight
+                           :follow-link "\C-m"
+                           :button-prefix ""
+                           :button-suffix ""
+                           :format "%[%t%]"
+                           (car el))
+            (insert "\n"))
+    list)))
+
+(defun pp/dashboard-insert-links (margin)
+  "Add the list of LIST-SIZE items of projects."
+  (pp/dashboard-insert-link-list
+   (list '("Working 1.0 (confluence)"     . "https://getbase.atlassian.net/wiki/display/EX/Working+1.0")
+         '("Working 1.0 (jira)"           . "https://getbase.atlassian.net/secure/RapidBoard.jspa?rapidView=384&projectKey=WRK&view=planning.nodetail")
+         '("Rebuild Smart Querier (jira)" . "https://getbase.atlassian.net/secure/RapidBoard.jspa?rapidView=406&projectKey=RSQ&view=planning.nodetail"))
+   margin))
 
 ;; resize
 
