@@ -101,4 +101,10 @@
 (general-evil-define-key 'normal help-mode-map
    "q" 'quit-window)
 
+;; compilation mode
+(define-key compilation-mode-map "\C-h" 'evil-window-left)
+(define-key compilation-mode-map "\C-j" 'evil-window-down)
+(define-key compilation-mode-map "\C-k" 'evil-window-up)
+(define-key compilation-mode-map "\C-l" 'evil-window-right)
+
 (provide 'pp-keybindings)
