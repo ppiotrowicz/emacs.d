@@ -26,6 +26,12 @@
  "hm"  '(describe-mode                       :which-key "describe mode")
  "hp"  '(paradox-list-packages               :which-key "paradox")
  "hv"  '(describe-variable                   :which-key "describe variable")
+ ;; Errors
+ "e"   '(:ignore t                           :which-key "errors")
+ "ee"  '(flycheck-list-errors                :which-key "list")
+ "en"  '(flycheck-next-error                 :which-key "next error")
+ "ep"  '(flycheck-previous-error             :which-key "next error")
+ "eb"  '(flycheck-buffer                     :which-key "check buffer")
  ;; Files
  "f"   '(:ignore t                           :which-key "files")
  "fd"  '(pp/delete-file-and-buffer           :which-key "delete file")

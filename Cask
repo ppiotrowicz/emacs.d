@@ -56,6 +56,7 @@
 (depends-on "projectile")
 (depends-on "counsel-projectile")
 (depends-on "dumb-jump")
+(depends-on "flycheck")
 
 
 ;; ORG

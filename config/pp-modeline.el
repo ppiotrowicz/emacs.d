@@ -279,11 +279,11 @@ directory, the file name, and its state (modified, read-only or non-existent)."
         (or (and (or (eq doom--flycheck-err-cache doom--flycheck-cache)
                      (memq flycheck-last-status-change '(running not-checked)))
                  (if (eq flycheck-last-status-change 'running)
-                     (concat " "
+                     (concat "  "
                              (all-the-icons-octicon
                               "ellipsis"
                               :face 'font-lock-doc-face
-                              :height 1.1
+                              :height 1.0
                               :v-adjust 0)
                              " ")
                    doom--flycheck-cache))
@@ -304,10 +304,13 @@ directory, the file name, and its state (modified, read-only or non-existent)."
                                          (propertize (format "%d" fw) 'face 'doom-modeline-warning)
                                          " "
                                          ))
-                                 (if (or fe fw)
-                                     "  "
-                                   (when (active)
-                                     (all-the-icons-octicon "check" :height 1.2 :v-adjust -0.06))))))))
+                                 (unless (or fe fw)
+                                     (concat "  "
+                                             (all-the-icons-octicon "comment"
+                                                                    :face 'doom-modeline-warning
+                                                                    :height 0.9
+                                                                    :v-adjust 0)
+                                             " ")))))))
       (concat
        "  "
        (all-the-icons-octicon "check"
