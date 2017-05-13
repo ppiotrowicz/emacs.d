@@ -32,7 +32,8 @@
             (eshell-mode              . emacs)
             (term-mode                . emacs)
             (inf-ruby-mode            . emacs)
-            (flycheck-error-list-mode . emacs)))
+            (flycheck-error-list-mode . emacs)
+            (ledger-report-mode       . emacs)))
 
     ;; ESC quits stuff
     (define-key evil-normal-state-map [escape] 'keyboard-quit)
