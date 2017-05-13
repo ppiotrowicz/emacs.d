@@ -12,6 +12,7 @@
 
 ;; pp-core-ui 
 (depends-on "nlinum")
+(depends-on "shackle")
 
 ;; pp-core-vcs
 (depends-on "gitconfig-mode")

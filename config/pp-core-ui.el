@@ -96,5 +96,9 @@
  :init
  (add-hook! (markdown-mode prog-mode) 'nlinum-mode))
 
+(use-package shackle
+  :config
+  (shackle-mode 1))
+
 
 (provide 'pp-core-ui)

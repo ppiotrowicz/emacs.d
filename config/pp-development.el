@@ -22,12 +22,10 @@
     ;; fringe indicators on left side
     (setq flycheck-indication-mode 'left-fringe)
 
-    (add-to-list 'display-buffer-alist
-                 `(,(rx bos "*Flycheck errors*" eos)
-                   (display-buffer-reuse-window
-                    display-buffer-in-side-window)
-                   (side            . bottom)
-                   (reusable-frames . visible)
-                   (window-height   . 0.33)))))
+    (def-popup! "\\*Flycheck errors\\*" :align below :size 14 :noselect t :regexp t :popup t)))
+
+;; eshell
+(def-popup! "\\*eshell\\*" :align below :size 14 :select t :regexp t :popup t)
 
 (provide 'pp-development)
+;;; pp-development ends here

@@ -37,6 +37,10 @@ Examples:
           (-list hook)))) funcs)
     `(progn ,@forms)))
 
+;;;###autoload
+(defmacro def-popup! (&rest params)
+  `(push ',params shackle-rules))
+
 (defun pp/ruby-19-hash ()
   "Convert old hashrocket syntax to ruby 1.9 hash"
   (interactive)

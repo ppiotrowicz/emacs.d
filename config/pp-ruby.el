@@ -47,12 +47,17 @@
     (use-package rspec-mode
       :config
       (progn
+        (def-popup! "\\*rspec-compilation\\*" :align below :size 14 :noselect t :regexp t :popup t)
         (setq compilation-scroll-output t)
         (setq rspec-autosave-buffer t)
         (setq rspec-spec-command "rspec --format progress --no-profile")
         (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)))
-    (use-package bundler)
-    (use-package rubocop)))
+    (use-package bundler
+      :config
+      (def-popup! "\\*Bundler\\*" :align below :size 14 :noselect t :regexp t :popup t))
+    (use-package rubocop
+      :config
+      (def-popup! "\\*RuboCop.+\\*" :align below :size 14 :noselect t :regexp t))))
 
 (add-hook! rspec-compilation-mode
   (toggle-truncate-lines -1))
