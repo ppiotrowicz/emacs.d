@@ -21,6 +21,9 @@
     (setq flycheck-highlighting-mode nil)
     ;; fringe indicators on left side
     (setq flycheck-indication-mode 'left-fringe)
+    (define-key flycheck-error-list-mode-map "\C-k" 'evil-window-up)
+    (define-key flycheck-error-list-mode-map "k" 'flycheck-error-list-previous-error)
+    (define-key flycheck-error-list-mode-map "j" 'flycheck-error-list-next-error)
 
     (def-popup! "\\*Flycheck errors\\*" :align below :size 14 :noselect t :regexp t :popup t)))
 
