@@ -109,4 +109,12 @@
 (define-key compilation-mode-map "\C-k" 'evil-window-up)
 (define-key compilation-mode-map "\C-l" 'evil-window-right)
 
+;; compilation mode
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (define-key eshell-mode-map "\C-h" 'evil-window-left)
+            (define-key eshell-mode-map "\C-j" 'evil-window-down)
+            (define-key eshell-mode-map "\C-k" 'evil-window-up)
+            (define-key eshell-mode-map "\C-l" 'evil-window-right)))
+
 (provide 'pp-keybindings)
