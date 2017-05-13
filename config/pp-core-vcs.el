@@ -34,7 +34,7 @@
   :commands (magit-status)
   :config
   (progn
-    (def-popup! "^\\*magit.+" :align right :regexp t)
+    (def-popup! "^\\*magit: .+" :align right :regexp t)
     (require 'evil-magit)
     ;; Do not override window movement
     (evil-define-key evil-magit-state magit-mode-map "\C-j" nil)
