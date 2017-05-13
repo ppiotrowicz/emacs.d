@@ -26,6 +26,8 @@
 
 ;; eshell
 (def-popup! "\\*eshell\\*" :align below :size 14 :select t :regexp t :popup t)
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 (provide 'pp-development)
 ;;; pp-development ends here

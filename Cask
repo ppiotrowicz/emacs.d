@@ -58,7 +58,7 @@
 (depends-on "counsel-projectile")
 (depends-on "dumb-jump")
 (depends-on "flycheck")
-
+(depends-on "exec-path-from-shell")
 
 ;; ORG
 (depends-on "org-plus-contrib")
