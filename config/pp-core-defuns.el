@@ -40,29 +40,4 @@ Examples:
 ;;;###autoload
 (defmacro def-popup! (&rest params)
   `(push ',params shackle-rules))
-
-(defun pp/ruby-19-hash ()
-  "Convert old hashrocket syntax to ruby 1.9 hash"
-  (interactive)
-  (let (symbol)
-    (save-excursion
-      (save-restriction
-        (narrow-to-region (line-beginning-position) (line-end-position))
-        (if (looking-at-p ":")
-            (forward-char 1))
-        (skip-chars-backward "^:")
-        (if (looking-at-p "[a-z_]+ =>")
-            (progn
-              (delete-backward-char 1)
-              (search-forward " =>" nil t)
-              (replace-match ":")))))))
-
-(defun pp/ruby-string-to-symbol ()
-  "Convert string to symbol"
-  (interactive)
-  (if (looking-at-p "\w*\"")
-      (evil-surround-delete ?\")
-    (evil-surround-delete ?\'))
-  (insert ":"))
-
 (provide 'pp-core-defuns)

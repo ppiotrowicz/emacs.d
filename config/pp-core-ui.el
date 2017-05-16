@@ -31,10 +31,7 @@
  ;; mouse - disable acceleration
  mouse-wheel-progressive-speed nil
  ;; Ask for confirmation on exit only if there are real buffers left
- confirm-kill-emacs
- (lambda (_)
-   (y-or-n-p "››› Quit?"))
-)
+ confirm-kill-emacs (lambda (_) (y-or-n-p "››› Quit?")))
 
 (defvar doom--modeline-bg nil)
 

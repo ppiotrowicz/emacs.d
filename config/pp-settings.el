@@ -6,7 +6,6 @@
 (menu-bar-mode -1)
 (blink-cursor-mode -1)
 (global-visual-line-mode -1)
-(setq custom-file (concat user-emacs-directory "custom.el"))
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-echo-area-message t)
 (setq inhibit-startup-message t)

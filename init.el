@@ -2,8 +2,7 @@
 
 (load (concat user-emacs-directory "config/pp-core.el"))
 
-(pp-emacs pp-packages
-          pp-core-defuns
+(pp-emacs pp-core-defuns
           pp-core-ui
           pp-core-vcs
           pp-settings
