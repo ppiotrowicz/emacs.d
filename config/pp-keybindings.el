@@ -98,6 +98,8 @@
 
 (general-define-key "M-w" 'quit-window)
 
+(general-nmap "C-t" 'counsel-imenu)
+
 ;; Help mode
 (evil-set-initial-state 'help-mode 'normal)
 (general-evil-define-key 'normal help-mode-map
@@ -116,5 +118,9 @@
             (define-key eshell-mode-map "\C-j" 'evil-window-down)
             (define-key eshell-mode-map "\C-k" 'evil-window-up)
             (define-key eshell-mode-map "\C-l" 'evil-window-right)))
+
+;; epa key list mode
+(general-evil-define-key 'normal epa-key-list-mode-map "m" 'epa-mark-key)
+(general-evil-define-key 'normal epa-key-list-mode-map "q" 'epa-exit-buffer)
 
 (provide 'pp-keybindings)
