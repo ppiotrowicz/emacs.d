@@ -35,6 +35,7 @@
 (depends-on "swiper")
 (depends-on "avy")
 (depends-on "all-the-icons")
+(depends-on "all-the-icons-ivy")
 (depends-on "neotree")
 (depends-on "company")
 (depends-on "ace-window")

@@ -43,6 +43,10 @@
 (use-package all-the-icons
   :demand t)
 
+(use-package all-the-icons-ivy
+  :config
+  (all-the-icons-ivy-setup))
+
 (use-package neotree
   :config
   (progn
