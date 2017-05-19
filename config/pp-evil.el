@@ -1,4 +1,5 @@
 (use-package evil
+  :demand t
   :init
   (progn
     ;; shorter mode names
@@ -55,16 +56,10 @@
     (global-evil-matchit-mode 1)))
 
 (use-package evil-surround
-  :commands (global-evil-surround-mode
-             evil-surround-edit
-             evil-Surround-edit
-             evil-surround-region)
-  :config
-  (global-evil-surround-mode 1))
+  :config (global-evil-surround-mode 1))
 
 (use-package evil-nerd-commenter
   :commands (evilnc-comment-or-uncomment-lines))
-
 
 (use-package evil-multiedit
   :commands (evil-multiedit-match-all
@@ -77,7 +72,31 @@
              evil-multiedit-prev
              evil-multiedit-abort
              evil-multiedit-ex-match)
-  :config (evil-multiedit-default-keybinds))
+  :init
+  (setq evil-multiedit-use-symbols t)
+  :config
+  (progn
+    (let ((me-map  evil-multiedit-state-map)
+          (mei-map evil-multiedit-insert-state-map))
+      (define-key me-map (kbd "M-d") #'evil-multiedit-match-and-next)
+      (define-key me-map (kbd "M-D") #'evil-multiedit-match-and-prev)
+      (define-key me-map (kbd "RET") #'evil-multiedit-toggle-or-restrict-region)
+
+      (dolist (map (list me-map mei-map))
+        (define-key map (kbd "C-n") #'evil-multiedit-next)
+        (define-key map (kbd "C-p") #'evil-multiedit-prev)))))
+
+(let ((map evil-visual-state-map))
+  (define-key map (kbd "M-d")   #'evil-multiedit-match-and-next)
+  (define-key map (kbd "M-D")   #'evil-multiedit-match-and-prev)
+  (define-key map (kbd "C-M-d") #'evil-multiedit-restore)
+  (define-key map (kbd "R")     #'evil-multiedit-match-all))
+
+(let ((map evil-normal-state-map))
+  (define-key map (kbd "M-d")   #'evil-multiedit-match-and-next)
+  (define-key map (kbd "M-D")   #'evil-multiedit-match-and-prev)
+  (define-key map (kbd "C-M-d") #'evil-multiedit-restore)
+  (define-key map (kbd "R")     #'evil-multiedit-match-all))
 
 (use-package evil-anzu
   :defer t

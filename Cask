@@ -52,6 +52,7 @@
 (depends-on "evil-nerd-commenter")
 (depends-on "evil-matchit")
 (depends-on "evil-anzu")
+(depends-on "evil-mc")
 (depends-on "evil-multiedit")
 
 ;; development
