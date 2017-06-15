@@ -12,6 +12,8 @@
 
 (add-to-list 'load-path (concat user-emacs-directory "config"))
 
+(put 'narrow-to-region 'disabled nil)
+
 (defconst pp-packages-dir
   (expand-file-name
    (format ".cask/%s.%s/elpa" emacs-major-version emacs-minor-version)

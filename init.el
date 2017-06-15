@@ -21,4 +21,3 @@
           pp-hydras
           pp-keybindings
           pp-funcs)
-(put 'narrow-to-region 'disabled nil)
