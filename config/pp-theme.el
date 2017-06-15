@@ -3,7 +3,7 @@
 ;;; Code:
 
 ;;; font
-(set-frame-font "Fira Mono for Powerline")
+(set-frame-font "Fira Mono")
 (set-face-attribute 'default nil :height 120)
 
 ;;; Theme
