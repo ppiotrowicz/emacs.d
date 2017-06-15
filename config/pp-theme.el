@@ -26,6 +26,7 @@
   (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
   (add-hook 'ediff-prepare-buffer-hook #'solaire-mode))
 
+(global-hl-line-mode +1)
 ;;; nlinum
 (use-package nlinum
   :commands nlinum-mode
