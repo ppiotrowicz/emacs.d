@@ -103,6 +103,9 @@
             ("l" "TIL" entry
              (file+datetree "~/org/til.org")
              "* %? %^g")
+            ("t" "Today" entry
+             (file+datetree "~/org/today.org")
+             "* TODO %?")
             ("b" "A link, for reading later." entry
              (file+headline "~/org/bookmarks.org" "INBOX")
              "* %:description\n%u\n%c\n\n%i")
