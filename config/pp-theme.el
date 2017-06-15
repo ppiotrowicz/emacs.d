@@ -3,8 +3,8 @@
 ;;; Code:
 
 ;;; font
-(set-frame-font "Fira Mono")
-(set-face-attribute 'default nil :height 120)
+(set-frame-font "M+ 1mn")
+(set-face-attribute 'default nil :height 130)
 
 ;;; Theme
 (add-to-list 'load-path "~/.emacs.d/themes/emacs-doom-theme")
