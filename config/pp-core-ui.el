@@ -85,14 +85,6 @@
         window-divider-default-right-width 1)
   (window-divider-mode +1))
 
-(use-package nlinum
- :commands nlinum-mode
- :preface
- (setq linum-format "%3d ")
- (defvar nlinum-format "%4d ")
- :init
- (add-hook! (markdown-mode prog-mode) 'nlinum-mode))
-
 (use-package shackle
   :config
   (shackle-mode 1))

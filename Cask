@@ -45,6 +45,8 @@
 (depends-on "paradox")
 (depends-on "crux")
 (depends-on "diminish")
+(depends-on "solaire-mode")
+(depends-on "nlinum-hl")
 
 ;; evil
 (depends-on "evil")

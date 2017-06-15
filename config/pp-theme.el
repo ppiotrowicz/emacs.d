@@ -1,36 +1,56 @@
-;; theme
+;;; pp-theme --- theme settings
+;;; Commentary:
+;;; Code:
 
+;;; font
+(set-frame-font "Fira Mono for Powerline")
+(set-face-attribute 'default nil :height 120)
+
+;;; Theme
 (add-to-list 'load-path "~/.emacs.d/themes/emacs-doom-theme")
 (require 'doom-themes)
 
-;;; Settings (defaults)
-(setq doom-enable-bold t    ; if nil, bolding are universally disabled
-      doom-enable-italic t  ; if nil, italics are universally disabled
-
-      ;; doom-one specific settings
-      doom-one-brighter-modeline nil
-      doom-one-brighter-comments nil)
+;;; Doom theme settings
+(setq doom-enable-bold t doom-enable-italic t)
 
 (load-theme 'doom-one t)
 
-;; brighter source buffers (that represent files)
-(add-hook 'find-file-hook 'doom-buffer-mode-maybe)
-;; ...if you use auto-revert-mode
-(add-hook 'after-revert-hook 'doom-buffer-mode-maybe)
-;; And you can brighten other buffers (unconditionally) with:
-(add-hook 'ediff-prepare-buffer-hook 'doom-buffer-mode)
-
-;; brighter minibuffer when active
-(add-hook 'minibuffer-setup-hook 'doom-brighten-minibuffer)
-
 ;; Enable custom neotree theme
-(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
+(doom-themes-neotree-config)
 
-;; Enable nlinum line highlighting
-(doom-themes-nlinum-config)   ; requires nlinum and hl-line-mode
+;;; Solaire - 'real' buffers are brighter
+(use-package solaire-mode
+  :config
+  (add-hook 'after-change-major-mode-hook #'turn-on-solaire-mode)
+  (add-hook 'after-revert-hook #'turn-on-solaire-mode)
+  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
+  (add-hook 'ediff-prepare-buffer-hook #'solaire-mode))
 
-;; font
-(set-default-font "Fira Mono for Powerline")
-(set-face-attribute 'default nil :height 120)
+;;; nlinum
+(use-package nlinum
+  :commands nlinum-mode
+  :preface
+  (setq linum-format "%3d ")
+  (defvar nlinum-format "%4d ")
+  :init
+  (add-hook! (markdown-mode prog-mode) 'nlinum-mode))
+
+(use-package nlinum-hl
+  :config
+  ;; A shotgun approach that refreshes line numbers on a regular basis:
+  ;; Runs occasionally, though unpredictably
+  (add-hook 'post-gc-hook #'nlinum-hl-flush-all-windows)
+
+  ;; whenever Emacs loses/gains focus
+  (add-hook 'focus-in-hook  #'nlinum-hl-flush-all-windows)
+  (add-hook 'focus-out-hook #'nlinum-hl-flush-all-windows)
+  ;; ...or switches windows
+  (advice-add #'select-window :before #'nlinum-hl-do-select-window-flush)
+  (advice-add #'select-window :after  #'nlinum-hl-do-select-window-flush)
+
+  ;; after X amount of idle time
+  (run-with-idle-timer 5 t #'nlinum-hl-flush-window)
+  (run-with-idle-timer 30 t #'nlinum-hl-flush-all-windows))
 
 (provide 'pp-theme)
+;;; pp-theme ends here
