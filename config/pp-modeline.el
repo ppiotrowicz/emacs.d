@@ -229,10 +229,15 @@ active."
                                           (replace-match "" t t s)
                                         s)))))
 
+(defun pp-ml-rbenv-update(orig-fun &rest args)
+  (let ((res (apply orig-fun args)))
+    (+doom-modeline|update-env)
+    res))
+
 ;; Only support python and ruby for now
 (add-hook! 'python-mode-hook (setq +doom-modeline-env-command "python --version 2>&1 | cut -d' ' -f2"))
 (add-hook! 'ruby-mode-hook   (setq +doom-modeline-env-command "ruby   --version 2>&1 | cut -d' ' -f2"))
-
+(advice-add 'rbenv--activate :around #'pp-ml-rbenv-update)
 
 ;;
 ;; Modeline helpers
