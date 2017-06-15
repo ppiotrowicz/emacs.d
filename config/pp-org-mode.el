@@ -116,7 +116,9 @@
                         :background "#262c34"
                         :foreground "#00B3EF"
                         :box nil
-                        :height 1.2)
+                        :height 1)
+    (set-face-attribute 'org-level-2 nil :height 1)
+    (set-face-attribute 'org-level-3 nil :height 1)
 
   ;; Keybindings
   (evil-set-initial-state 'org-agenda-mode 'normal)
