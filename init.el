@@ -7,6 +7,7 @@
           pp-core-vcs
           pp-settings
           pp-editor
+          pp-dired
           pp-theme
           pp-interface
           pp-dashboard
