@@ -10,3 +10,5 @@ projectile-bookmarks.eld
 /eshell/
 .cask
 custom.el
+magithub/
+projectile.cache
