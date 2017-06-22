@@ -1,5 +1,7 @@
 ;; pp-dired
 
+(require 'dired)
+
 (defun dired-get-size ()
   (interactive)
   (let ((files (dired-get-marked-files)))
