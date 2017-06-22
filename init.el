@@ -16,6 +16,7 @@
           pp-development
           pp-org-mode
           pp-ruby
+          pp-js
           pp-web
           pp-ledger
           pp-modeline

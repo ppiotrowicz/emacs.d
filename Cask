@@ -84,6 +84,13 @@
 (depends-on "json-mode")
 (depends-on "csv-mode")
 
+;; js
+(depends-on "web-mode")
+(depends-on "js2-mode")
+(depends-on "js2-refactor")
+(depends-on "xref-js2")
+
+
 ;; ledger
 (depends-on "ledger-mode")
 
