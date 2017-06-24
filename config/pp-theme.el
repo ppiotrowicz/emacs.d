@@ -36,7 +36,7 @@
   (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
   (add-hook 'ediff-prepare-buffer-hook #'solaire-mode))
 
-(global-hl-line-mode +1)
+(global-hl-line-mode -1)
 ;;; nlinum
 (use-package nlinum
   :commands nlinum-mode
@@ -44,7 +44,9 @@
   (setq linum-format "%3d ")
   (defvar nlinum-format "%4d ")
   :init
-  (add-hook! (markdown-mode prog-mode) 'nlinum-mode))
+  (add-hook! (markdown-mode prog-mode) 'nlinum-mode)
+  :config
+  (setq nlinum-highlight-current-line t))
 
 (use-package nlinum-hl
   :config

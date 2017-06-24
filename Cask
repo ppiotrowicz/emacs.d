@@ -12,6 +12,7 @@
 
 ;; pp-core-ui 
 (depends-on "nlinum")
+(depends-on "nlinum-hl")
 (depends-on "shackle")
 
 ;; pp-core-vcs
@@ -46,7 +47,6 @@
 (depends-on "crux")
 (depends-on "diminish")
 (depends-on "solaire-mode")
-(depends-on "nlinum-hl")
 
 ;; evil
 (depends-on "evil")
