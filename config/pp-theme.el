@@ -3,8 +3,18 @@
 ;;; Code:
 
 ;;; font
-(set-frame-font "M+ 1mn")
-(set-face-attribute 'default nil :height 130)
+
+;; https://www.fontsquirrel.com/fonts/M-1m
+;; (set-frame-font "M+ 1mn")
+
+;; https://github.com/mozilla/Fira
+;; (set-frame-font "Fira Mono")
+
+;; http://input.fontbureau.com/
+(set-frame-font "InputMonoCondensed")
+(set-face-attribute 'default nil :height 140)
+(setq-default line-spacing nil)
+
 
 ;;; Theme
 (add-to-list 'load-path "~/.emacs.d/themes/emacs-doom-theme")
