@@ -223,7 +223,7 @@ active."
 (add-hook! '(focus-in-hook find-file-hook) #'+doom-modeline|update-env)
 (defun +doom-modeline|update-env ()
   (when +doom-modeline-env-command
-    (let* ((default-directory (projectile-project-root))
+    (let* ((default-directory (pp/project-root))
            (s (shell-command-to-string +doom-modeline-env-command)))
       (setq +doom-modeline-env-version (if (string-match "[ \t\n\r]+\\'" s)
                                           (replace-match "" t t s)
@@ -286,7 +286,7 @@ project root). Excludes the file basename. See `doom-buffer-name' for that."
     (let ((buffer-path
            (file-relative-name (file-name-directory
                                 (or buffer-file-truename (file-truename buffer-file-name)))
-                               (projectile-project-root))))
+                               (pp/project-root))))
       (unless (equal buffer-path "./")
         (let ((max-length (truncate (* (window-body-width) 0.4))))
           (if (> (length buffer-path) max-length)
@@ -310,7 +310,7 @@ project root). Excludes the file basename. See `doom-buffer-name' for that."
 ;;
 
 (def-modeline-segment! buffer-project
-  "Displays `projectile-project-root'. This is for special buffers like the scratch
+  "Displays `pp/project-root'. This is for special buffers like the scratch
 buffer where knowing the current project directory is important."
   (let ((face (if (active) 'doom-modeline-buffer-path)))
     (concat (if (display-graphic-p) " ")
@@ -319,7 +319,7 @@ buffer where knowing the current project directory is important."
              :face face
              :v-adjust -0.05
              :height 1.25)
-            (propertize (concat " " (abbreviate-file-name (projectile-project-root)))
+            (propertize (concat " " (abbreviate-file-name (pp/project-root)))
                         'face face))))
 
 ;;
