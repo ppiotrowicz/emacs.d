@@ -13,7 +13,6 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier nil)
 (setq create-lockfiles nil)
-(setq exec-path (append exec-path '("/usr/local/bin")))
 (setq save-interprogram-paste-before-kill t)
 
 (put 'narrow-to-page 'disabled nil)

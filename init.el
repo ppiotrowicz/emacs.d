@@ -12,8 +12,8 @@
           pp-interface
           pp-dashboard
           pp-evil
-          pp-scratch
           pp-development
+          pp-scratch
           pp-org-mode
           pp-ruby
           pp-js

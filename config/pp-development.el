@@ -32,7 +32,10 @@
 ;; eshell
 (def-popup! "\\*eshell\\*" :align below :size 14 :select t :regexp t :popup t)
 (when (memq window-system '(mac ns x))
+  (setq exec-path-from-shell-arguments (list "-l"))
   (exec-path-from-shell-initialize))
+
+(add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 
 (provide 'pp-development)
 ;;; pp-development ends here
