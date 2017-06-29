@@ -12,7 +12,7 @@
 
 ;; http://input.fontbureau.com/
 (set-frame-font "InputMonoCondensed")
-(set-face-attribute 'default nil :height 140)
+(set-face-attribute 'default nil :height 130)
 (setq-default line-spacing nil)
 
 
