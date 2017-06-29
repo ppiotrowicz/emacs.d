@@ -3,7 +3,17 @@
 (use-package js2-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode))
+  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+  (add-to-list 'company-backends 'company-tern)
+  (add-hook 'js2-mode-hook (lambda ()
+                             (tern-mode)
+                             (company-mode)))
+  (add-hook 'js2-mode-hook #'add-node-modules-path))
+
+;; Disable completion keybindings, as we use xref-js2 instead
+(add-hook 'tern-mode-hook (lambda ()
+                            (define-key tern-mode-keymap (kbd "M-.") nil)
+                            (define-key tern-mode-keymap (kbd "M-,") nil)))
 
 (use-package xref-js2
   :config

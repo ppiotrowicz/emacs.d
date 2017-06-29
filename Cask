@@ -86,10 +86,11 @@
 (depends-on "csv-mode")
 
 ;; js
-(depends-on "web-mode")
 (depends-on "js2-mode")
 (depends-on "js2-refactor")
 (depends-on "xref-js2")
+(depends-on "company-tern")
+(depends-on "add-node-modules-path")
 
 
 ;; ledger
