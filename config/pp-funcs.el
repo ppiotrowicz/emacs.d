@@ -14,6 +14,11 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+(defun pp/edit-dotfiles ()
+  "Open emacs config file."
+  (interactive)
+  (find-file "~/dotfiles/"))
+
 (defun pp/find-in-project ()
   "Searches in current project."
   (interactive)

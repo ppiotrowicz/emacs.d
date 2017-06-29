@@ -21,6 +21,7 @@
  ;; Help
  "h"   '(:ignore t                           :which-key "help")
  "hc"  '(pp/edit-emacs-config                :which-key "edit config")
+ "hd"  '(pp/edit-dotfiles                    :which-key "edit dotfiles")
  "hf"  '(describe-function                   :which-key "describe function")
  "hk"  '(describe-key                        :which-key "describe key")
  "hm"  '(describe-mode                       :which-key "describe mode")
