@@ -84,6 +84,7 @@
 (depends-on "markdown-mode")
 (depends-on "json-mode")
 (depends-on "csv-mode")
+(depends-on "emmet-mode")
 
 ;; js
 (depends-on "js2-mode")
@@ -91,7 +92,6 @@
 (depends-on "xref-js2")
 (depends-on "company-tern")
 (depends-on "add-node-modules-path")
-
 
 ;; ledger
 (depends-on "ledger-mode")
