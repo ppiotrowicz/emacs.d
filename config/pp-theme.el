@@ -15,6 +15,7 @@
 (set-face-attribute 'default nil :height 130)
 (setq-default line-spacing nil)
 
+(custom-set-faces '(variable-pitch ((t nil))))
 
 ;;; Theme
 (add-to-list 'load-path "~/.emacs.d/themes/emacs-doom-theme")

@@ -101,3 +101,8 @@
 
 ;; hydras
 (depends-on "hydra")
+
+;; elfeed
+(depends-on "elfeed")
+(depends-on "elfeed-goodies")
+(depends-on "elfeed-org")

@@ -22,4 +22,5 @@
           pp-modeline
           pp-hydras
           pp-keybindings
-          pp-funcs)
+          pp-funcs
+          pp-elfeed)
