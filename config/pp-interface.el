@@ -22,6 +22,7 @@
   :config
   (progn
     (require 'counsel)
+    (require 'ivy-hydra)
 
     (ivy-mode 1)
     (setq ivy-use-virtual-buffers t)

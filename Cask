@@ -31,7 +31,9 @@
 (depends-on "bind-key")
 (depends-on "bind-map")
 (depends-on "powerline")
+(depends-on "hydra")
 (depends-on "ivy")
+(depends-on "ivy-hydra")
 (depends-on "counsel")
 (depends-on "swiper")
 (depends-on "avy")
@@ -98,9 +100,6 @@
 
 ;; modeline
 (depends-on "s")
-
-;; hydras
-(depends-on "hydra")
 
 ;; elfeed
 (depends-on "elfeed")
