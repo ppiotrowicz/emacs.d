@@ -8,6 +8,7 @@ projectile-bookmarks.eld
 /speed-type/
 /.org-id-locations
 /eshell/
+/url/
 .cask
 custom.el
 magithub/
