@@ -105,4 +105,12 @@ Repeated invocations toggle between the two most recently open buffers."
         (interactive "p")
         (kmacro-exec-ring-item (quote ([66 120 69 97 58 kp-delete kp-delete kp-delete escape] 0 "%d")) arg)))
 
+(defun pp/toggle-window-height ()
+  (interactive)
+  (let ((current-height (window-height)))
+    (message "Current window height: '%s'." current-height)
+    (if (> current-height 20)
+        (set-window-text-height (selected-window) (/ current-height 3))
+      (set-window-text-height (selected-window) (* current-height 3)))))
+
 (provide 'pp-funcs)

@@ -127,4 +127,7 @@
 (general-evil-define-key 'normal epa-key-list-mode-map "m" 'epa-mark-key)
 (general-evil-define-key 'normal epa-key-list-mode-map "q" 'epa-exit-buffer)
 
+;; rspec-compilation-mode
+(general-evil-define-key 'normal rspec-compilation-mode-map "?" 'pp/toggle-window-height)
+
 (provide 'pp-keybindings)
