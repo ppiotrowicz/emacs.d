@@ -9,6 +9,7 @@
     (setq org-cycle-include-plain-lists t)
     (setq org-entities-user '(("flat" "\\flat" nil "" "" "266D" "♭")
                               ("sharp" "\\sharp" nil "" "" "266F" "♯")))
+    (setq org-M-RET-may-split-line '((default . nil)))
     (setq org-fontify-done-headline t)
     (setq org-fontify-quote-and-verse-blocks t)
     (setq org-fontify-whole-heading-line t)
@@ -17,24 +18,29 @@
     (setq org-image-actual-width nil)
     (setq org-pretty-entities t)
     (setq org-pretty-entities-include-sub-superscripts t)
-    (setq org-startup-folded t)
+    (setq org-startup-folded 'content)
     (setq org-startup-indented t)
     (setq org-startup-with-inline-images nil)
     (setq org-use-sub-superscripts '{})
     (setq org-src-fontify-natively t)
-    (setq org-startup-indented t)
     (setq org-hide-leading-stars t)
     (setq org-directory "~/org")
     (setq org-link-abbrev-alist
           '(("SD"   . "https://getbase.atlassian.net/browse/SD-")
             ("jira" . "https://getbase.atlassian.net/browse/")
             ("conf" . "https://getbase.atlassian.net/wiki/display/%h")))
-    (setq org-agenda-files (list "~/org/home.org" "~/org/work.org"))
-    (setq org-log-into-drawer "LOGBOOK")
+
+    (setq org-log-into-drawer nil)
     (setq org-clock-into-drawer "CLOCKING")
-    (setq org-refile-targets '((nil :maxlevel . 9)
-                               (org-agenda-files :maxlevel . 9)))
-    (setq org-refile-use-outline-path nil)
+
+    (setq org-agenda-files (list "~/org/current.org"
+                                 "~/org/reminders.org"
+                                 "~/org/someday.org"))
+    (setq org-refile-targets '(("~/org/current.org" :maxlevel . 3)
+                               ("~/org/reminders.org" :maxlevel . 3)
+                               ("~/org/someday.org" :maxlevel . 3)))
+    (setq org-refile-use-outline-path 'file)
+    (setq org-outline-path-complete-in-steps nil)
     (setq org-refile-allow-creating-parent-nodes (quote confirm))
     (setq org-tags-column -90)
     (setq org-export-html-postamble nil)
@@ -94,7 +100,10 @@
 
     (setq org-capture-templates
           (quote
-           (("w" "Work TODO" entry
+           (("i" "INBOX TODO" entry
+             (file+headline "~/org/inbox.org" "INBOX")
+             "* TODO %?")
+            ("w" "Work TODO" entry
              (file+headline "~/org/work.org" "INBOX")
              "* TODO %?")
             ("h" "Home TODO" entry
@@ -165,11 +174,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                     ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                      (org-agenda-overriding-header "High-priority unfinished tasks:")))
               (agenda "" ((org-agenda-span 1)))
-              (alltodo ""
-                       ((org-agenda-skip-function
-                         '(or (pp/org-skip-subtree-if-priority ?A)
-                              (org-agenda-skip-if nil '(scheduled deadline))))))))))
-
+              ))))
 
     ;; other
     (require 'org-protocol)
