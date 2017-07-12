@@ -27,6 +27,7 @@
     (setq org-directory "~/org")
     (setq org-link-abbrev-alist
           '(("SD"   . "https://getbase.atlassian.net/browse/SD-")
+            ("OOI"  . "https://getbase.atlassian.net/browse/OOI-")
             ("jira" . "https://getbase.atlassian.net/browse/")
             ("conf" . "https://getbase.atlassian.net/wiki/display/%h")))
 

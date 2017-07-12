@@ -53,13 +53,14 @@
  "mw"  '(whitespace-mode                     :which-key "whitespace")
  ;; Open
  "o"   '(:ignore t                           :which-key "open")
- "oc"  '(org-capture                         :which-key "org capture")
  "ob"  '((lambda () (interactive) (find-file "~/org/bookmarks.org"))  :which-key "bookmarks")
  "oe"  '((lambda () (interactive) (find-file "~/org/emacs.org"))      :which-key "emacs tasks")
- "oh"  '((lambda () (interactive) (find-file "~/org/home.org"))       :which-key "home tasks")
+ "oi"  '((lambda () (interactive) (find-file "~/org/current.org"))    :which-key "inbox")
+ "oc"  '((lambda () (interactive) (find-file "~/org/current.org"))    :which-key "current tasks")
+ "os"  '((lambda () (interactive) (find-file "~/org/someday.org"))    :which-key "someday/maybe")
+ "or"  '((lambda () (interactive) (find-file "~/org/reminders.org"))  :which-key "reminders")
  "ot"  '((lambda () (interactive) (find-file "~/org/today.org"))      :which-key "today tasks")
  "ol"  '((lambda () (interactive) (find-file "~/org/til.org"))        :which-key "today I learned")
- "ow"  '((lambda () (interactive) (find-file "~/org/work.org"))       :which-key "work tasks")
  "of"  '((lambda () (interactive) (find-file "~/finance/ledger.dat")) :which-key "ledger")
  ;;; Capture
  "c"   '(:ignore t                           :which-key "capture")
