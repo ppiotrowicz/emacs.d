@@ -62,6 +62,7 @@
  "ot"  '((lambda () (interactive) (find-file "~/org/today.org"))      :which-key "today tasks")
  "ol"  '((lambda () (interactive) (find-file "~/org/til.org"))        :which-key "today I learned")
  "of"  '((lambda () (interactive) (find-file "~/finance/ledger.dat")) :which-key "ledger")
+ "oj"  '(pp/browse-jira                      :which-key "jira")
  ;;; Capture
  "c"   '(:ignore t                           :which-key "capture")
  "cc"  '(org-capture                         :which-key "org capture")
