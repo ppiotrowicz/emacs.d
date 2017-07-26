@@ -11,9 +11,9 @@
 (use-package dumb-jump
   :general (:keymaps 'evil-normal-state-map "C-]" 'dumb-jump-go)
   :config
-  (progn
-    (setq dumb-jump-selector 'ivy)
-    (setq dumb-jump-aggressive nil)))
+  (setq dumb-jump-selector 'ivy)
+  (setq dumb-jump-aggressive nil)
+  (setq dumb-jump-force-searcher 'ag))
 
 (use-package flycheck
   :init (global-flycheck-mode)
