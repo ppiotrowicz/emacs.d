@@ -55,7 +55,7 @@
  "o"   '(:ignore t                           :which-key "open")
  "ob"  '((lambda () (interactive) (find-file "~/org/bookmarks.org"))  :which-key "bookmarks")
  "oe"  '((lambda () (interactive) (find-file "~/org/emacs.org"))      :which-key "emacs tasks")
- "oi"  '((lambda () (interactive) (find-file "~/org/current.org"))    :which-key "inbox")
+ "oi"  '((lambda () (interactive) (find-file "~/org/inbox.org"))      :which-key "inbox")
  "oc"  '((lambda () (interactive) (find-file "~/org/current.org"))    :which-key "current tasks")
  "os"  '((lambda () (interactive) (find-file "~/org/someday.org"))    :which-key "someday/maybe")
  "or"  '((lambda () (interactive) (find-file "~/org/reminders.org"))  :which-key "reminders")
