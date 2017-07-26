@@ -23,6 +23,8 @@
     (setq flycheck-highlighting-mode nil)
     ;; fringe indicators on left side
     (setq flycheck-indication-mode 'left-fringe)
+    ;; don't show errors in minibuffer
+    (setq flycheck-display-errors-function nil)
     (define-key flycheck-error-list-mode-map "\C-k" 'evil-window-up)
     (define-key flycheck-error-list-mode-map "k" 'flycheck-error-list-previous-error)
     (define-key flycheck-error-list-mode-map "j" 'flycheck-error-list-next-error)
