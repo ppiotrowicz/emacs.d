@@ -29,6 +29,8 @@
 ;; Enable custom neotree theme
 (doom-themes-neotree-config)
 
+(doom-themes-org-config)
+
 ;;; Solaire - 'real' buffers are brighter
 (use-package solaire-mode
   :config
@@ -38,33 +40,9 @@
   (add-hook 'ediff-prepare-buffer-hook #'solaire-mode))
 
 (global-hl-line-mode -1)
-;;; nlinum
-(use-package nlinum
-  :commands nlinum-mode
-  :preface
-  (setq linum-format "%3d ")
-  (defvar nlinum-format "%4d ")
-  :init
-  (add-hook! (markdown-mode prog-mode) 'nlinum-mode)
-  :config
-  (setq nlinum-highlight-current-line t))
 
-(use-package nlinum-hl
-  :config
-  ;; A shotgun approach that refreshes line numbers on a regular basis:
-  ;; Runs occasionally, though unpredictably
-  (add-hook 'post-gc-hook #'nlinum-hl-flush-all-windows)
-
-  ;; whenever Emacs loses/gains focus
-  (add-hook 'focus-in-hook  #'nlinum-hl-flush-all-windows)
-  (add-hook 'focus-out-hook #'nlinum-hl-flush-all-windows)
-  ;; ...or switches windows
-  (advice-add #'select-window :before #'nlinum-hl-do-select-window-flush)
-  (advice-add #'select-window :after  #'nlinum-hl-do-select-window-flush)
-
-  ;; after X amount of idle time
-  (run-with-idle-timer 5 t #'nlinum-hl-flush-window)
-  (run-with-idle-timer 30 t #'nlinum-hl-flush-all-windows))
+(add-hook! (markdown-mode prog-mode)
+  (setq display-line-numbers t))
 
 (provide 'pp-theme)
 ;;; pp-theme ends here

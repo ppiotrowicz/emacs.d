@@ -97,7 +97,6 @@
                    ;; custom #hashtags & @at-tags for another level of organization
                    ;; TODO refactor this into a single rule
                    ("\\s-\\(\\([#@]\\)[^ \n]+\\)" 1 (+org--tag-face 2)))))))
-    (add-hook 'org-font-lock-set-keywords-hook #'+org|adjust-faces)
 
     (setq org-capture-templates
           (quote
