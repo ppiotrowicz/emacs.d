@@ -2,6 +2,8 @@
 
 (use-package js2-mode
   :config
+  (setq js2-mode-show-parse-errors nil
+        js2-mode-show-strict-warnings nil)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
   (add-to-list 'company-backends 'company-tern)

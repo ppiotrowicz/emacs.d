@@ -33,4 +33,13 @@
 
 (use-package csv-mode)
 
+(use-package emmet-mode
+  :config
+  (setq emmet-expand-jsx-className? t)
+  (setq emmet-self-closing-tag-style "/"))
+(add-hook! 'rjsx-mode-hook 'emmet-mode)
+
+(use-package rjsx-mode
+  :mode (("\\.js\\'" . rjsx-mode)))
+
 (provide 'pp-web)

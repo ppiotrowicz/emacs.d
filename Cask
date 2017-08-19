@@ -87,6 +87,7 @@
 (depends-on "json-mode")
 (depends-on "csv-mode")
 (depends-on "emmet-mode")
+(depends-on "rjsx-mode")
 
 ;; js
 (depends-on "js2-mode")
