@@ -96,6 +96,9 @@
 (depends-on "company-tern")
 (depends-on "add-node-modules-path")
 
+;; java/groovy
+(depends-on "groovy-mode")
+
 ;; ledger
 (depends-on "ledger-mode")
 
