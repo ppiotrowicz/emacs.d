@@ -22,7 +22,7 @@
 (defun pp/find-in-project ()
   "Searches in current project."
   (interactive)
-  (counsel-ag nil (projectile-project-root)))
+  (counsel-projectile-ag))
 
 (defun pp/find-symbol-at-point ()
   "Searches for symbol under cursor in current project."
