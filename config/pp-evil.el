@@ -58,8 +58,9 @@
 (use-package evil-surround
   :config (global-evil-surround-mode 1))
 
-(use-package evil-nerd-commenter
-  :commands (evilnc-comment-or-uncomment-lines))
+(use-package evil-commentary
+  :commands (evil-commentary-yank evil-commentary-line)
+  :config (evil-commentary-mode 1))
 
 (use-package evil-multiedit
   :commands (evil-multiedit-match-all

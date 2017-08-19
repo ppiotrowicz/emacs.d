@@ -53,7 +53,7 @@
 ;; evil
 (depends-on "evil")
 (depends-on "evil-surround")
-(depends-on "evil-nerd-commenter")
+(depends-on "evil-commentary")
 (depends-on "evil-matchit")
 (depends-on "evil-anzu")
 (depends-on "evil-mc")

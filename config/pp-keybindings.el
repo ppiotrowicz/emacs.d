@@ -90,7 +90,8 @@
 
 (general-nmap "*"   'pp/highlight-symbol-hydra)
 (general-nmap "C-y" 'counsel-yank-pop)
-(general-nmap "gc"  'evilnc-comment-or-uncomment-lines)
+(general-nmap "gc"  'evil-commentary-line)
+(general-nmap "gy"  'evil-commentary-yank)
 (general-nmap "%"   'evilmi-jump-items)
 ;; window movement
 (general-nmap "C-h" 'evil-window-left)
