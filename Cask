@@ -10,7 +10,7 @@
 (depends-on "dash")
 (depends-on "f")
 
-;; pp-core-ui 
+;; pp-core-ui
 (depends-on "nlinum")
 (depends-on "nlinum-hl")
 (depends-on "shackle")
@@ -71,6 +71,7 @@
 (depends-on "org-plus-contrib")
 (depends-on "ob-restclient")
 (depends-on "ox-gfm")
+(depends-on "deft")
 
 ;; ruby
 (depends-on "ruby-mode")
