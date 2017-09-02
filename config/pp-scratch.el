@@ -1,7 +1,7 @@
 ;; pp-scratch.el
 
-(setenv "LC_ALL" "C")
-(setenv "LANG" "C")
+(setenv "LC_ALL" "en_US.UTF-8")
+(setenv "LANG" "en_US")
 
 (setq initial-scratch-message
       (format
