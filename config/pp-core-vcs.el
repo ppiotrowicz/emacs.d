@@ -40,8 +40,9 @@
     (evil-define-key evil-magit-state magit-mode-map "\C-j" nil)
     (evil-define-key evil-magit-state magit-mode-map "\C-k" nil)
 
-    (use-package magithub
-      :config (magithub-feature-autoinject t))))
+    ;; (use-package magithub
+    ;;   :config (magithub-feature-autoinject t))
+    ))
 
 (use-package github-browse-file
   :defer t)
