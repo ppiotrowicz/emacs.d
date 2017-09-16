@@ -1,6 +1,6 @@
 ;; general development config
 
-(electric-pair-mode +1)
+(electric-pair-mode -1)
 
 (use-package projectile
   :config
