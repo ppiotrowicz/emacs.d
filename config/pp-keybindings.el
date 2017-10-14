@@ -102,6 +102,8 @@
 (general-nmap "zm"  'yafolding-toggle-all)
 (general-nmap "zc"  'yafolding-hide-parent-element)
 (general-nmap "za"  'yafolding-toggle-element)
+;; narrowring
+(general-nmap "zz"  'eos/narrow-or-widen-dwim)
 
 (general-define-key "M-w" 'quit-window)
 
