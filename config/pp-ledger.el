@@ -4,7 +4,7 @@
   :defer t
   :config
   (progn
-    (def-popup! "*Ledger Report*" :align below :size 14 :select t :regexp nil :popup t)
+    (def-popup! "*Ledger Report*" :align below :size 18 :select t :regexp nil :popup t)
     (defvar pp/ledger-map (make-sparse-keymap) "Ledger keymap.")
     (general-define-key
      :keymaps 'pp/ledger-map
@@ -23,13 +23,10 @@
 
     (setq ledger-reports
       (quote
-       (("expenses monthly" "ledger -f %(ledger-file) reg expenses -M")
-        ("incomes monthly"  "ledger -f %(ledger-file) reg incomes -M")
-        ("current balance"  "ledger -f %(ledger-file) bal assets")
-        ("bal"              "ledger -f %(ledger-file) bal")
-        ("reg"              "ledger -f %(ledger-file) reg")
-        ("payee"            "ledger -f %(ledger-file) payee")
-        ("account"          "ledger -f %(ledger-file) account")
+       (("wydatki"          "ledger -f %(ledger-file) reg wydatki -M")
+        ("wydatki jedzenie" "ledger -f %(ledger-file) reg wydatki:jedzenie -M")
+        ("przychody"        "ledger -f %(ledger-file) reg przychody -M")
+        ("saldo"            "ledger -f %(ledger-file) bal aktywa")
         )))
     )
   :mode (("\\.dat" . ledger-mode)))
