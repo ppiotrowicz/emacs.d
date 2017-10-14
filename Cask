@@ -69,6 +69,9 @@
 (depends-on "fence-edit" :git "https://github.com/aaronbieber/fence-edit.el")
 (depends-on "edit-indirect" :git "https://github.com/Fanael/edit-indirect")
 
+;; dired
+(depends-on "dired+")
+
 ;; ORG
 (depends-on "org-plus-contrib")
 (depends-on "ob-restclient")
