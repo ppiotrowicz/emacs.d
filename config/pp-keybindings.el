@@ -72,6 +72,7 @@
  "pf"  '(counsel-projectile-find-file        :which-key "find file")
  "pb"  '(counsel-projectile-switch-to-buffer :which-key "find buffer")
  "pk"  '(projectile-kill-buffers             :which-key "kill buffers")
+ "ps"  '(projectile-run-eshell               :which-key "run shell")
  "p/"  '(pp/find-in-project                  :which-key "find string")
  "/"   '(pp/find-in-project                  :which-key "find string")
  ;; Windows
