@@ -34,12 +34,12 @@
     (setq org-log-into-drawer nil)
     (setq org-clock-into-drawer "CLOCKING")
 
-    (setq org-agenda-files (list "~/org/current.org"
-                                 "~/org/reminders.org"
-                                 "~/org/someday.org"))
-    (setq org-refile-targets '(("~/org/current.org" :maxlevel . 3)
-                               ("~/org/reminders.org" :maxlevel . 3)
-                               ("~/org/someday.org" :maxlevel . 3)))
+    ;; (setq org-agenda-files (list "~/org/current.org"
+    ;;                              "~/org/reminders.org"
+    ;;                              "~/org/someday.org"))
+    ;; (setq org-refile-targets '(("~/org/current.org" :maxlevel . 3)
+    ;;                            ("~/org/reminders.org" :maxlevel . 3)
+    ;;                            ("~/org/someday.org" :maxlevel . 3)))
     (setq org-refile-use-outline-path 'file)
     (setq org-outline-path-complete-in-steps nil)
     (setq org-refile-allow-creating-parent-nodes (quote confirm))
