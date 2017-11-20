@@ -85,6 +85,7 @@
 (depends-on "rspec-mode")
 (depends-on "bundler")
 (depends-on "rubocop")
+(depends-on "minitest")
 
 ;; web
 (depends-on "restclient")

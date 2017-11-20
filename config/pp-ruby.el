@@ -20,13 +20,13 @@
      "rr" '(rubocop-check-current-file  :which-key "check file")
      "ra" '(rubocop-autocorrect-current-file :which-key "autocorrect file")
      ;; testing
-     "t"  '(:ignore t                   :which-key "rspec")
-     "ta" '(rspec-verify-all            :which-key "run all")
-     "tb" '(rspec-verify                :which-key "run buffer")
-     "tl" '(rspec-run-last-failed       :which-key "last failed")
-     "tr" '(rspec-rerun                 :which-key "rerun")
-     "tt" '(rspec-verify-single         :which-key "run")
-     "tk" '((lambda () (interactive) (kill-buffer "*rspec-compilation*")) :which-key "stop")
+     "t"  '(:ignore t                   :which-key "spec")
+     "ta" '(pp/spec-verify-all          :which-key "run all")
+     "tb" '(pp/spec-verify              :which-key "run buffer")
+     "tl" '(pp/spec-run-last-failed     :which-key "last failed")
+     "tr" '(pp/spec-rerun               :which-key "rerun")
+     "tt" '(pp/spec-verify-single       :which-key "run")
+     "tk" '(pp/spec-stop-spec           :which-key "stop")
      ;; rbenv
      "v"  '(:ignore t                   :which-key "rbenv")
      "vc" '(rbenv-use-corresponding     :which-key "use local")
@@ -53,6 +53,12 @@
         (setq rspec-autosave-buffer t)
         (setq rspec-spec-command "rspec --format progress --no-profile")
         (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)))
+    (use-package minitest
+      :config
+      (progn
+        (def-popup! "\\*minitest .*" :align below :size 14 :noselect t :regexp t :popup t)
+        (defun minitest--post-command (cmd str)
+          (format "%s" (replace-regexp-in-string "[\s#:]" " " str)))))
     (use-package bundler
       :config
       (def-popup! "\\*Bundler\\*" :align below :size 14 :noselect t :regexp t :popup t))
@@ -88,5 +94,47 @@
     (evil-surround-delete ?\'))
   (insert ":"))
 
+(setq pp/test-framework "rspec")
+(defun pp/spec-verify-single ()
+  "Runs rspec or minitest on single spec"
+  (interactive)
+  (cond ((string= pp/test-framework "rspec") (rspec-verify-single))
+        ((string= pp/test-framework "minitest") (minitest-verify-single))
+      ))
+
+(defun pp/spec-verify ()
+  "Runs rspec or minitest on entire buffer"
+  (interactive)
+  (cond ((string= pp/test-framework "rspec") (rspec-verify))
+        ((string= pp/test-framework "minitest") (minitest-verify))
+      ))
+
+(defun pp/spec-verify-all ()
+  "Runs rspec or minitest on entire spec suite"
+  (interactive)
+  (cond ((string= pp/test-framework "rspec") (rspec-verify-all))
+        ((string= pp/test-framework "minitest") (minitest-verify-all))
+      ))
+
+(defun pp/spec-rerun ()
+  "Reruns rspec or minitest"
+  (interactive)
+  (cond ((string= pp/test-framework "rspec") (rspec-rerun))
+        ((string= pp/test-framework "minitest") (minitest-rerun))
+      ))
+
+(defun pp/spec-run-last-failed ()
+  "Runs rspec or minitest on failed tests"
+  (interactive)
+  (cond ((string= pp/test-framework "rspec") (rspec-run-last-failed))
+        ((string= pp/test-framework "minitest") (minitest-rerun))
+      ))
+
+(defun pp/spec-stop-spec ()
+  "Kills rspec or minitest compilation buffers"
+  (interactive)
+  (cond ((string= pp/test-framework "rspec") (kill-buffer "*rspec-compilation*"))
+        ((string= pp/test-framework "minitest") (kill-buffer "*minitest "))
+      ))
 
 (provide 'pp-ruby)
