@@ -113,12 +113,6 @@ Repeated invocations toggle between the two most recently open buffers."
         (set-window-text-height (selected-window) (/ current-height 3))
       (set-window-text-height (selected-window) (* current-height 3)))))
 
-(defun pp/browse-jira ()
-  "Quickly find tasks in jira"
-  (interactive)
-  (let ((task-id (read-from-minibuffer "Task id: " "OOI-")))
-    (browse-url (concat "https://getbase.atlassian.net/browse/" task-id))))
-
 (defun eos/narrow-or-widen-dwim (p)
   "Widen if buffer is narrowed, narrow-dwim otherwise.
 Dwim means: region, org-src-block, org-subtree, or
