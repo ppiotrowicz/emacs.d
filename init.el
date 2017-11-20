@@ -10,7 +10,6 @@
           pp-dired
           pp-theme
           pp-interface
-          pp-dashboard
           pp-evil
           pp-development
           pp-scratch

@@ -17,7 +17,6 @@
  "bd"  '(kill-this-buffer                    :which-key "kill buffer")
  "bn"  '(evil-buffer-new                     :which-key "new buffer")
  "TAB" '(pp/switch-to-previous-buffer        :which-key "previous buffer")
- "d"   '(pp/show-dashboard                   :which-key "dashboard")
  ;; Help
  "h"   '(:ignore t                           :which-key "help")
  "hc"  '(pp/edit-emacs-config                :which-key "edit config")
