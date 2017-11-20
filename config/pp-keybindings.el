@@ -11,9 +11,6 @@
  "a"   '(org-agenda                          :which-key "agenda")
  "t"   '(neotree-projectile-find             :which-key "neotree find")
  "T"   '(neotree-projectile                  :which-key "neotree")
- ;; Apps
- "A"   '(:ignore t                           :which-key "apps")
- "Af"  '(elfeed                              :which-key "elfeed")
  ;; Buffers
  "b"   '(:ignore t                           :which-key "buffers")
  "bb"  '(ivy-switch-buffer                   :which-key "switch buffer")

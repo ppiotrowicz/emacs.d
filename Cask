@@ -111,8 +111,3 @@
 
 ;; modeline
 (depends-on "s")
-
-;; elfeed
-(depends-on "elfeed")
-(depends-on "elfeed-goodies")
-(depends-on "elfeed-org")
