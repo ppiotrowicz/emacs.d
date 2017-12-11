@@ -80,6 +80,8 @@
  "w="  '(balance-windows                     :which-key "balance windows")
  "ww"  '(ace-window                          :which-key "ace window")
  "wf"  '(pp/toggle-fullscreen                :which-key "fullscreen")
+ "w <left>" '(winner-undo                     :which-key "winner undo")
+ "w <right>" '(winner-redo                    :which-key "winner redo")
 )
 
 ;;(define-key ruby-mode-map (kbd "C-c :") 'ruby_toggle_symbol)

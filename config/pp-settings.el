@@ -62,4 +62,7 @@
 (show-paren-mode)
 (setq show-paren-delay 0)
 
+;; winner mode
+(winner-mode 1)
+
 (provide 'pp-settings)
