@@ -80,8 +80,10 @@
  "w="  '(balance-windows                     :which-key "balance windows")
  "ww"  '(ace-window                          :which-key "ace window")
  "wf"  '(pp/toggle-fullscreen                :which-key "fullscreen")
- "w <left>" '(winner-undo                     :which-key "winner undo")
- "w <right>" '(winner-redo                    :which-key "winner redo")
+ "w <left>" '(winner-undo                    :which-key "winner undo")
+ "w <right>" '(winner-redo                   :which-key "winner redo")
+ "wm" '(ivy-push-view                        :which-key "push view")
+ "wM" '(ivy-pop-view                         :which-key "push view")
 )
 
 (general-nmap "*"   'pp/highlight-symbol-hydra)

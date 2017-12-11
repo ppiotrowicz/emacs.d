@@ -28,6 +28,7 @@
     (setq ivy-use-virtual-buffers t)
     (setq ivy-height 15)
     (setq ivy-count-format "(%d/%d) ")
+    (setq ivy-use-selectable-prompt t)
 
     (use-package swiper
       :config
