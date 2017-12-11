@@ -84,8 +84,6 @@
  "w <right>" '(winner-redo                    :which-key "winner redo")
 )
 
-;;(define-key ruby-mode-map (kbd "C-c :") 'ruby_toggle_symbol)
-
 (general-nmap "*"   'pp/highlight-symbol-hydra)
 (general-nmap "C-y" 'counsel-yank-pop)
 (general-nmap "gc"  'evil-commentary-line)

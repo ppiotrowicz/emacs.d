@@ -99,12 +99,6 @@ Repeated invocations toggle between the two most recently open buffers."
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
-(fset 'ruby_toggle_symbol
-      (lambda (&optional arg)
-        "Keyboard macro for changing :symbol => '' into symbol: ''."
-        (interactive "p")
-        (kmacro-exec-ring-item (quote ([66 120 69 97 58 kp-delete kp-delete kp-delete escape] 0 "%d")) arg)))
-
 (defun pp/toggle-window-height ()
   (interactive)
   (let ((current-height (window-height)))
