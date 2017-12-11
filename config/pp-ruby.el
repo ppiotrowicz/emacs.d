@@ -51,12 +51,12 @@
         (def-popup! "\\*rspec-compilation\\*" :align below :size 14 :noselect t :regexp t :popup t)
         (setq compilation-scroll-output t)
         (setq rspec-autosave-buffer t)
-        (setq rspec-spec-command "rspec --format progress --no-profile")
-        (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)))
+        (setq rspec-spec-command "rspec --format progress --no-profile")))
     (use-package minitest
       :config
       (progn
         (def-popup! "\\*minitest .*" :align below :size 14 :noselect t :regexp t :popup t)
+        (setenv "EMACS" "t") ; makes default reporter output colorful
         (defun minitest--post-command (cmd str)
           (format "%s" (replace-regexp-in-string "[\s#:]" " " str)))))
     (use-package bundler
@@ -68,6 +68,8 @@
 
 (add-hook! rspec-compilation-mode
   (toggle-truncate-lines -1))
+
+(add-hook! 'compilation-filter-hook 'inf-ruby-auto-enter)
 
 ;;; refactorings
 (defun pp/ruby-19-hash ()
