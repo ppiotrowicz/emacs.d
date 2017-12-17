@@ -9,6 +9,7 @@
 ;; pp-core-defuns
 (depends-on "dash")
 (depends-on "f")
+(depends-on "eldoc-eval")
 
 ;; pp-core-ui
 (depends-on "nlinum")
