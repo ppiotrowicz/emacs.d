@@ -112,5 +112,10 @@
   (evil-snipe-override-mode 1)
   (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
 
+(use-package key-chord
+  :config
+  (key-chord-mode 1)
+  (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
+
 (provide 'pp-evil)
 ;;; pp-evil.el ends here

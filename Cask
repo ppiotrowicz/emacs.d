@@ -5,6 +5,7 @@
 
 ;; Core
 (depends-on "use-package")
+(depends-on "key-chord")
 
 ;; pp-core-defuns
 (depends-on "dash")
