@@ -154,6 +154,16 @@
         ((string= pp/ruby-test-framework "minitest") (kill-buffer "*minitest "))
       ))
 
+(defun pp/pry-jump-to-source ()
+  "Jumps to source location given debugger output"
+  (interactive)
+  (delete-other-windows)
+  (when (save-excursion (search-backward-regexp "From: \\(.*\.rb\\) @ line \\([0-9]+\\)")))
+  (let ((file (match-string 1))
+        (line (string-to-number (match-string 2))))
+    (find-file-other-window file)
+    (goto-line line)))
+
 (defun pp/insert-pry ()
   "Inserts require 'pry'; binding.pry"
   (interactive)
