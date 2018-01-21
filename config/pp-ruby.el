@@ -7,6 +7,7 @@
      :keymaps 'pp/ruby-map
      ":"  '(pp/ruby-19-hash             :which-key "ruby 1.9 hash")
      "'"  '(pp/ruby-string-to-symbol    :which-key "string to sym")
+     "a"  '(projectile-find-implementation-or-test-other-window :which-key "implementation or test")
      ;; bundle
      "b"  '(:ignore t                   :which-key "bundle")
      "bi" '(bundle-install              :which-key "bundle install")
