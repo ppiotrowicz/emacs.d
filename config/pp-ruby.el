@@ -96,47 +96,50 @@
     (evil-surround-delete ?\'))
   (insert ":"))
 
-(setq pp/test-framework "rspec")
+(defcustom pp/ruby-test-framework "rspec"
+  "Specifies test framework for ruby"
+  :safe (lambda (x) t))
+
 (defun pp/spec-verify-single ()
   "Runs rspec or minitest on single spec"
   (interactive)
-  (cond ((string= pp/test-framework "rspec") (rspec-verify-single))
-        ((string= pp/test-framework "minitest") (minitest-verify-single))
+  (cond ((string= pp/ruby-test-framework "rspec") (rspec-verify-single))
+        ((string= pp/ruby-test-framework "minitest") (minitest-verify-single))
       ))
 
 (defun pp/spec-verify ()
   "Runs rspec or minitest on entire buffer"
   (interactive)
-  (cond ((string= pp/test-framework "rspec") (rspec-verify))
-        ((string= pp/test-framework "minitest") (minitest-verify))
+  (cond ((string= pp/ruby-test-framework "rspec") (rspec-verify))
+        ((string= pp/ruby-test-framework "minitest") (minitest-verify))
       ))
 
 (defun pp/spec-verify-all ()
   "Runs rspec or minitest on entire spec suite"
   (interactive)
-  (cond ((string= pp/test-framework "rspec") (rspec-verify-all))
-        ((string= pp/test-framework "minitest") (minitest-verify-all))
+  (cond ((string= pp/ruby-test-framework "rspec") (rspec-verify-all))
+        ((string= pp/ruby-test-framework "minitest") (minitest-verify-all))
       ))
 
 (defun pp/spec-rerun ()
   "Reruns rspec or minitest"
   (interactive)
-  (cond ((string= pp/test-framework "rspec") (rspec-rerun))
-        ((string= pp/test-framework "minitest") (minitest-rerun))
+  (cond ((string= pp/ruby-test-framework "rspec") (rspec-rerun))
+        ((string= pp/ruby-test-framework "minitest") (minitest-rerun))
       ))
 
 (defun pp/spec-run-last-failed ()
   "Runs rspec or minitest on failed tests"
   (interactive)
-  (cond ((string= pp/test-framework "rspec") (rspec-run-last-failed))
-        ((string= pp/test-framework "minitest") (minitest-rerun))
+  (cond ((string= pp/ruby-test-framework "rspec") (rspec-run-last-failed))
+        ((string= pp/ruby-test-framework "minitest") (minitest-rerun))
       ))
 
 (defun pp/spec-stop-spec ()
   "Kills rspec or minitest compilation buffers"
   (interactive)
-  (cond ((string= pp/test-framework "rspec") (kill-buffer "*rspec-compilation*"))
-        ((string= pp/test-framework "minitest") (kill-buffer "*minitest "))
+  (cond ((string= pp/ruby-test-framework "rspec") (kill-buffer "*rspec-compilation*"))
+        ((string= pp/ruby-test-framework "minitest") (kill-buffer "*minitest "))
       ))
 
 (provide 'pp-ruby)
