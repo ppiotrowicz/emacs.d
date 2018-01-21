@@ -5,6 +5,7 @@
 (use-package projectile
   :config
   (progn
+    (projectile-mode +1)
     (require 'counsel-projectile)
     (setq projectile-switch-project-action 'counsel-projectile-find-file)))
 
