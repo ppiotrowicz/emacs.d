@@ -71,6 +71,10 @@
 
 (add-hook! 'compilation-filter-hook 'inf-ruby-auto-enter)
 
+(add-hook! 'ruby-mode-hook (setq-local flycheck-command-wrapper-function
+                                 (lambda (command)
+                                   (append '("bundle" "exec") command))))
+
 ;;; refactorings
 (defun pp/ruby-19-hash ()
   "Convert old hashrocket syntax to ruby 1.9 hash"
