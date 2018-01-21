@@ -53,7 +53,13 @@
         (def-popup! "\\*rspec-compilation\\*" :align below :size 14 :noselect t :regexp t :popup t)
         (setq compilation-scroll-output t)
         (setq rspec-autosave-buffer t)
-        (setq rspec-spec-command "rspec --format progress --no-profile")))
+        (setq rspec-spec-command "rspec --format progress --no-profile")
+
+        (defadvice rspec-compile
+            (before rspec-save-before-compile (A-FILE-OR-DIR &optional opts) activate)
+          "Save current buffer before running spec.  This remove the annoying save confirmation."
+          (save-some-buffers (lambda () (string-match "\\.rb" (buffer-name (current-buffer))))))
+        ))
     (use-package minitest
       :config
       (progn
