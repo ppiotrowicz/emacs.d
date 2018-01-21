@@ -60,7 +60,6 @@
 (depends-on "evil-anzu")
 (depends-on "evil-mc")
 (depends-on "evil-multiedit")
-(depends-on "evil-snipe")
 
 ;; development
 (depends-on "projectile")
