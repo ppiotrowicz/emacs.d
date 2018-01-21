@@ -8,6 +8,7 @@
      ":"  '(pp/ruby-19-hash             :which-key "ruby 1.9 hash")
      "'"  '(pp/ruby-string-to-symbol    :which-key "string to sym")
      "a"  '(projectile-find-implementation-or-test-other-window :which-key "implementation or test")
+     "p"  '(pp/insert-pry               :which-key "insert binding.pry")
      ;; bundle
      "b"  '(:ignore t                   :which-key "bundle")
      "bi" '(bundle-install              :which-key "bundle install")
@@ -146,5 +147,11 @@
   (cond ((string= pp/ruby-test-framework "rspec") (kill-buffer "*rspec-compilation*"))
         ((string= pp/ruby-test-framework "minitest") (kill-buffer "*minitest "))
       ))
+
+(defun pp/insert-pry ()
+  "Inserts require 'pry'; binding.pry"
+  (interactive)
+  (insert "require 'pry'; binding.pry")
+  (c-indent-command))
 
 (provide 'pp-ruby)
