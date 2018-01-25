@@ -65,4 +65,7 @@
 ;; winner mode
 (winner-mode 1)
 
+;; pcre2el
+(use-package pcre2el)
+
 (provide 'pp-settings)

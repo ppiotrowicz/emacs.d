@@ -6,6 +6,7 @@
 ;; Core
 (depends-on "use-package")
 (depends-on "key-chord")
+(depends-on "pcre2el")
 
 ;; pp-core-defuns
 (depends-on "dash")

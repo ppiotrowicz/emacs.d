@@ -9,6 +9,7 @@
      "'"  '(pp/ruby-string-to-symbol    :which-key "string to sym")
      "a"  '(projectile-find-implementation-or-test-other-window :which-key "implementation or test")
      "p"  '(pp/insert-pry               :which-key "insert binding.pry")
+     "ym" '(pp/copy-module              :which-key "copy module name")
      ;; bundle
      "b"  '(:ignore t                   :which-key "bundle")
      "bi" '(bundle-install              :which-key "bundle install")
@@ -169,5 +170,22 @@
   (interactive)
   (insert "require 'pry'; binding.pry")
   (c-indent-command))
+
+(defun pp/copy-module ()
+  (interactive)
+  (let* ((class_name '())
+         (module_regex "\\bmodule \\w+\\b")
+         (class_regex "\\bclass \\w+\\b"))
+
+    (save-excursion
+      (goto-char (point-max))
+
+      (while (re-search-backward class_regex nil t)
+        (add-to-list 'class_name (substring (match-string-no-properties 0) 6)))
+
+      (while (re-search-backward module_regex nil t)
+        (add-to-list 'class_name (substring (match-string-no-properties 0) 7))))
+    (kill-new (s-join "::" class_name))
+  ))
 
 (provide 'pp-ruby)
