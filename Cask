@@ -70,6 +70,7 @@
 (depends-on "exec-path-from-shell")
 ;; (depends-on "fence-edit" :git "https://github.com/aaronbieber/fence-edit.el")
 ;; (depends-on "edit-indirect" :git "https://github.com/Fanael/edit-indirect")
+(depends-on "yasnippet")
 
 ;; dired
 (depends-on "dired+")

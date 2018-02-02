@@ -33,4 +33,8 @@
  '((tab-mark ?\t [?› ?\t])
    (newline-mark 10 [36 10])))
 
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
+
 (provide 'pp-editor)
