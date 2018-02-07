@@ -61,6 +61,8 @@
  ;;; Capture
  "c"   '(:ignore t                           :which-key "capture")
  "cc"  '(org-capture                         :which-key "org capture")
+ "cl"  '(org-store-link                      :which-key "store link")
+ "ci"  '(org-insert-link                     :which-key "insert link")
  ;; Project
  "p"   '(:ignore t                           :which-key "project")
  "pp"  '(counsel-projectile-switch-project   :which-key "switch project")
