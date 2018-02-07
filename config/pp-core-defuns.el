@@ -54,7 +54,6 @@ Body forms can access the hook's arguments through the let-bound variable
 ;;;###autoload
 (defmacro def-popup! (&rest params)
   `(push ',params shackle-rules))
-(provide 'pp-core-defuns)
 
 ;;;###autoload
 (defvar doom-memoized-table (make-hash-table :test 'equal :size 10)
@@ -131,3 +130,5 @@ compilation."
          #'progn
        #'with-no-warnings)
     (with-eval-after-load ',feature ,@forms)))
+
+(provide 'pp-core-defuns)
