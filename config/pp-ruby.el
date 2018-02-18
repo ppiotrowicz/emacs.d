@@ -84,6 +84,9 @@
                                  (lambda (command)
                                    (append '("bundle" "exec") command))))
 
+(add-hook! 'ruby-mode-hook
+  (whitespace-mode +1))
+
 ;;; refactorings
 (defun pp/ruby-19-hash ()
   "Convert old hashrocket syntax to ruby 1.9 hash"
