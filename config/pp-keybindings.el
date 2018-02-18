@@ -43,6 +43,7 @@
  "gb"  '(magit-blame                         :which-key "blame")
  "go"  '(github-browse-file                  :which-key "github browse")
  "m"   '(:ignore t                           :which-key "modes")
+ "ma"  '(pp/display-ansi-colors              :which-key "ansi colors")
  "mf"  '(auto-fill-mode                      :which-key "fill")
  "mj"  '(json-mode                           :which-key "json")
  "mt"  '(toggle-truncate-lines               :which-key "truncate")
