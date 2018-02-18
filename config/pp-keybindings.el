@@ -73,6 +73,12 @@
  "ps"  '(projectile-run-eshell               :which-key "run shell")
  "p/"  '(pp/find-in-project                  :which-key "find string")
  "/"   '(pp/find-in-project                  :which-key "find string")
+ ;; Spotify
+ "s"   '(:ignore t                           :which-key "spotify")
+ "sn"  '(counsel-spotify-next                :which-key "next")
+ "sp"  '(counsel-spotify-previous            :which-key "previous")
+ "ss"  '(counsel-spotify-search-track        :which-key "search")
+ "s SPC"  '(counsel-spotify-toggle-play-pause :which-key "play/pause")
  ;; Windows
  "w"   '(:ignore t                           :which-key "windows")
  "ws"  '(split-window-vertically             :which-key "split -")

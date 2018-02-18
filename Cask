@@ -114,3 +114,6 @@
 
 ;; modeline
 (depends-on "s")
+
+;; fun
+(depends-on "counsel-spotify")
