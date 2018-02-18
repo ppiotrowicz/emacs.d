@@ -183,8 +183,10 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
     (use-package ox-gfm)
     (org-babel-do-load-languages
      'org-babel-load-languages
-     '((restclient . t)))
-    ))
+     '((restclient . t)
+       (shell . t)
+       (ruby . t))
+    )))
 
 (use-package deft
   :config
