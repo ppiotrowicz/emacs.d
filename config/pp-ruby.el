@@ -5,35 +5,40 @@
     (defvar pp/ruby-map (make-sparse-keymap) "Ruby keymap.")
     (general-define-key
      :keymaps 'pp/ruby-map
-     ":"  '(pp/ruby-19-hash             :which-key "ruby 1.9 hash")
-     "'"  '(pp/ruby-string-to-symbol    :which-key "string to sym")
+     ":"  '(pp/ruby-hash-new-syntax       :which-key "hash: new syntax")
+     ";"  '(pp/ruby-hash-string-to-symbol :which-key "hash: string to symbol")
+     "'"  '(pp/ruby-string-to-symbol      :which-key "string to sym")
      "a"  '(projectile-find-implementation-or-test-other-window :which-key "implementation or test")
-     "p"  '(pp/insert-pry               :which-key "insert binding.pry")
-     "ym" '(pp/copy-module              :which-key "copy module name")
+     "p"  '(pp/insert-pry                 :which-key "insert binding.pry")
+     "ym" '(pp/copy-module                :which-key "copy module name")
      ;; bundle
-     "b"  '(:ignore t                   :which-key "bundle")
-     "bi" '(bundle-install              :which-key "bundle install")
-     "bo" '(bundle-open                 :which-key "bundle open")
-     "be" '(bundle-exec                 :which-key "bundle exec")
-     "bc" '(bundle-console              :which-key "bundle console")
-     "bu" '(bundle-update               :which-key "bundle update")
+     "b"  '(:ignore t                     :which-key "bundle")
+     "bi" '(bundle-install                :which-key "bundle install")
+     "bo" '(bundle-open                   :which-key "bundle open")
+     "be" '(bundle-exec                   :which-key "bundle exec")
+     "bc" '(bundle-console                :which-key "bundle console")
+     "bu" '(bundle-update                 :which-key "bundle update")
+     ;; quick refactorings
+     "q:" '(pp/ruby-hash-new-syntax       :which-key "hash: new syntax")
+     "q;" '(pp/ruby-hash-string-to-symbol :which-key "hash: string to symbol")
+     "qs" '(pp/ruby-hash-symbol-to-string :which-key "hash: symbol to string")
      ;; rubocop
-     "r"  '(:ignore t                   :which-key "rubocop")
-     "rp" '(rubocop-check-project       :which-key "check project")
-     "rr" '(rubocop-check-current-file  :which-key "check file")
+     "r"  '(:ignore t                     :which-key "rubocop")
+     "rp" '(rubocop-check-project         :which-key "check project")
+     "rr" '(rubocop-check-current-file    :which-key "check file")
      "ra" '(rubocop-autocorrect-current-file :which-key "autocorrect file")
      ;; testing
-     "t"  '(:ignore t                   :which-key "spec")
-     "ta" '(pp/spec-verify-all          :which-key "run all")
-     "tb" '(pp/spec-verify              :which-key "run buffer")
-     "tl" '(pp/spec-run-last-failed     :which-key "last failed")
-     "tr" '(pp/spec-rerun               :which-key "rerun")
-     "tt" '(pp/spec-verify-single       :which-key "run")
-     "tk" '(pp/spec-stop-spec           :which-key "stop")
+     "t"  '(:ignore t                     :which-key "spec")
+     "ta" '(pp/spec-verify-all            :which-key "run all")
+     "tb" '(pp/spec-verify                :which-key "run buffer")
+     "tl" '(pp/spec-run-last-failed       :which-key "last failed")
+     "tr" '(pp/spec-rerun                 :which-key "rerun")
+     "tt" '(pp/spec-verify-single         :which-key "run")
+     "tk" '(pp/spec-stop-spec             :which-key "stop")
      ;; rbenv
-     "v"  '(:ignore t                   :which-key "rbenv")
-     "vc" '(rbenv-use-corresponding     :which-key "use local")
-     "vg" '(rbenv-use-global            :which-key "use global")
+     "v"  '(:ignore t                     :which-key "rbenv")
+     "vc" '(rbenv-use-corresponding       :which-key "use local")
+     "vg" '(rbenv-use-global              :which-key "use global")
      )
     (setq ruby-insert-encoding-magic-comment nil)
     (bind-map pp/ruby-map
@@ -88,21 +93,56 @@
   (whitespace-mode +1))
 
 ;;; refactorings
-(defun pp/ruby-19-hash ()
+(defun pp/ruby-hash-new-syntax ()
   "Convert old hashrocket syntax to ruby 1.9 hash"
   (interactive)
-  (let (symbol)
-    (save-excursion
-      (save-restriction
-        (narrow-to-region (line-beginning-position) (line-end-position))
-        (if (looking-at-p ":")
-            (forward-char 1))
-        (skip-chars-backward "^:")
-        (if (looking-at-p "[a-z_]+ =>")
-            (progn
-              (delete-backward-char 1)
-              (search-forward " =>" nil t)
-              (replace-match ":")))))))
+  (if mark-active
+      (pp/ruby-hash-new-syntax-region (region-beginning) (region-end))
+    (pp/ruby-hash-new-syntax-region (line-beginning-position) (line-end-position))))
+
+(defun pp/ruby-hash-new-syntax-region (pos1 pos2)
+  "Convert old hash syntax to new in region"
+  (save-excursion
+    (save-restriction
+      (narrow-to-region pos1 pos2)
+      (let ((case-fold-search t))
+        (goto-char (point-min))
+        (while (search-forward-regexp":\\([A-Za-z_]+\\) +=> +" nil t)
+          (replace-match "\\1: "))))))
+
+(defun pp/ruby-hash-string-to-symbol ()
+  "Convert string hash syntax to symbol hash"
+  (interactive)
+  (if mark-active
+      (pp/ruby-hash-string-to-symbol-region (region-beginning) (region-end))
+    (pp/ruby-hash-string-to-symbol-region (line-beginning-position) (line-end-position))))
+
+(defun pp/ruby-hash-string-to-symbol-region (pos1 pos2)
+  "Convert string hash syntax to symbol hash in region"
+  (save-excursion
+    (save-restriction
+      (narrow-to-region pos1 pos2)
+      (let ((case-fold-search t))
+        (goto-char (point-min))
+        (while (search-forward-regexp "['\"]\\(\\w+\\)['\"] +=> +" nil t)
+          (replace-match "\\1: "))))))
+
+(defun pp/ruby-hash-symbol-to-string ()
+  "Convert symbol hash syntax to string hash"
+  (interactive)
+  (if mark-active
+      (pp/ruby-hash-symbol-to-string-region (region-beginning) (region-end))
+    (pp/ruby-hash-symbol-to-string-region (line-beginning-position) (line-end-position))))
+
+(defun pp/ruby-hash-symbol-to-string-region (pos1 pos2)
+  "Convert symbol hash syntax to string hash in region"
+  (save-excursion
+    (save-restriction
+      (narrow-to-region pos1 pos2)
+      (let ((case-fold-search t))
+        (goto-char (point-min))
+        (while (search-forward-regexp "\\(\\w+\\): +" nil t)
+          (replace-match "'\\1' => "))))))
 
 (defun pp/ruby-string-to-symbol ()
   "Convert string to symbol"
