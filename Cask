@@ -24,7 +24,6 @@
 (depends-on "git-gutter-fringe")
 (depends-on "magit")
 (depends-on "evil-magit")
-(depends-on "magithub")
 (depends-on "github-browse-file")
 
 ;; pp-interface
