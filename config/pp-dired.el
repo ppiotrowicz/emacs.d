@@ -15,6 +15,4 @@
 
 (define-key dired-mode-map (kbd "z") 'dired-get-size)
 
-(require 'dired+)
-
 (provide 'pp-dired)

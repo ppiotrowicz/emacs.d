@@ -72,9 +72,6 @@
 ;; (depends-on "edit-indirect" :git "https://github.com/Fanael/edit-indirect")
 (depends-on "yasnippet")
 
-;; dired
-(depends-on "dired+")
-
 ;; ORG
 (depends-on "org-plus-contrib")
 (depends-on "ob-restclient")
