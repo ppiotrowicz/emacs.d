@@ -188,10 +188,4 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
        (ruby . t))
     )))
 
-(use-package deft
-  :config
-  (setq deft-extensions '("txt" "org"))
-  (setq deft-directory "~/notes"))
-
-
 (provide 'pp-org-mode)

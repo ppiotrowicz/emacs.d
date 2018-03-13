@@ -32,7 +32,6 @@
 (depends-on "which-key")
 (depends-on "bind-key")
 (depends-on "bind-map")
-(depends-on "powerline")
 (depends-on "hydra")
 (depends-on "ivy")
 (depends-on "ivy-hydra")
@@ -40,15 +39,12 @@
 (depends-on "swiper")
 (depends-on "avy")
 (depends-on "all-the-icons")
-(depends-on "all-the-icons-ivy")
 (depends-on "neotree")
 (depends-on "company")
 (depends-on "ace-window")
 (depends-on "yafolding")
 (depends-on "wgrep")
 (depends-on "highlight-symbol")
-(depends-on "paradox")
-(depends-on "crux")
 (depends-on "diminish")
 (depends-on "solaire-mode")
 
@@ -67,15 +63,12 @@
 (depends-on "dumb-jump")
 (depends-on "flycheck")
 (depends-on "exec-path-from-shell")
-;; (depends-on "fence-edit" :git "https://github.com/aaronbieber/fence-edit.el")
-;; (depends-on "edit-indirect" :git "https://github.com/Fanael/edit-indirect")
 (depends-on "yasnippet")
 
 ;; ORG
 (depends-on "org-plus-contrib")
 (depends-on "ob-restclient")
 (depends-on "ox-gfm")
-(depends-on "deft")
 
 ;; ruby
 (depends-on "ruby-mode")
@@ -107,9 +100,6 @@
 
 ;; java/groovy
 (depends-on "groovy-mode")
-
-;; ledger
-(depends-on "ledger-mode")
 
 ;; modeline
 (depends-on "s")
