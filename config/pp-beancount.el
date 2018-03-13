@@ -2,4 +2,6 @@
 (require 'beancount)
 (add-to-list 'auto-mode-alist '("\\.beancount\\'" . beancount-mode))
 
+(setq beancount-use-ido nil)
+
 (provide 'pp-beancount)

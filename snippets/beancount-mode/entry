@@ -1,0 +1,6 @@
+#name : beancount entry
+#contributor : ppiotrowicz <ppiotrowicz@gmail.com>
+#group : stuff
+#key : entry
+# --
+${1:`(message (format-time-string "%Y-%m-%d" (current-time)))`} * "$0"
