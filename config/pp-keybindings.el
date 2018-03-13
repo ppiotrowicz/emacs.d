@@ -39,6 +39,7 @@
  "fd"  '(pp/delete-file-and-buffer           :which-key "delete file")
  "ff"  '(counsel-find-file                   :which-key "find file")
  "fr"  '(pp/rename-file-and-buffer           :which-key "rename file")
+ "fy"  '(pp/copy-file-name-to-clipboard      :which-key "copy filename")
  "fw"  '(delete-trailing-whitespace          :which-key "clear trailing whitespace")
  ;; Git
  "g"   '(:ignore t                           :which-key "magit")
