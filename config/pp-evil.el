@@ -106,10 +106,5 @@
         anzu-minimum-input-length 1
         anzu-search-threshold 250))
 
-(use-package key-chord
-  :config
-  (key-chord-mode 1)
-  (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state))
-
 (provide 'pp-evil)
 ;;; pp-evil.el ends here
