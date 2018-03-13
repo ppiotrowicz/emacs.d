@@ -103,6 +103,9 @@
 (depends-on "company-tern")
 (depends-on "add-node-modules-path")
 
+;; typescript
+(depends-on "tide")
+
 ;; java/groovy
 (depends-on "groovy-mode")
 
