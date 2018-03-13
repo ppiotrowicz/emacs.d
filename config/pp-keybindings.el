@@ -28,7 +28,9 @@
  "hv"  '(describe-variable                   :which-key "describe variable")
  ;; Errors
  "e"   '(:ignore t                           :which-key "errors")
+ "ed"  '(flycheck-disable-checker            :which-key "disable checker")
  "ee"  '(flycheck-list-errors                :which-key "list")
+ "em"  '(flycheck-mode                       :which-key "mode")
  "en"  '(flycheck-next-error                 :which-key "next error")
  "ep"  '(flycheck-previous-error             :which-key "next error")
  "eb"  '(flycheck-buffer                     :which-key "check buffer")
