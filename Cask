@@ -44,7 +44,6 @@
 (depends-on "yafolding")
 (depends-on "wgrep")
 (depends-on "highlight-symbol")
-(depends-on "diminish")
 (depends-on "solaire-mode")
 
 ;; evil
