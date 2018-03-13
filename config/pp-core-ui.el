@@ -1,37 +1,47 @@
-(setq-default
- mode-line-default-help-echo nil
- indicate-buffer-boundaries nil
- indicate-empty-lines nil
- fringes-outside-margins t
- cursor-in-non-selected-windows nil
- highlight-nonselected-windows nil
- bidi-display-reordering nil
- fringe-indicator-alist (delq (assq 'continuation fringe-indicator-alist)
-                              fringe-indicator-alist)
- blink-matching-paren nil
- show-paren-delay 0.075
- show-paren-highlight-openparen t
- show-paren-when-point-inside-paren t
- uniquify-buffer-name-style nil
- visible-bell nil
- visible-cursor nil
- x-stretch-cursor t
- use-dialog-box nil
- redisplay-dont-pause t
- split-width-threshold nil
- show-help-function nil
- jit-lock-defer-time nil
- jit-lock-stealth-nice 0.1
- jit-lock-stealth-time 0.2
- jit-lock-stealth-verbose nil
- ;; Minibuffer resizing
- resize-mini-windows 'grow-only
- max-mini-window-height 0.3
- image-animate-loop t
- ;; mouse - disable acceleration
- mouse-wheel-progressive-speed nil
- ;; Ask for confirmation on exit only if there are real buffers left
- confirm-kill-emacs (lambda (_) (y-or-n-p "››› Quit?")))
+(setq mode-line-default-help-echo nil
+      cursor-in-non-selected-windows nil
+      highlight-nonselected-windows nil
+      bidi-display-reordering nil
+      blink-matching-paren nil
+      visible-bell nil
+      visible-cursor nil
+      x-stretch-cursor t
+      use-dialog-box nil
+      show-help-function nil)
+
+;; split window sensibly
+(setq split-width-threshold nil
+      split-height-threshold 80)
+
+;; disable mouse acceleration
+(setq mouse-wheel-progressive-speed nil)
+
+;; minibuffer
+(setq resize-mini-windows 'grow-only
+      max-mini-window-height 0.3)
+
+;; fringe
+(setq indicate-buffer-boundaries 'left
+      indicate-empty-lines nil
+      fringes-outside-margins t
+      fringe-indicator-alist (delq (assq 'continuation fringe-indicator-alist) fringe-indicator-alist))
+
+;; uniquify
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+
+;; parens
+(setq show-paren-delay 0.075
+      show-paren-highlight-openparen t
+      show-paren-when-point-inside-paren t)
+
+;; jit
+(setq jit-lock-defer-time nil
+      jit-lock-stealth-nice 0.1
+      jit-lock-stealth-time 0.2
+      jit-lock-stealth-verbose nil)
+
+;; Ask for confirmation on exit only if there are real buffers left
+(setq confirm-kill-emacs (lambda (_) (y-or-n-p "››› Quit?")))
 
 (defvar doom--modeline-bg nil)
 
