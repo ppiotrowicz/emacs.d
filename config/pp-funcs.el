@@ -40,7 +40,7 @@ Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (set-frame-parameter
      nil 'fullscreen
-     (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+     (when (not (frame-parameter nil 'fullscreen)) 'fullscreen)))
 
 (defun pp/split-window-right-and-focus ()
   "Split the window horizontally and focus the new window."
