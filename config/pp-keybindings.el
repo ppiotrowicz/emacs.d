@@ -1,11 +1,11 @@
 ;; Keybindings config
 
 (general-define-key
- :states '(normal visual insert emacs)
+ :states '(normal visual emacs)
  :prefix "SPC"
  :non-normal-prefix "M-SPC"
  "'"   '(pp/terminal-focus                   :which-key "iTerm")
- ":"   '(execute-extended-command            :which-key "M-x")
+ ":"   '(counsel-M-x                         :which-key "M-x")
  "!"   '(pp/open-eshell                      :which-key "eshell")
  "SPC" '(avy-goto-char                       :which-key "avy char")
  "a"   '(org-agenda                          :which-key "agenda")
@@ -98,6 +98,8 @@
  "wm" '(ivy-push-view                        :which-key "push view")
  "wM" '(ivy-pop-view                         :which-key "push view")
 )
+
+(global-set-key (kbd "M-x") 'counsel-M-x)
 
 (general-nmap "*"   'pp/highlight-symbol-hydra)
 (general-nmap "C-y" 'counsel-yank-pop)

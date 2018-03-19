@@ -36,6 +36,7 @@
 (depends-on "ivy-hydra")
 (depends-on "counsel")
 (depends-on "swiper")
+(depends-on "smex")
 (depends-on "avy")
 (depends-on "all-the-icons")
 (depends-on "neotree")

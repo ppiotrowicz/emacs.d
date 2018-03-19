@@ -16,6 +16,8 @@
 (use-package bind-map
   :demand bind-map)
 
+(use-package smex)
+
 (use-package ivy
   :config
   (progn
@@ -27,6 +29,7 @@
     (setq ivy-height 15)
     (setq ivy-count-format "(%d/%d) ")
     (setq ivy-use-selectable-prompt t)
+    (setq ivy-on-del-error-function nil)
 
     (use-package swiper
       :config
