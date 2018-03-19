@@ -22,12 +22,12 @@
 (defun pp/find-in-project ()
   "Searches in current project."
   (interactive)
-  (counsel-projectile-ag))
+  (counsel-projectile-rg))
 
 (defun pp/find-symbol-at-point ()
   "Searches for symbol under cursor in current project."
   (interactive)
-  (counsel-ag (thing-at-point 'symbol) (projectile-project-root)))
+  (counsel-rg (thing-at-point 'symbol) (projectile-project-root)))
 
 (defun pp/switch-to-previous-buffer ()
   "Switch to previously open buffer.
