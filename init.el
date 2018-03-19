@@ -23,4 +23,4 @@
           pp-hydras
           pp-keybindings
           pp-funcs
-          )
+          pp-spotify)
