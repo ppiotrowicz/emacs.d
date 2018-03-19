@@ -103,14 +103,18 @@
 
 (general-nmap "*"   'pp/highlight-symbol-hydra)
 (general-nmap "C-y" 'counsel-yank-pop)
+(general-imap "C-y" 'counsel-yank-pop)
 (general-nmap "gc"  'evil-commentary-line)
-(general-nmap "gy"  'evil-commentary-yank)
 (general-nmap "%"   'evilmi-jump-items)
 ;; window movement
 (general-nmap "C-h" 'evil-window-left)
 (general-nmap "C-j" 'evil-window-down)
 (general-nmap "C-k" 'evil-window-up)
 (general-nmap "C-l" 'evil-window-right)
+(general-imap "C-h" 'evil-window-left)
+(general-imap "C-j" 'evil-window-down)
+(general-imap "C-k" 'evil-window-up)
+(general-imap "C-l" 'evil-window-right)
 ;; folding
 (general-nmap "zm"  'yafolding-toggle-all)
 (general-nmap "zc"  'yafolding-hide-parent-element)
