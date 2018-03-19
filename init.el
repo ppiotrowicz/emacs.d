@@ -18,7 +18,6 @@
           pp-ruby
           pp-js
           pp-web
-          pp-ledger
           pp-beancount
           pp-modeline
           pp-hydras
