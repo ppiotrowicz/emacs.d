@@ -86,6 +86,9 @@
 (depends-on "csv-mode")
 (depends-on "emmet-mode")
 (depends-on "rjsx-mode")
+(depends-on "js-import")
+(depends-on "web-mode")
+(depends-on "prettier-js")
 
 ;; js
 (depends-on "js2-mode")
