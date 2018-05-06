@@ -78,6 +78,9 @@
 (depends-on "rubocop")
 (depends-on "minitest")
 
+;; elixir
+(depends-on "alchemist")
+
 ;; web
 (depends-on "restclient")
 (depends-on "coffee-mode")

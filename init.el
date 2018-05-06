@@ -16,7 +16,7 @@
           pp-scratch
           pp-org-mode
           pp-ruby
-          pp-js
+          pp-elixir
           pp-web
           pp-beancount
           pp-modeline
