@@ -39,7 +39,26 @@
   (setq emmet-self-closing-tag-style "/"))
 (add-hook! 'rjsx-mode-hook 'emmet-mode)
 
+(use-package js-import
+  :config
+  (setq js-import-quote "'"))
+
 (use-package rjsx-mode
-  :mode (("\\.js\\'" . rjsx-mode)))
+  :mode (("\\.js\\'" . rjsx-mode))
+  :config
+  (progn
+    (defvar pp/js-map (make-sparse-keymap) "Js/React keymap.")
+    (general-define-key        :keymaps 'pp/js-map
+     "i" '(js-import           :which-key "import")
+     "I" '(js-import-dev       :which-key "import dev")
+     )
+    (bind-map pp/js-map
+      :evil-keys (",")
+      :major-modes (rjsx-mode))
+    ))
+
+(add-hook 'rjsx-mode-hook #'add-node-modules-path)
+(add-hook 'rjsx-mode-hook #'prettier-js-mode)
+(setq css-indent-offset 2)
 
 (provide 'pp-web)

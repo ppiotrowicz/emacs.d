@@ -1,0 +1,7 @@
+#name : action
+# --
+
+export const $1 = ($2) => ({
+  type: ${1:$(upcase (string-join (let ((case-fold-search nil)) (s-slice-at "[[:upper:]]" yas-text)) "_"))},
+  payload: { $2 }
+});

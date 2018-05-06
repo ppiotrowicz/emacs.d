@@ -1,0 +1,17 @@
+#name : pcomp
+# --
+import React from 'react';
+
+const ${1:`(let ((fn (file-name-nondirectory
+                                 (file-name-sans-extension
+				 (or (buffer-file-name)
+				     (buffer-name (current-buffer)))))))
+             (replace-regexp-in-string "_" "" fn t t))`} = (props) => {
+  return (
+    <div>
+      $0
+    </div>
+  );
+};
+
+export default $1;
