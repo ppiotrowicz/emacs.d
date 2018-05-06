@@ -31,6 +31,7 @@
     (setq ivy-use-selectable-prompt t)
     (setq ivy-on-del-error-function nil)
     (setq enable-recursive-minibuffers t)
+    (setq ivy-initial-inputs-alist nil)
     (setq counsel-rg-base-command "rg -M 120 -S --no-heading --line-number --color never %s")
 
     (use-package swiper
