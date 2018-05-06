@@ -152,4 +152,7 @@
 ;; rspec-compilation-mode
 (general-evil-define-key 'normal rspec-compilation-mode-map "?" 'pp/toggle-window-height)
 
+;; clear C-d from evil
+(define-key evil-insert-state-map (kbd "C-d") nil)
+
 (provide 'pp-keybindings)

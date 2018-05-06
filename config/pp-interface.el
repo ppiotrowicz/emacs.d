@@ -59,6 +59,21 @@
     (add-hook 'neotree-mode-hook (lambda () (setq-local mode-line-format nil)))
     (add-hook 'neotree-mode-hook (lambda () (setq-local tab-width 1)))
 
+    (defun pp/neotree-smart-find ()
+      "Opens neotree for project/gems//current dir"
+      (interactive)
+      (if (neo-global--window-exists-p)
+          (neotree-hide)
+        (progn
+          (neotree-find (or (ignore-errors (projectile-project-root))
+                            (let* ((path (file-name-directory (buffer-file-name)))
+                                   (directory "gems")
+                                   (positions (s-matched-positions-all directory path)))
+                              (if positions (s-left (cdr (car (last positions))) path)))
+                            (file-name-nondirectory (buffer-file-name))) (buffer-file-name))
+          ;; (neotree-find ))
+        )))
+
     (defun neotree-projectile ()
       (interactive )
       (if (neo-global--window-exists-p)
