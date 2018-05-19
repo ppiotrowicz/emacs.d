@@ -92,6 +92,8 @@
 (depends-on "js-import")
 (depends-on "web-mode")
 (depends-on "prettier-js")
+(depends-on "request")
+(depends-on "graphql-mode")
 
 ;; js
 (depends-on "js2-mode")
