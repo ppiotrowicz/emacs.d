@@ -27,4 +27,19 @@
   ("s" pp/swiper-at-point "swiper")
   ("q" highlight-symbol-remove-all "quit" :exit t))
 
+
+(defhydra hydra-window (:color red
+                        :hint nil)
+  "
+   _k_
+ _h_   _l_
+   _j_
+ _=_:balance
+  "
+  ("h" shrink-window-horizontally)
+  ("l" enlarge-window-horizontally)
+  ("k" enlarge-window)
+  ("j" shrink-window)
+  ("=" balance-windows))
+
 (provide 'pp-hydras)

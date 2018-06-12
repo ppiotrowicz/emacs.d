@@ -91,6 +91,7 @@
  "wV"  '(pp/split-window-right-and-focus     :which-key "split | and focus")
  "wc"  '(delete-window                       :which-key "delete window")
  "w="  '(balance-windows                     :which-key "balance windows")
+ "wr"  '(hydra-window/body                   :which-key "resize")
  "ww"  '(ace-window                          :which-key "ace window")
  "wf"  '(pp/toggle-fullscreen                :which-key "fullscreen")
  "w <left>" '(winner-undo                    :which-key "winner undo")
