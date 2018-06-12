@@ -11,8 +11,10 @@
 ;; (set-frame-font "Fira Mono")
 
 ;; http://input.fontbureau.com/
-(set-frame-font "InputMonoCondensed")
-(set-face-attribute 'default nil :height 130)
+;; (set-frame-font "InputMonoCondensed")
+
+(set-frame-font "Operator Mono")
+(set-face-attribute 'default nil :height 150)
 (setq-default line-spacing nil)
 
 (custom-set-faces '(variable-pitch ((t nil))))
