@@ -22,5 +22,4 @@
           pp-modeline
           pp-hydras
           pp-keybindings
-          pp-funcs
-          pp-spotify)
+          pp-funcs)
