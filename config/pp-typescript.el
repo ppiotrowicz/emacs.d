@@ -15,7 +15,7 @@
   (general-define-key
    :keymaps 'pp/typescript-map
    "]"  '(tide-jump-to-definition     :which-key "Jump to definition")
-   "["  '(tide-jump-back                   :which-key "Jump to definition")
+   "["  '(tide-jump-back              :which-key "Jump to definition")
 
    "ss" '(tide-start-server           :which-key "Start server")
    "sr" '(tide-restart-server         :which-key "Restart server")
@@ -29,9 +29,9 @@
    )
   (bind-map pp/typescript-map
     :evil-keys (",")
-    :major-modes (typescript-mode))
+    :major-modes (typescript-mode) (web-mode))
   )
 
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
+;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (provide 'pp-typescript)
