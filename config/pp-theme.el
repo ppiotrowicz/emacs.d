@@ -15,7 +15,7 @@
 
 (set-frame-font "Operator Mono")
 (set-face-attribute 'default nil :height 150)
-(setq-default line-spacing nil)
+(setq-default line-spacing 3)
 
 (custom-set-faces '(variable-pitch ((t nil))))
 

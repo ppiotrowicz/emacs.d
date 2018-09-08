@@ -81,11 +81,6 @@
 ;; elixir
 (depends-on "alchemist")
 
-;; java
-(depends-on "lsp-javacomp")
-(depends-on "groovy-mode")
-(depends-on "gradle-mode")
-
 ;; web
 (depends-on "restclient")
 (depends-on "coffee-mode")

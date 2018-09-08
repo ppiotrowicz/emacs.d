@@ -17,7 +17,6 @@
           pp-org-mode
           pp-ruby
           pp-elixir
-          pp-java
           pp-web
           pp-beancount
           pp-modeline
