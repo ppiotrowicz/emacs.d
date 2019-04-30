@@ -18,7 +18,7 @@
           pp-ruby
           pp-elixir
           pp-web
-          pp-beancount
+          ;;pp-beancount
           pp-modeline
           pp-hydras
           pp-keybindings
