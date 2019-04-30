@@ -104,6 +104,11 @@
 ;; typescript
 (depends-on "tide")
 
+;; terraform
+(depends-on "terraform-mode")
+
+;; kotlin
+(depends-on "kotlin-mode")
 
 ;; modeline
 (depends-on "s")
