@@ -26,7 +26,8 @@
 ;;; Doom theme settings
 (setq doom-enable-bold t doom-enable-italic t)
 
-(load-theme 'doom-one t)
+;; (load-theme 'doom-one t)
+(load-theme 'doom-vibrant t)
 
 ;; Enable custom neotree theme
 (doom-themes-neotree-config)
