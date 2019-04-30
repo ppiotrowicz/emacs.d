@@ -89,8 +89,8 @@
                                  (lambda (command)
                                    (append '("bundle" "exec") command))))
 
-(add-hook! 'ruby-mode-hook
-  (whitespace-mode +1))
+;; (add-hook! 'ruby-mode-hook
+;;   (whitespace-mode +1))
 
 ;;; refactorings
 (defun pp/ruby-hash-new-syntax ()
