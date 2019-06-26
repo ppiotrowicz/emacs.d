@@ -19,7 +19,6 @@
           pp-lsp
           pp-elixir
           pp-web
-          ;;pp-beancount
           pp-modeline
           pp-hydras
           pp-keybindings
