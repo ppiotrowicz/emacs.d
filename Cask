@@ -78,8 +78,17 @@
 (depends-on "rubocop")
 (depends-on "minitest")
 
+;; lsp
+(depends-on "lsp-mode")
+(depends-on "lsp-ui")
+(depends-on "company-lsp")
+
 ;; elixir
-(depends-on "alchemist")
+;; (depends-on "alchemist")
+(depends-on "elixir-mode")
+;;(depends-on "eglot")
+(depends-on "exunit")
+(depends-on "flycheck-credo")
 
 ;; web
 (depends-on "restclient")
@@ -112,3 +121,6 @@
 
 ;; modeline
 (depends-on "s")
+
+;; yaml
+(depends-on "yaml-mode")

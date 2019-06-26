@@ -1,30 +1,40 @@
-(use-package alchemist
+(use-package elixir-mode
   :config
   (progn
+    (use-package exunit)
+
     (defvar pp/elixir-map (make-sparse-keymap) "Elixir keymap.")
     (general-define-key
      :keymaps 'pp/elixir-map
-     ":"  '(alchemist-mix                           :which-key "Mix")
-     "a"  '(alchemist-project-toggle-file-and-tests :which-key "alternate")
-     "g"  '(alchemist-goto-list-symbol-definitions  :which-key "symbols")
-     ;; tests
      "t"  '(:ignore t                               :which-key "test")
-     "ta" '(alchemist-mix-test                      :whick-key "run all")
-     "tb" '(alchemist-mix-test-this-buffer          :whick-key "run buffer")
-     "tf" '(alchemist-mix-test-file                 :whick-key "run file")
-     "tt" '(alchemist-mix-test-at-point             :whick-key "run")
-     "tr" '(alchemist-mix-rerun-last-test           :whick-key "rerun")
+     "ta" '(exunit-verify-all                       :which-key "run all")
+     "tb" '(exunit-verify                           :which-key "run buffer")
+     "tr" '(exunit-rerun                            :which-key "rerun")
+     "tt" '(exunit-verify-single                    :which-key "run")
+     "h"  '(:ignore t                               :which-key "help")
+     "hh" '(lsp-ui-doc-show                         :which-key "show doc")
+     "hH" '(lsp-ui-doc-hide                         :which-key "hide doc")
      )
+
     (bind-map pp/elixir-map
       :evil-keys (",")
       :major-modes (elixir-mode))
-    )
-  )
+    ))
 
-(add-hook 'elixir-mode-hook
-          (lambda ()
-            (define-key evil-normal-state-local-map "C-]" 'alchemist-goto-definition-at-point)
-            (define-key evil-normal-state-local-map "C-[" 'alchemist-goto-jump-back)
-            ))
+(use-package flycheck-credo
+  :init
+  (flycheck-credo-setup)
+  :config
+  (setq flycheck-elixir-credo-strict t))
+
+;; (use-package eglot
+;;   :config
+;;   (add-to-list 'eglot-server-programs `(elixir-mode "/Users/ppiotrowicz/code/elixir-ls/release")))
+
+;; (add-hook 'elixir-mode-hook
+;;           (lambda ()
+;;             (define-key evil-normal-state-local-map "C-]" 'alchemist-goto-definition-at-point)
+;;             (define-key evil-normal-state-local-map "C-[" 'alchemist-goto-jump-back)
+;;             ))
 
 (provide 'pp-elixir)

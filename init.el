@@ -16,6 +16,7 @@
           pp-scratch
           pp-org-mode
           pp-ruby
+          pp-lsp
           pp-elixir
           pp-web
           ;;pp-beancount
