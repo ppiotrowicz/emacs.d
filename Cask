@@ -121,6 +121,7 @@
 
 ;; modeline
 (depends-on "s")
+(depends-on "doom-modeline")
 
 ;; yaml
 (depends-on "yaml-mode")
