@@ -125,3 +125,7 @@
 
 ;; yaml
 (depends-on "yaml-mode")
+
+;; persp
+(depends-on "perspective")
+(depends-on "persp-projectile")
