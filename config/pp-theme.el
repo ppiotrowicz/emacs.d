@@ -22,6 +22,9 @@
 ;;; Theme
 (add-to-list 'load-path "~/.emacs.d/themes/emacs-doom-theme")
 (require 'doom-themes)
+(require 'doom-themes-ext-neotree)
+(require 'doom-themes-ext-org)
+(require 'doom-themes-ext-visual-bell)
 
 ;;; Doom theme settings
 (setq doom-enable-bold t doom-enable-italic t)
