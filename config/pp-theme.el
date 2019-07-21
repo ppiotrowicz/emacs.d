@@ -34,6 +34,11 @@
 
 (doom-themes-org-config)
 
+(doom-themes-visual-bell-config)
+(set-face-attribute 'doom-visual-bell nil
+                    :background "#54252c"
+                    :inverse-video nil)
+
 ;;; Solaire - 'real' buffers are brighter
 (use-package solaire-mode
   :config

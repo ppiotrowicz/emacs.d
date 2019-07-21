@@ -45,16 +45,6 @@
 
 (defvar doom--modeline-bg nil)
 
-(setq ring-bell-function 'pp-highlight-modeline)
-
-(defun pp-highlight-modeline ()
-    (unless doom--modeline-bg
-      (setq doom--modeline-bg (face-attribute 'mode-line :background)))
-  (set-face-attribute 'mode-line nil :background "#54252C")
-  (run-with-timer
-   0.1 nil
-   (lambda () (set-face-attribute 'mode-line nil :background doom--modeline-bg))))
-
 (defvar doom-hide-mode-line-format nil
   "Format to use when `doom-hide-mode-line-mode' replaces the modeline")
 
