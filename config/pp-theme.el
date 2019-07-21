@@ -2,6 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
+(add-to-list 'default-frame-alist
+             '(ns-transparent-titlebar . t))
+
+(add-to-list 'default-frame-alist
+             '(ns-appearance . dark))
+
+
 ;;; font
 
 ;; https://www.fontsquirrel.com/fonts/M-1m
