@@ -84,21 +84,16 @@
 (depends-on "company-lsp")
 
 ;; elixir
-;; (depends-on "alchemist")
 (depends-on "elixir-mode")
-;;(depends-on "eglot")
 (depends-on "exunit")
 (depends-on "flycheck-credo")
 
 ;; web
 (depends-on "restclient")
-(depends-on "coffee-mode")
 (depends-on "markdown-mode")
 (depends-on "json-mode")
 (depends-on "csv-mode")
-(depends-on "emmet-mode")
 (depends-on "rjsx-mode")
-(depends-on "js-import")
 (depends-on "web-mode")
 (depends-on "prettier-js")
 (depends-on "request")

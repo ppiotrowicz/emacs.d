@@ -15,11 +15,6 @@
       :evil-keys (",")
       :major-modes (restclient-mode))))
 
-(use-package coffee-mode
-  :config
-  (progn
-    (setq coffee-tab-width 2)))
-
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
@@ -32,16 +27,6 @@
   (setq js-indent-level 2))
 
 (use-package csv-mode)
-
-(use-package emmet-mode
-  :config
-  (setq emmet-expand-jsx-className? t)
-  (setq emmet-self-closing-tag-style "/"))
-(add-hook! 'rjsx-mode-hook 'emmet-mode)
-
-(use-package js-import
-  :config
-  (setq js-import-quote "'"))
 
 (use-package rjsx-mode
   :mode (("\\.js\\'" . rjsx-mode))
