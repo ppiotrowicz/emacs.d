@@ -34,8 +34,9 @@
             (term-mode                . emacs)
             (inf-ruby-mode            . emacs)
             (flycheck-error-list-mode . emacs)
-            (ledger-report-mode       . emacs)
-            (ivy-occur-grep-mode      . normal)))
+            (ledger-report-mode       . emacs)))
+
+    (evil-set-initial-state 'ivy-occur-grep-mode 'normal)
 
     ;; ESC quits stuff
     (define-key evil-normal-state-map [escape] 'keyboard-quit)
