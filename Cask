@@ -63,6 +63,7 @@
 (depends-on "flycheck")
 (depends-on "exec-path-from-shell")
 (depends-on "yasnippet")
+(depends-on "smartparens")
 
 ;; ORG
 (depends-on "org-plus-contrib")

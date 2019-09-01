@@ -37,4 +37,8 @@
   :config
   (yas-global-mode 1))
 
+(use-package smartparens
+  :config
+  (add-hook 'prog-mode-hook 'smartparens-mode))
+
 (provide 'pp-editor)
