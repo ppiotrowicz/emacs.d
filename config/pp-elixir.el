@@ -6,6 +6,7 @@
     (defvar pp/elixir-map (make-sparse-keymap) "Elixir keymap.")
     (general-define-key
      :keymaps 'pp/elixir-map
+     "="  '(elixir-format                           :which-key "format")
      "t"  '(:ignore t                               :which-key "test")
      "ta" '(exunit-verify-all                       :which-key "run all")
      "tb" '(exunit-verify                           :which-key "run buffer")
