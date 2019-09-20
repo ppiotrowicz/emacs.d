@@ -13,8 +13,12 @@
      "tr" '(exunit-rerun                            :which-key "rerun")
      "tt" '(exunit-verify-single                    :which-key "run")
      "h"  '(:ignore t                               :which-key "help")
-     "hh" '(lsp-ui-doc-show                         :which-key "show doc")
-     "hH" '(lsp-ui-doc-hide                         :which-key "hide doc")
+     "hh" '(eglot-help-at-point                     :which-key "show doc")
+     "he" '(display-local-help                      :which-key "local help")
+     "f"  '(:ignore t                               :which-key "find")
+     "ff" '(xref-find-definitions                   :which-key "definitions")
+     "fF" '(xref-find-definitions-other-window      :which-key "def in other window")
+     "fr" '(xref-find-references                    :which-key "references")
      )
 
     (bind-map pp/elixir-map
@@ -22,20 +26,17 @@
       :major-modes (elixir-mode))
     ))
 
+(add-hook 'elixir-mode-hook 'flycheck-mode)
+
 (use-package flycheck-credo
   :init
   (flycheck-credo-setup)
   :config
   (setq flycheck-elixir-credo-strict t))
 
-;; (use-package eglot
-;;   :config
-;;   (add-to-list 'eglot-server-programs `(elixir-mode "/Users/ppiotrowicz/code/elixir-ls/release")))
-
-;; (add-hook 'elixir-mode-hook
-;;           (lambda ()
-;;             (define-key evil-normal-state-local-map "C-]" 'alchemist-goto-definition-at-point)
-;;             (define-key evil-normal-state-local-map "C-[" 'alchemist-goto-jump-back)
-;;             ))
+(add-hook 'elixir-mode-hook
+          (lambda ()
+            (general-nmap "C-]" 'xref-find-definitions)
+            ))
 
 (provide 'pp-elixir)

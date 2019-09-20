@@ -80,9 +80,8 @@
 (depends-on "minitest")
 
 ;; lsp
-(depends-on "lsp-mode")
-(depends-on "lsp-ui")
 (depends-on "company-lsp")
+(depends-on "eglot")
 
 ;; elixir
 (depends-on "elixir-mode")
