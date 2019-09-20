@@ -12,22 +12,29 @@
 ;;; font
 
 ;; https://www.fontsquirrel.com/fonts/M-1m
-;; (set-frame-font "M+ 1mn")
+;; (set-frame-font "M+ 1m")
 
 ;; https://github.com/mozilla/Fira
 ;; (set-frame-font "Fira Mono")
 
+;; https://github.com/tonsky/FiraCode
+;; (set-frame-font "Fira Code")
+
+(set-frame-font "Iosevka")
+(setq-default line-spacing 1)
+
 ;; http://input.fontbureau.com/
 ;; (set-frame-font "InputMonoCondensed")
 
-(set-frame-font "Operator Mono")
-(set-face-attribute 'default nil :height 150)
-(setq-default line-spacing 3)
+;; (set-frame-font "Operator Mono")
+(set-face-attribute 'default nil :height 160)
+;; (setq-default line-spacing 3)
 
 (custom-set-faces '(variable-pitch ((t nil))))
 
 ;;; Theme
-(add-to-list 'load-path "~/.emacs.d/themes/emacs-doom-theme")
+(add-to-list 'load-path "/Users/ppiotrowicz/.emacs.d/themes/emacs-doom-theme")
+(setq custom-theme-directory "/Users/ppiotrowicz/.emacs.d/themes/emacs-doom-theme/themes")
 (require 'doom-themes)
 (require 'doom-themes-ext-neotree)
 (require 'doom-themes-ext-org)
@@ -37,7 +44,8 @@
 (setq doom-enable-bold t doom-enable-italic t)
 
 ;; (load-theme 'doom-one t)
-(load-theme 'doom-vibrant t)
+;; (load-theme 'doom-vibrant t)
+(load-theme 'doom-gruvbox t)
 
 ;; Enable custom neotree theme
 (doom-themes-neotree-config)
