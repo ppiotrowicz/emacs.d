@@ -64,6 +64,7 @@
 (depends-on "exec-path-from-shell")
 (depends-on "yasnippet")
 (depends-on "smartparens")
+(depends-on "vterm")
 
 ;; ORG
 (depends-on "org-plus-contrib")

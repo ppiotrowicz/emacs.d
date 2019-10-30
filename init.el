@@ -7,6 +7,7 @@
           pp-core-vcs
           pp-defuns
           pp-settings
+          pp-shell
           pp-editor
           pp-dired
           pp-theme
