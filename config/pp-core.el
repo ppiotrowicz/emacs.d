@@ -1,4 +1,8 @@
+;;; package --- Summary
+;;; config/pp-core.el -*- lexical-binding: t; -*-
 ;;; core.el
+;;; Commentary:
+;;; Code:
 
 (eval-when-compile (require 'cl))
 
@@ -18,7 +22,7 @@
   (expand-file-name
    (format ".cask/%s.%s/elpa" emacs-major-version emacs-minor-version)
    user-emacs-directory)
-  "Where plugins are installed (by cask)")
+  "Where plugins are installed (by cask).")
 
 (setq-default
  package--init-file-ensured t
@@ -34,8 +38,8 @@
 (require 'use-package)
 
 (defmacro pp-emacs (&rest packages)
-  "Bootstrap emacs and initialize packages"
-  (setq-default gc-cons-threshold 339430400
+  "Bootstrap Emacs and initialize PACKAGES."
+  (setq-default gc-cons-threshold 536870912
                 gc-cons-percentage 0.6)
   (require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
   (cask-initialize)
@@ -47,5 +51,8 @@
                        (error "Initfile not found: %s" pkg))
                      `(require ',pkg ,(file-name-sans-extension lib-path))))
                  packages))
-     (setq-default gc-cons-threshold 4388608
+     (setq-default gc-cons-threshold 16777216
                    gc-cons-percentage 0.4)))
+
+(provide 'pp-core)
+;;; pp-core.el ends here

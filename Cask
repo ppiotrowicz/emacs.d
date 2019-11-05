@@ -82,7 +82,6 @@
 (depends-on "minitest")
 
 ;; lsp
-(depends-on "company-lsp")
 (depends-on "eglot")
 
 ;; elixir
