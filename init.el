@@ -7,13 +7,13 @@
           pp-core-vcs
           pp-defuns
           pp-settings
-          pp-shell
           pp-editor
           pp-dired
           pp-theme
           pp-interface
           pp-perspective
           pp-evil
+          pp-shell
           pp-development
           pp-scratch
           pp-org-mode
