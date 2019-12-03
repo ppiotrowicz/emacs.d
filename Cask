@@ -62,7 +62,6 @@
 (depends-on "dumb-jump")
 (depends-on "flycheck")
 (depends-on "exec-path-from-shell")
-(depends-on "yasnippet")
 (depends-on "smartparens")
 (depends-on "vterm")
 (depends-on "multi-libvterm" :git "https://github.com/suonlight/multi-libvterm")
