@@ -14,7 +14,7 @@
      "tt" '(exunit-verify-single                    :which-key "run")
      "h"  '(:ignore t                               :which-key "help")
      "hh" '(eglot-help-at-point                     :which-key "show doc")
-     "he" '(display-local-help                      :which-key "local help")
+     "hH" '(display-local-help                      :which-key "local help")
      "f"  '(:ignore t                               :which-key "find")
      "ff" '(xref-find-definitions                   :which-key "definitions")
      "fF" '(xref-find-definitions-other-window      :which-key "def in other window")
