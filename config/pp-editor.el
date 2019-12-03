@@ -33,8 +33,4 @@
  '((tab-mark ?\t [?› ?\t])
    (newline-mark 10 [36 10])))
 
-(use-package smartparens
-  :config
-  (add-hook 'prog-mode-hook 'smartparens-mode))
-
 (provide 'pp-editor)
