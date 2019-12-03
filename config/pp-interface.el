@@ -1,5 +1,7 @@
 ;; pp-interface.el
 
+(mac-auto-operator-composition-mode +1)
+
 (use-package general
   :demand general
   :config
