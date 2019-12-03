@@ -12,11 +12,14 @@
               (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
                 (message "[Initialized in %.3fs]" elapsed)))))
 
+(put 'narrow-to-region 'disabled nil)
+
+(if (version< emacs-version "27.0")
+  (progn
 (setq custom-file (concat user-emacs-directory "custom.el"))
 
 (add-to-list 'load-path (concat user-emacs-directory "config"))
 
-(put 'narrow-to-region 'disabled nil)
 
 (defconst pp-packages-dir
   (expand-file-name
@@ -36,6 +39,7 @@
 (package-initialize)
 
 (require 'use-package)
+))
 
 (defmacro pp-emacs (&rest packages)
   "Bootstrap Emacs and initialize PACKAGES."
