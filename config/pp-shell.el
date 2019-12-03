@@ -25,14 +25,9 @@
 	(evil-define-key 'insert vterm-mode-map (kbd "C-c")      #'vterm--self-insert)
 	(evil-define-key 'insert vterm-mode-map (kbd "C-SPC")    #'vterm--self-insert)
 	(evil-define-key 'normal vterm-mode-map (kbd "C-d")      #'vterm--self-insert)
-	(evil-define-key 'normal vterm-mode-map (kbd ",c")       #'multi-libvterm)
-	(evil-define-key 'normal vterm-mode-map (kbd ",n")       #'multi-libvterm-next)
-	(evil-define-key 'normal vterm-mode-map (kbd ",p")       #'multi-libvterm-prev)
 	(evil-define-key 'normal vterm-mode-map (kbd "i")        #'evil-insert-resume)
 	(evil-define-key 'normal vterm-mode-map (kbd "o")        #'evil-insert-resume)
 	(evil-define-key 'normal vterm-mode-map (kbd "<return>") #'evil-insert-resume))
-
-(use-package multi-libvterm)
 
 (defun pp/open-vterm ()
   "Opens vterm in current project or current dir"

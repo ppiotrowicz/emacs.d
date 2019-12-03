@@ -6,7 +6,7 @@
  :non-normal-prefix "M-SPC"
  "'"   '(pp/terminal-focus                   :which-key "iTerm")
  ":"   '(counsel-M-x                         :which-key "M-x")
- "!"   '(multi-libvterm-projectile           :which-key "vterm")
+ "!"   '(pp/open-vterm                       :which-key "vterm")
  "SPC" '(avy-goto-char                       :which-key "avy char")
  "a"   '(org-agenda                          :which-key "agenda")
  "t"   '(neotree-projectile-find             :which-key "neotree find")
