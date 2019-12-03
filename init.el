@@ -11,7 +11,6 @@
           pp-dired
           pp-theme
           pp-interface
-          pp-perspective
           pp-evil
           pp-shell
           pp-development
