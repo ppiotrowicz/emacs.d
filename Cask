@@ -77,6 +77,7 @@
 (depends-on "bundler")
 (depends-on "rubocop")
 (depends-on "minitest")
+(depends-on "slim-mode")
 
 ;; lsp
 (depends-on "eglot")

@@ -45,5 +45,6 @@
 (add-hook 'rjsx-mode-hook #'add-node-modules-path)
 (add-hook 'rjsx-mode-hook #'prettier-js-mode)
 (setq css-indent-offset 2)
+(setq js2-strict-missing-semi-warning nil)
 
 (provide 'pp-web)

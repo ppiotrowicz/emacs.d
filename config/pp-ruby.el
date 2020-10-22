@@ -78,7 +78,8 @@
       (def-popup! "\\*Bundler\\*" :align below :size 14 :noselect t :regexp t :popup t))
     (use-package rubocop
       :config
-      (def-popup! "\\*RuboCop.+\\*" :align below :size 14 :noselect t :regexp t))))
+      (def-popup! "\\*RuboCop.+\\*" :align below :size 14 :noselect t :regexp t))
+    (use-package slim-mode)))
 
 (add-hook! rspec-compilation-mode
   (toggle-truncate-lines -1))

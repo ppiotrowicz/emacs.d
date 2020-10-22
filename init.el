@@ -5,7 +5,6 @@
 (pp-emacs pp-core-defuns
           pp-core-ui
           pp-core-vcs
-          pp-defuns
           pp-settings
           pp-editor
           pp-dired
